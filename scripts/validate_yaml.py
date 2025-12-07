@@ -8,12 +8,18 @@ YAML_PATH = os.path.join(ROOT, "aismm_definition", "aismm.yaml")
 
 
 def load_yaml(path):
-    # Read raw text and convert leading tabs to spaces so PyYAML can parse.
+    # Read raw text and reject files that contain tab characters.
+    # YAML best practice is to use spaces only for indentation. If tabs
+    # are present we fail fast and report the offending line numbers so
+    # the user/editor/CI can fix the source.
     with open(path, "r", encoding="utf-8") as f:
         text = f.read()
     if '\t' in text:
-        print("WARNING: YAML contains tab characters — converting tabs to 2 spaces for parsing.")
-        text = text.replace('\t', '  ')
+        lines_with_tabs = [i + 1 for i, ln in enumerate(text.splitlines()) if '\t' in ln]
+        raise ValueError(
+            f"YAML file contains tab characters on line(s): {lines_with_tabs}. "
+            "YAML must use spaces for indentation. Replace tabs with spaces and re-run validation."
+        )
     return yaml.safe_load(text)
 
 
