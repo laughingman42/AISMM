@@ -33,7 +33,11 @@ def simple_checks(doc):
     else:
         if not isinstance(doc.get("aismm"), dict):
             errors.append("'aismm' should be a mapping")
-    comps = doc.get("components")
+    
+    # Support both old and new structure: components can be at top-level or under aismm
+    aismm_section = doc.get("aismm", {})
+    comps = doc.get("components") or aismm_section.get("components")
+    
     if comps is None:
         errors.append("Missing 'components' list")
     elif not isinstance(comps, list):
@@ -63,6 +67,17 @@ def simple_checks(doc):
                         errors.append(f"{dprefix} missing 'id'")
                     if "id_code" not in dom:
                         errors.append(f"{dprefix} missing 'id_code'")
+                    
+                    # Optional mappings check
+                    if "mappings" in dom:
+                        mappings = dom.get("mappings")
+                        if not isinstance(mappings, dict):
+                            errors.append(f"{dprefix}.mappings should be a mapping")
+                        else:
+                            for framework, refs in mappings.items():
+                                if not isinstance(refs, list):
+                                    errors.append(f"{dprefix}.mappings.{framework} should be a list of strings")
+
                     if "maturity_levels" not in dom:
                         errors.append(f"{dprefix} missing 'maturity_levels' list")
                     else:
@@ -75,7 +90,7 @@ def simple_checks(doc):
                                 errors.append(f"{dprefix}.maturity_levels should contain levels 1..5")
 
     # Check questionnaire structure
-    q = doc.get("assessment_questionnaire")
+    q = doc.get("assessment_questionnaire") or aismm_section.get("assessment_questionnaire")
     if q is None:
         errors.append("Missing 'assessment_questionnaire' section")
     else:
@@ -118,11 +133,13 @@ def main():
         sys.exit(1)
     print("YAML parsed and basic structure validated successfully.")
     # optionally print summary counts
-    comps = doc.get("components", [])
+    aismm_section = doc.get("aismm", {})
+    comps = doc.get("components") or aismm_section.get("components", [])
     print(f"Components: {len(comps)}")
     total_domains = sum(len(c.get("domains", [])) for c in comps if isinstance(c, dict))
     print(f"Total domains: {total_domains}")
-    qs = doc.get("assessment_questionnaire", {}).get("questions", [])
+    q = doc.get("assessment_questionnaire") or aismm_section.get("assessment_questionnaire", {})
+    qs = q.get("questions", [])
     print(f"Total assessment questions: {len(qs)}")
 
 

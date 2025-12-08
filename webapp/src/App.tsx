@@ -7,7 +7,9 @@ import {
   ChevronRight, 
   Menu,
   BookOpen,
-  Layers
+  Layers,
+  ShieldCheck,
+  Target
 } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -25,8 +27,14 @@ function App() {
         return res.text();
       })
       .then(text => {
-        const parsed = yaml.load(text) as AISMMData;
-        setData(parsed);
+        const parsed = yaml.load(text) as any;
+        // Support both old and new structure
+        const normalizedData: AISMMData = {
+          aismm: parsed.aismm,
+          components: parsed.components || parsed.aismm?.components || [],
+          assessment_questionnaire: parsed.assessment_questionnaire || parsed.aismm?.assessment_questionnaire || { questions: [] }
+        };
+        setData(normalizedData);
         setLoading(false);
       })
       .catch(err => {
@@ -135,8 +143,57 @@ function App() {
                     <span className="text-xs font-mono text-gray-500">{domain.id_code}</span>
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{domain.name}</h3>
-                  <p className="text-gray-600">{domain.description}</p>
+                  <p className="text-gray-600 mb-4">{domain.description}</p>
+                  
+                  {domain.mappings && (
+                    <div className="space-y-2">
+                      <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wider">Framework Mappings</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {domain.mappings.nist_ai_rmf && domain.mappings.nist_ai_rmf.length > 0 && (
+                          <div className="flex items-center gap-1 px-2 py-1 bg-blue-50 border border-blue-200 rounded text-xs">
+                            <span className="font-medium text-blue-900">NIST AI RMF:</span>
+                            <span className="text-blue-700">{domain.mappings.nist_ai_rmf.join(', ')}</span>
+                          </div>
+                        )}
+                        {domain.mappings.eu_ai_act && domain.mappings.eu_ai_act.length > 0 && (
+                          <div className="flex items-center gap-1 px-2 py-1 bg-purple-50 border border-purple-200 rounded text-xs">
+                            <span className="font-medium text-purple-900">EU AI Act:</span>
+                            <span className="text-purple-700">{domain.mappings.eu_ai_act.join(', ')}</span>
+                          </div>
+                        )}
+                        {domain.mappings.iso_42001 && domain.mappings.iso_42001.length > 0 && (
+                          <div className="flex items-center gap-1 px-2 py-1 bg-green-50 border border-green-200 rounded text-xs">
+                            <span className="font-medium text-green-900">ISO 42001:</span>
+                            <span className="text-green-700">{domain.mappings.iso_42001.join(', ')}</span>
+                          </div>
+                        )}
+                        {domain.mappings.owasp_genai && domain.mappings.owasp_genai.length > 0 && (
+                          <div className="flex items-center gap-1 px-2 py-1 bg-orange-50 border border-orange-200 rounded text-xs">
+                            <span className="font-medium text-orange-900">OWASP GenAI:</span>
+                            <span className="text-orange-700">{domain.mappings.owasp_genai.join(', ')}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
+                
+                {domain.key_controls && domain.key_controls.length > 0 && (
+                  <div className="p-6 border-b border-gray-100 bg-blue-50/30">
+                    <div className="flex items-center gap-2 mb-3">
+                      <ShieldCheck className="w-4 h-4 text-blue-600" />
+                      <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wider">Key Controls</h4>
+                    </div>
+                    <ul className="space-y-2">
+                      {domain.key_controls.map((control, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
+                          <span className="text-blue-500 mt-1">•</span>
+                          <span>{control}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 <div className="p-6">
                   <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Maturity Levels</h4>
                   <div className="grid gap-4">
@@ -152,9 +209,22 @@ function App() {
                         )}>
                           {level.level}
                         </div>
-                        <div>
+                        <div className="flex-1">
                           <h5 className="font-semibold text-gray-900 mb-1">{level.name}</h5>
-                          <p className="text-sm text-gray-600">{level.description}</p>
+                          <p className="text-sm text-gray-600 mb-3">{level.description}</p>
+                          {level.key_indicators && level.key_indicators.length > 0 && (
+                            <div className="mt-2">
+                              <div className="flex items-center gap-1 mb-2">
+                                <Target className="w-3 h-3 text-gray-500" />
+                                <span className="text-xs font-medium text-gray-600 uppercase tracking-wide">Key Indicators</span>
+                              </div>
+                              <ul className="space-y-1 pl-4">
+                                {level.key_indicators.map((indicator, idx) => (
+                                  <li key={idx} className="text-xs text-gray-600 list-disc">{indicator}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
                         </div>
                       </div>
                     ))}

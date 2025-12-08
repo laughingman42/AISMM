@@ -2,6 +2,7 @@ export interface MaturityLevel {
   level: number;
   name: string;
   description: string;
+  key_indicators?: string[];
 }
 
 export interface Domain {
@@ -9,6 +10,13 @@ export interface Domain {
   id_code: string;
   name: string;
   description: string;
+  key_controls?: string[];
+  mappings?: {
+    nist_ai_rmf?: string[];
+    eu_ai_act?: string[];
+    iso_42001?: string[];
+    owasp_genai?: string[];
+  };
   maturity_levels: MaturityLevel[];
 }
 

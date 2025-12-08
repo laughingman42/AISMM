@@ -1,1013 +1,1073 @@
----
 aismm:
-  version: "1.0"
-  id: "AISMM-1.0"
-  title: "AI Security Maturity Model (AISMM)"
-  description: "The AISMM provides a structured maturity model to assess and guide organizations across three complementary components: Security for AI (protecting AI systems), Security with AI (using AI as a security capability), and Security from AI (managing risks that AI systems themselves introduce). Each domain includes five maturity levels to facilitate assessments and create prioritized next-step recommendations."
+  version: "2.0"
+  id: "AISMM-2.0"
+  title: "AI Security Maturity Model (AISMM) v2.0"
+  
+  description: |
+    The AISMM v2.0 provides a comprehensive, standards-aligned maturity model for organizations to assess 
+    and advance their AI security posture across three integrated domains: Security for AI (protecting AI 
+    systems throughout their lifecycle), Security with AI (deploying AI as a security capability), and 
+    Security from AI (managing AI-specific risks and harms). This version incorporates guidance from:
+    - NIST AI Risk Management Framework (AI RMF 2.0) and Generative AI Profile (NIST AI 600-1)
+    - EU AI Act (effective August 2, 2026)
+    - ISO/IEC 42001 (AI Management Systems)
+    - OWASP GenAI Security initiatives
+    - Recent research on LLM supply chain security, prompt injection defenses, and model poisoning
+    - Dynamic safety case management and frontier AI risk considerations
+    
+  references:
+    nist_ai_rmf: "NIST AI Risk Management Framework 2.0 & Generative AI Profile (2024)"
+    eu_ai_act: "Regulation (EU) 2024/1689 - AI Act (Entry into Force: 2 August 2024)"
+    iso_42001: "ISO/IEC 42001:2023 - Information Technology — AI Management System"
+    owasp_genai: "OWASP GenAI Security initiatives and threat taxonomies"
+    research_foundation: "Recent peer-reviewed research on AI security, supply chains, and emergent threats (2024-2025)"
 
+  components:
+    - id: security_for_ai
+      id_code: "S01"
+      title: "Security for AI"
+      description: |
+        Controls, practices and capabilities to secure AI systems and their lifecycle. Encompasses 
+        governance, data integrity, secure development practices, infrastructure hardening, operational 
+        monitoring, and incident resilience. Addresses both traditional cybersecurity and AI-specific 
+        threats such as model poisoning, prompt injection, data exfiltration, and supply chain attacks.
+      
+      domains:
+        - id: governance_risk_compliance
+          id_code: "S01.GRC01"
+          name: "Governance, Risk & Compliance"
+          description: |
+            Policies, roles, ownership, risk management and compliance frameworks for AI systems. 
+            Includes AI literacy for governance bodies, risk assessment methodologies, compliance 
+            mapping to regulatory frameworks (EU AI Act, ISO 42001), and organizational accountability 
+            structures for AI risk ownership.
+          
+          key_controls:
+            - "Formal AI governance framework and steering committee"
+            - "AI risk appetite definition and risk classification criteria"
+            - "Mandatory risk assessments for all AI initiatives with defined severity thresholds"
+            - "AI literacy programs for board, C-suite, and risk leadership"
+            - "Documentation of AI ownership, data stewardship, and compliance roles"
+            - "Compliance mapping to applicable regulations (EU AI Act Articles 4-8, ISO 42001 Clause 5)"
+            - "Escalation procedures for high-risk AI systems and emerging threats"
+            - "Regulatory monitoring and change management for evolving AI policies"
+          
+          mappings:
+            nist_ai_rmf: ["GOVERN 1.1", "GOVERN 1.2", "GOVERN 1.3", "MANAGE 1.1", "MANAGE 1.2"]
+            eu_ai_act: ["Article 4 (AI Literacy)", "Article 5 (Prohibited Practices)", "Article 9 (Risk Management System)", "Article 24 (Governance)"]
+            iso_42001: ["Clause 4.1", "Clause 5", "Clause 6.1", "Annex A.2", "Annex B.1"]
+            owasp_genai: ["Governance & Strategy", "Risk Assessment"]
+          
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: |
+                No formal AI governance structure. Risk ownership unclear. Compliance efforts are reactive 
+                or absent. AI decisions made without formal risk assessment or policy framework.
+              key_indicators:
+                - "No AI governance committee or ownership structure"
+                - "Informal or no risk assessment processes"
+                - "Limited policy documentation for AI systems"
+            
+            - level: 2
+              name: "Developing"
+              description: |
+                Initial governance framework emerging. AI owners identified for major projects. Risk 
+                assessments performed ad-hoc for critical systems. Basic compliance awareness but gaps in coverage.
+              key_indicators:
+                - "AI governance roles defined for selected projects"
+                - "Risk assessments for >50% of critical AI projects"
+                - "Basic compliance mapping to key regulations documented"
+            
+            - level: 3
+              name: "Defined"
+              description: |
+                Organization-wide AI governance, risk frameworks, and policy baselines established. 
+                Consistent risk assessment processes. Compliance requirements mapped and documented. 
+                Audit trails for AI governance decisions.
+              key_indicators:
+                - "Formal AI governance charter and steering committee operational"
+                - "Documented risk assessment methodology applied across all AI projects"
+                - "Compliance gap analysis completed for EU AI Act, ISO 42001, NIST AI RMF"
+                - "AI literacy program established for leadership and key stakeholders"
+            
+            - level: 4
+              name: "Managed"
+              description: |
+                Governance actively enforced with metrics, monitoring, and reporting. Risks tracked in 
+                enterprise risk management system. Compliance processes integrated into development workflows.
+                Regular audits and improvement cycles in place.
+              key_indicators:
+                - "AI risk dashboard with real-time KPIs and trend analysis"
+                - "Compliance metrics tracked with SLAs and escalation thresholds"
+                - "Quarterly governance reviews with board-level reporting"
+                - "Automated policy checks integrated into CI/CD and model deployment"
+            
+            - level: 5
+              name: "Optimized"
+              description: |
+                Governance integrated with enterprise risk management. Continuous improvement through 
+                automated monitoring and policy enforcement. Proactive regulatory engagement. Dynamic risk 
+                response to emerging AI threats. AI governance viewed as competitive advantage.
+              key_indicators:
+                - "AI risk management fully integrated with enterprise ERM"
+                - "Automated policy enforcement with adaptive thresholds"
+                - "Proactive engagement with regulators and industry bodies"
+                - "Continuous learning from industry incidents and threat intelligence"
+        
+        - id: data_management
+          id_code: "S01.DM02"
+          name: "Data Management & Integrity"
+          description: |
+            Data governance, lineage, quality, provenance, labeling and protections used by AI systems. 
+            Includes data validation for poisoning detection, supply chain oversight for training data, 
+            and privacy-preserving techniques. Addresses risks from contaminated datasets, synthetic data 
+            quality, and unauthorized data usage in training pipelines.
+          
+          key_controls:
+            - "Data provenance tracking (origin, transformations, versioning)"
+            - "Data quality validation and anomaly detection for poisoning indicators"
+            - "Data labeling standards with inter-rater agreement metrics and quality checks"
+            - "Supplier/vendor assessments for training data and model sources"
+            - "Protected dataset mechanisms with role-based access control"
+            - "Automated drift detection and data contamination alerts"
+            - "Privacy-preserving techniques (differential privacy, federated learning, synthetic data)"
+            - "Data retention and deletion policies compliant with regulations"
+          
+          mappings:
+            nist_ai_rmf: ["MAP 2.1", "MAP 2.2", "MAP 2.3", "MAP 2.4", "MEASURE 2.5", "MANAGE 2.5"]
+            eu_ai_act: ["Article 10 (Data and Data Governance)", "Article 27 (Fundamental Rights Impact Assessment)"]
+            iso_42001: ["Clause 6.2", "Annex A.5", "Annex B.5"]
+            owasp_genai: ["Data Quality", "Training Data Integrity"]
+          
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: |
+                Data practices inconsistent and largely undocumented. Limited controls for data used in 
+                models. No formal data governance or quality assurance.
+              key_indicators:
+                - "No documented data lineage"
+                - "Manual, inconsistent data labeling"
+                - "No data quality checks or validation"
+            
+            - level: 2
+              name: "Repeatable"
+              description: |
+                Defined datasets for major projects with basic documentation. Manual labeling with 
+                guidelines. Access controls implemented for some datasets. Limited data quality monitoring.
+              key_indicators:
+                - "Data catalogs for >50% of projects"
+                - "Labeling guidelines documented and communicated"
+                - "Basic access controls and role-based permissions"
+            
+            - level: 3
+              name: "Defined"
+              description: |
+                Data catalogs, lineage, and quality checks in place. Protected datasets with 
+                enforced access controls. Data governance policies documented and communicated.
+                Basic anomaly detection for contamination.
+              key_indicators:
+                - "Comprehensive data catalog with lineage tracking"
+                - "Automated quality checks in data pipelines"
+                - "Data ownership and stewardship roles assigned"
+                - "Supplier assessments for third-party data sources"
+            
+            - level: 4
+              name: "Measured"
+              description: |
+                Automated data quality monitoring across environments. Provenance fully tracked and 
+                auditable. Drift detection implemented. Privacy impact assessments completed for 
+                sensitive datasets. Metrics for data integrity and quality available.
+              key_indicators:
+                - "Real-time data quality dashboards and alerts"
+                - "Automated drift and contamination detection"
+                - "Data provenance audit trail maintained"
+                - "Privacy assessments (DPIAs) completed and tracked"
+            
+            - level: 5
+              name: "Adaptive"
+              description: |
+                Data governance is proactive with advanced privacy-preserving techniques, continuous 
+                validation, and automated remediation. Self-healing data pipelines. Predictive data 
+                quality monitoring. Supply chain security integrated with threat intelligence.
+              key_indicators:
+                - "Differential privacy and federated learning in production"
+                - "Automated data poisoning detection and remediation"
+                - "Synthetic data quality assessments and validation"
+                - "Supply chain risk scoring with automated alerts"
+        
+        - id: model_development_lifecycle
+          id_code: "S01.MDL03"
+          name: "Model Development & Lifecycle"
+          description: |
+            Secure design, development, testing, validation, deployment, and retirement of models. 
+            Includes threat modeling, adversarial robustness testing, prompt injection defenses, 
+            model provenance, supply chain vetting, and secure ML Ops practices.
+          
+          key_controls:
+            - "Secure SDLC for ML with threat modeling and misuse case analysis"
+            - "Adversarial robustness testing and red-teaming before deployment"
+            - "Prompt injection and jailbreak testing for LLM-based systems (OWASP LLM Top 10)"
+            - "Model versioning with immutable provenance and integrity verification"
+            - "Explainability and interpretability requirements for high-risk systems"
+            - "Supply chain validation for pre-trained models and third-party components"
+            - "Secure model deployment with secrets management and access controls"
+            - "Automated security gates in CI/CD pipelines"
+            - "Model decommissioning procedures with secure disposal and archival"
+          
+          mappings:
+            nist_ai_rmf: ["MAP 1.1", "MAP 1.2", "MAP 1.3", "MEASURE 2.2", "MEASURE 2.6", "MANAGE 2.3"]
+            eu_ai_act: ["Article 11 (Technical Documentation)", "Article 15 (Accuracy, Robustness and Cybersecurity)", "Article 18 (Transparency)"]
+            iso_42001: ["Clause 6.2", "Annex A.6", "Annex B.6"]
+            owasp_genai: ["LLM01:2025 Prompt Injection", "LLM02:2025 Insecure Output Handling", "Adversarial Testing"]
+          
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: |
+                Modeling occurs without formal security requirements or testing. No standardized 
+                development practices. Threat modeling absent.
+              key_indicators:
+                - "No security requirements in model specifications"
+                - "Manual ad-hoc testing only"
+                - "No threat modeling or adversarial testing"
+            
+            - level: 2
+              name: "Repeatable"
+              description: |
+                Basic secure development practices adopted for select projects. Manual security 
+                reviews performed. Some testing of robustness and edge cases.
+              key_indicators:
+                - "Security checklist used for critical models"
+                - "Manual adversarial testing for high-risk systems"
+                - "Model versioning in place for selected projects"
+            
+            - level: 3
+              name: "Defined"
+              description: |
+                Standardized SDLC for AI/ML with testing, versioning, and release gates. Threat 
+                modeling integrated into design phase. Adversarial testing checklist required. 
+                Explainability documentation for high-risk models.
+              key_indicators:
+                - "Formal threat modeling process for all models"
+                - "Automated testing gates including adversarial tests"
+                - "Model provenance tracking and immutable versioning"
+                - "Supply chain assessment for third-party models and libraries"
+            
+            - level: 4
+              name: "Measured"
+              description: |
+                Security and performance metrics tracked. Model validation and explainability 
+                integrated into CI/CD. Red-teaming exercises conducted. Metrics for robustness 
+                and fairness measured and reported.
+              key_indicators:
+                - "Automated adversarial robustness metrics in pipelines"
+                - "Red-teaming exercises (quarterly or continuous)"
+                - "Explainability and interpretability metrics tracked"
+                - "Supply chain risk assessments with scorecards"
+            
+            - level: 5
+              name: "Optimized"
+              description: |
+                End-to-end automated lifecycle with continuous evaluation, rollback, and 
+                adaptive retraining controls. Automated prompt injection and jailbreak testing. 
+                Self-healing models with anomaly-driven retraining.
+              key_indicators:
+                - "Continuous adversarial testing and prompt injection detection"
+                - "Automated model rollback on security or performance degradation"
+                - "Self-driving model improvement with feedback loops"
+                - "Supply chain threat intelligence integrated into risk decisions"
+        
+        - id: infrastructure_platform
+          id_code: "S01.INF04"
+          name: "Infrastructure & Platform Security"
+          description: |
+            Secure compute, container, network and cloud platform controls that host AI workloads. 
+            Includes workload isolation, secrets management, network segmentation, encryption, 
+            and supply chain security for infrastructure components.
+          
+          key_controls:
+            - "Secure baseline configurations and infrastructure-as-code (IaC) templates"
+            - "Workload isolation (containers, VMs, namespace isolation)"
+            - "Secrets management (key vault, credential rotation)"
+            - "Network segmentation and zero-trust access controls"
+            - "End-to-end encryption for data in transit and at rest"
+            - "Vulnerability scanning and patch management"
+            - "Supply chain security for container images and base OS"
+            - "Compliance monitoring and configuration drift detection"
+          
+          mappings:
+            nist_ai_rmf: ["GOVERN 4.1", "GOVERN 4.2", "MANAGE 2.4", "MANAGE 3.3"]
+            eu_ai_act: ["Article 15 (Cybersecurity)", "Article 28 (Quality management system)"]
+            iso_42001: ["Clause 6.2", "Annex A.7", "Annex A.9", "Annex B.7"]
+            owasp_genai: ["Infrastructure Security"]
+          
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: |
+                Infrastructure security is inconsistent. AI workloads often run on unstandardized 
+                environments. No formal hardening standards.
+              key_indicators:
+                - "Inconsistent security configurations"
+                - "Secrets embedded in code or configs"
+                - "No formal patch management"
+            
+            - level: 2
+              name: "Repeatable"
+              description: |
+                Baseline hardening applied for some environments. Isolated AI deployments exist. 
+                Basic secrets handling with manual rotation.
+              key_indicators:
+                - "Security baseline documentation in place"
+                - "Some isolated deployment environments"
+                - "Manual secrets management processes"
+            
+            - level: 3
+              name: "Defined"
+              description: |
+                Standardized secure platform templates and IaC. Configuration management enforced. 
+                Secrets handling centralized. Network segmentation implemented.
+              key_indicators:
+                - "IaC templates with security controls enforced"
+                - "Centralized secrets management solution"
+                - "Network policies and segmentation documented"
+            
+            - level: 4
+              name: "Measured"
+              description: |
+                Platform-level monitoring and automated compliance checking. Patch management 
+                automated. Configuration drift detection. Supply chain scanning for images.
+              key_indicators:
+                - "Automated vulnerability scanning and patching"
+                - "Configuration compliance monitoring"
+                - "Supply chain scanning for base images and dependencies"
+            
+            - level: 5
+              name: "Adaptive"
+              description: |
+                Resilient, policy-driven platforms with automated threat mitigation. Workload-aware 
+                protections with dynamic policies. Self-healing infrastructure.
+              key_indicators:
+                - "Policy-driven infrastructure with dynamic adjustments"
+                - "Automated threat mitigation and containment"
+                - "Self-healing and auto-remediation capabilities"
+        
+        - id: operations_monitoring
+          id_code: "S01.OPM05"
+          name: "Operations & Monitoring"
+          description: |
+            Runtime monitoring, telemetry, observability, anomaly detection, and model performance 
+            monitoring. Includes model drift detection, adversarial input detection, usage anomalies, 
+            and security event monitoring.
+          
+          key_controls:
+            - "Comprehensive telemetry collection and centralized logging"
+            - "Model performance monitoring (accuracy, drift, fairness metrics)"
+            - "Anomaly detection for suspicious inputs/outputs and usage patterns"
+            - "Security event detection and alerting"
+            - "SLA/SLO definition and tracking"
+            - "Post-market monitoring for deployed models"
+            - "Audit trails for model decisions and human reviews"
+            - "Incident detection with automated escalation"
+          
+          mappings:
+            nist_ai_rmf: ["MEASURE 1.1", "MEASURE 1.2", "MEASURE 1.3", "MEASURE 2.10", "MANAGE 4.1", "MANAGE 4.2"]
+            eu_ai_act: ["Article 12 (Record-keeping)", "Article 26 (Technical Documentation)", "Article 61 (Post-market monitoring)"]
+            iso_42001: ["Clause 8", "Annex A.7", "Annex B.7"]
+            owasp_genai: ["Monitoring & Logging"]
+          
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: |
+                Limited or no runtime monitoring. Model health and security events largely invisible.
+              key_indicators:
+                - "No centralized monitoring"
+                - "Manual log review only"
+                - "No proactive alerting"
+            
+            - level: 2
+              name: "Repeatable"
+              description: |
+                Basic logs and alerts exist for critical systems. Many gaps in coverage. Manual 
+                analysis of events.
+              key_indicators:
+                - "Basic application logs collected"
+                - "Manual alerts for critical errors"
+                - "Ad-hoc performance reviews"
+            
+            - level: 3
+              name: "Defined"
+              description: |
+                Consistent telemetry collection and centralization. Dashboards for model health 
+                and security events. Alerting rules documented and maintained.
+              key_indicators:
+                - "Centralized logging and monitoring platform"
+                - "Model performance dashboards"
+                - "Security event alerting rules"
+            
+            - level: 4
+              name: "Measured"
+              description: |
+                Automated detection of model drift, performance regressions, and anomalous 
+                behavior. SLAs defined and tracked. Metrics for incident response times.
+              key_indicators:
+                - "Automated model drift detection"
+                - "Anomaly detection for suspicious behavior"
+                - "SLA/SLO tracking and compliance reporting"
+            
+            - level: 5
+              name: "Optimized"
+              description: |
+                Predictive monitoring and closed-loop automation. Continuous tuning of detection 
+                thresholds. Automated remediation and rollback. Adaptive monitoring based on 
+                threat intelligence.
+              key_indicators:
+                - "Predictive anomaly detection and early warning"
+                - "Automated remediation workflows"
+                - "Continuous threshold optimization"
+        
+        - id: incident_response_resilience
+          id_code: "S01.IRR06"
+          name: "Incident Response & Resilience"
+          description: |
+            Preparedness and capability to detect, respond, recover, and learn from AI-specific 
+            security incidents. Includes incident classification, escalation procedures, recovery 
+            procedures, and post-incident learning.
+          
+          key_controls:
+            - "AI-specific incident response playbooks and runbooks"
+            - "Incident classification and severity assessment criteria"
+            - "Escalation procedures and communication templates"
+            - "Model containment and rollback procedures"
+            - "Recovery procedures and business continuity planning"
+            - "Incident tracking and metrics (MTTR, containment time)"
+            - "Post-incident review and root cause analysis (RCA) process"
+            - "Red-teaming and incident simulation exercises"
+          
+          mappings:
+            nist_ai_rmf: ["GOVERN 4.3", "MANAGE 4.3"]
+            eu_ai_act: ["Article 62 (Reporting of serious incidents)", "Article 73 (Competence of notified bodies)"]
+            iso_42001: ["Clause 8.2", "Annex A.9.3", "Annex B.9"]
+            owasp_genai: ["Incident Response"]
+          
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: |
+                No AI-specific incident playbooks. Responses improvised and reactive.
+              key_indicators:
+                - "No documented incident procedures"
+                - "Ad-hoc response teams"
+                - "No tracking of incidents"
+            
+            - level: 2
+              name: "Repeatable"
+              description: |
+                Basic playbooks and contacts exist for selected incidents. Exercises rare.
+              key_indicators:
+                - "Initial playbooks documented"
+                - "Key contacts identified"
+                - "Annual exercises planned"
+            
+            - level: 3
+              name: "Defined"
+              description: |
+                AI-focused IR plans, roles, and regular exercises implemented organization-wide. 
+                Severity classification and escalation procedures defined.
+              key_indicators:
+                - "AI incident response plan published"
+                - "Quarterly tabletop exercises conducted"
+                - "Incident severity matrix and escalation defined"
+            
+            - level: 4
+              name: "Measured"
+              description: |
+                IR metrics tracked (MTTR, containment time). Recovery capabilities tested. 
+                Incidents tracked with root cause analysis.
+              key_indicators:
+                - "IR metrics dashboard with SLAs"
+                - "Root cause analysis documented for incidents"
+                - "Recovery testing conducted quarterly"
+            
+            - level: 5
+              name: "Optimized"
+              description: |
+                Automated containment, attack surface reduction, and post-incident learning 
+                integrated into lifecycle. Continuous red-teaming and simulation.
+              key_indicators:
+                - "Automated incident detection and containment"
+                - "Continuous red-teaming and simulation"
+                - "Rapid recovery with <1 hour MTTR targets"
+    
+    - id: security_with_ai
+      id_code: "S02"
+      title: "Security with AI"
+      description: |
+        Using AI and ML to enhance security capabilities while maintaining trust, control, and oversight. 
+        Encompasses use case governance, model assurance for security, safe integration and automation, 
+        and ethical oversight of AI-driven security decisions.
+      
+      domains:
+        - id: use_cases_controls
+          id_code: "S02.UC01"
+          name: "Security Use Cases & Controls"
+          description: |
+            Identification, prioritization, and safe implementation of AI-enabled security use cases. 
+            Includes business case validation, risk assessment of use cases, and governance of 
+            AI security tool deployment.
+          
+          key_controls:
+            - "AI security use case catalog and prioritization framework"
+            - "Business case validation with ROI metrics"
+            - "Risk assessment specific to security use cases"
+            - "Deployment approval gates for AI security systems"
+            - "High-risk use case identification and escalation"
+            - "Vendor evaluation and assessment for AI security tools"
+          
+          mappings:
+            nist_ai_rmf: ["GOVERN 1.2", "MAP 1.5"]
+            eu_ai_act: ["Article 5 (Prohibited Practices)", "Article 6 (High-risk classification)", "Article 71 (Third-party conformity assessment bodies)"]
+            iso_42001: ["Clause 4.1", "Annex A.4", "Annex B.4"]
+            owasp_genai: ["Use Case Analysis"]
+          
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: |
+                Sporadic experimentation with AI for security. Limited ROI tracking or governance.
+            
+            - level: 2
+              name: "Repeatable"
+              description: |
+                Pilots for high-value use cases with manual oversight. Lessons documented.
+            
+            - level: 3
+              name: "Defined"
+              description: |
+                Catalog of validated AI security use cases. Standard deployment patterns documented.
+            
+            - level: 4
+              name: "Measured"
+              description: |
+                Operational AI security systems with measured effectiveness and risk controls.
+            
+            - level: 5
+              name: "Optimized"
+              description: |
+                Adaptive AI security spanning detection, investigation, and response with continuous improvement.
+        
+        - id: model_assurance_security
+          id_code: "S02.MAS02"
+          name: "Model Assurance for Security"
+          description: |
+            Assurance, validation, explainability and robustness of models used as security controls. 
+            Includes testing for false positives/negatives, adversarial attacks, and fairness in 
+            security decisions.
+          
+          key_controls:
+            - "Validation testing for accuracy, precision, recall, F1-score"
+            - "Adversarial testing and robustness evaluation"
+            - "False positive/negative impact assessment and thresholds"
+            - "Explainability and interpretability of security decisions"
+            - "Fairness and bias testing for security models"
+            - "Continuous validation and retraining schedules"
+            - "Test coverage metrics and quality gates"
+          
+          mappings:
+            nist_ai_rmf: ["MEASURE 2.1", "MEASURE 2.2", "MEASURE 2.6", "MANAGE 2.1"]
+            eu_ai_act: ["Article 15 (Accuracy, Robustness and Cybersecurity)"]
+            iso_42001: ["Annex A.8", "Annex B.8"]
+            owasp_genai: ["Model Validation & Testing"]
+          
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: "Little to no validation or assurance of security models."
+            
+            - level: 2
+              name: "Repeatable"
+              description: "Basic validation and testing for models in isolated projects."
+            
+            - level: 3
+              name: "Defined"
+              description: |
+                Assurance processes standardized: testing, explainability, and bias checks 
+                for security models.
+            
+            - level: 4
+              name: "Measured"
+              description: |
+                Operational metrics for false positives/negatives, adversarial testing, 
+                and continual validation.
+            
+            - level: 5
+              name: "Optimized"
+              description: |
+                Continuous assurance pipelines with automatic re-training, self-checks 
+                and human-in-the-loop verification.
+        
+        - id: integration_automation
+          id_code: "S02.IA03"
+          name: "Integration & Automation"
+          description: |
+            Safe integration of AI-driven security into workflows, orchestration and SOAR systems. 
+            Includes automation levels (from assistance to delegation), human oversight, and 
+            rollback capabilities.
+          
+          key_controls:
+            - "SOAR integration with defined approval gates"
+            - "Automation level definitions and approval authority mapping"
+            - "Human oversight and review procedures"
+            - "Audit trails and logging for automated actions"
+            - "Rollback and error handling procedures"
+            - "Agentic AI controls for delegated decisions"
+            - "Performance monitoring for automated workflows"
+          
+          mappings:
+            nist_ai_rmf: ["MANAGE 2.2", "MANAGE 3.2", "MANAGE 4.2"]
+            eu_ai_act: ["Article 14 (Human Oversight)"]
+            iso_42001: ["Annex A.6.4", "Annex A.7.2"]
+            owasp_genai: ["Integration & Orchestration"]
+          
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: "Manual handoffs and little automation between AI outputs and security operations."
+            
+            - level: 2
+              name: "Repeatable"
+              description: "Semi-automated workflows with human review for high-risk actions."
+            
+            - level: 3
+              name: "Defined"
+              description: |
+                Standard integration patterns with risk gating and audit trails for automated actions.
+            
+            - level: 4
+              name: "Measured"
+              description: "Automated playbooks with measurable outcomes and rollback capabilities."
+            
+            - level: 5
+              name: "Optimized"
+              description: |
+                Fully orchestrated, proven automation with adaptive policies and continuous improvement.
+        
+        - id: ethics_oversight
+          id_code: "S02.ETH04"
+          name: "Ethics & Oversight"
+          description: |
+            Controls to ensure permissible, transparent and ethical use of AI within security operations. 
+            Includes fairness assessment, fundamental rights consideration, and ethics review boards.
+          
+          key_controls:
+            - "Ethics review board or committee"
+            - "Fairness and bias assessment for security systems"
+            - "Transparency and explainability requirements"
+            - "Fundamental rights impact assessment (FRIA)"
+            - "Escalation procedures for ethical concerns"
+            - "Training on AI ethics for security teams"
+            - "Audit procedures for ethical compliance"
+          
+          mappings:
+            nist_ai_rmf: ["GOVERN 2.1", "GOVERN 2.2", "MAP 1.3"]
+            eu_ai_act: ["Article 14 (Human Oversight)", "Article 27 (Fundamental Rights Impact Assessment)"]
+            iso_42001: ["Annex A.3", "Annex B.3"]
+            owasp_genai: ["Ethics & Fairness"]
+          
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: "Ethics considerations informal or reactive."
+            
+            - level: 2
+              name: "Repeatable"
+              description: "Ethical guidelines under development for some projects."
+            
+            - level: 3
+              name: "Defined"
+              description: "Clear policies for acceptable AI security use and oversight processes established."
+            
+            - level: 4
+              name: "Measured"
+              description: "Ethics metrics and compliance checks applied to AI security systems."
+            
+            - level: 5
+              name: "Optimized"
+              description: |
+                Governance ensures ethical AI usage is embedded, audited and continuously refined.
+    
+    - id: security_from_ai
+      id_code: "S03"
+      title: "Security from AI"
+      description: |
+        Assessing and mitigating risks introduced by AI — intentional misuse, emergent behaviors, 
+        supply chain attacks, adversarial manipulation, and systemic harms. Addresses AI-specific 
+        threats at the systems and societal level.
+      
+      domains:
+        - id: threat_modeling_risk_assessment
+          id_code: "S03.TM01"
+          name: "Threat Modeling & Risk Assessment"
+          description: |
+            Identify and quantify AI-specific threats, misuse cases, and systemic risks. Includes 
+            prompt injection, model poisoning, data poisoning, supply chain attacks, and emerging 
+            AI capabilities.
+          
+          key_controls:
+            - "AI-specific threat taxonomy and catalog"
+            - "Misuse case analysis for all AI systems"
+            - "Adversarial attack scenarios and threat modeling"
+            - "Supply chain risk assessment for models and data"
+            - "Emerging capability assessment (frontier AI risks)"
+            - "Red-teaming and adversarial testing exercises"
+            - "Risk quantification and prioritization"
+            - "Scenario-based risk modeling"
+          
+          mappings:
+            nist_ai_rmf: ["MAP 3.1", "MAP 3.2", "MAP 3.3", "MEASURE 1.1"]
+            eu_ai_act: ["Article 9 (Risk Management System)", "Article 27 (Fundamental Rights Impact Assessment)"]
+            iso_42001: ["Clause 6.1.2", "Annex B.1"]
+            owasp_genai: ["Threat Modeling"]
+          
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: |
+                Limited awareness of AI-specific threats. No systematic threat modeling.
+              key_indicators:
+                - "No AI threat catalog"
+                - "Threat modeling not performed for AI"
+            
+            - level: 2
+              name: "Repeatable"
+              description: |
+                Threat modeling done for major projects. Many gaps in coverage.
+              key_indicators:
+                - "Basic threat modeling for critical systems"
+                - "Some misuse case identification"
+            
+            - level: 3
+              name: "Defined"
+              description: |
+                Consistent threat modeling approach applied across AI initiatives. Prioritized 
+                risk register maintained.
+              key_indicators:
+                - "AI threat modeling methodology documented"
+                - "Misuse cases tracked in risk register"
+                - "Annual red-teaming exercises"
+            
+            - level: 4
+              name: "Measured"
+              description: |
+                Risks tracked and mitigations measured. Controls tested against adversarial scenarios.
+              key_indicators:
+                - "Risk metrics dashboard"
+                - "Red-teaming conducted quarterly"
+                - "Mitigation effectiveness tracked"
+            
+            - level: 5
+              name: "Optimized"
+              description: |
+                Proactive horizon-scanning and red-teaming. System-level resilience planning.
+              key_indicators:
+                - "Continuous red-teaming and simulation"
+                - "Horizon scanning for emerging threats"
+                - "Systemic resilience assessments"
+        
+        - id: detection_misuse_prevention
+          id_code: "S03.DMP02"
+          name: "Detection & Misuse Prevention"
+          description: |
+            Controls and capabilities to detect misuse of AI systems and malicious use of AI by 
+            adversaries. Includes prompt injection detection, model behavior anomaly detection, 
+            and abuse mitigation.
+          
+          key_controls:
+            - "Input validation and content filtering"
+            - "Prompt injection detection mechanisms"
+            - "Output monitoring and anomaly detection"
+            - "Abuse detection and rate limiting"
+            - "Model behavior validation"
+            - "Deception and honeypot techniques"
+            - "Automated response and containment"
+            - "Incident reporting mechanisms"
+          
+          mappings:
+            nist_ai_rmf: ["MANAGE 4.1", "MANAGE 4.2"]
+            eu_ai_act: ["Article 15 (Cybersecurity)"]
+            iso_42001: ["Annex A.9.2", "Annex B.9"]
+            owasp_genai: ["LLM01:2025 Prompt Injection", "Input/Output Handling"]
+          
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: "Few detection controls. Misuse often discovered reactively."
+            
+            - level: 2
+              name: "Repeatable"
+              description: |
+                Basic anomaly detection and manual reviews for high-risk models.
+            
+            - level: 3
+              name: "Defined"
+              description: |
+                Automated detection pipelines for suspicious inputs and outputs with response playbooks.
+            
+            - level: 4
+              name: "Measured"
+              description: |
+                High-fidelity detection, telemetry correlation, and measured prevention effectiveness.
+            
+            - level: 5
+              name: "Optimized"
+              description: |
+                Adaptive defenses combining ML-based detection, deception, and active mitigation.
+        
+        - id: privacy_data_protection
+          id_code: "S03.PDP03"
+          name: "Privacy & Data Protection"
+          description: |
+            Protecting individual privacy and ensuring lawful data use in AI systems. Includes 
+            personal data minimization, privacy-enhancing technologies, and fundamental rights 
+            protection.
+          
+          key_controls:
+            - "Data minimization principles and policies"
+            - "Privacy impact assessments (PIAs/DPIAs)"
+            - "Anonymization and de-identification techniques"
+            - "Differential privacy implementation"
+            - "Consent management for data usage"
+            - "Data subject rights handling (GDPR, CCPA)"
+            - "Secure data deletion and retention policies"
+            - "Privacy-preserving ML (federated learning, synthetic data)"
+          
+          mappings:
+            nist_ai_rmf: ["MAP 2.4", "MEASURE 2.7", "MANAGE 2.6"]
+            eu_ai_act: ["Article 10 (Data and Data Governance)", "Article 27 (Fundamental Rights Impact Assessment)"]
+            iso_42001: ["Clause 6.2", "Annex A.5.3", "Annex B.5"]
+            owasp_genai: ["Privacy & Data Protection"]
+          
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: "Privacy considerations applied sporadically and inconsistently."
+            
+            - level: 2
+              name: "Repeatable"
+              description: "Basic anonymization and access controls for sensitive datasets."
+            
+            - level: 3
+              name: "Defined"
+              description: |
+                Privacy-by-design processes and data minimization practices enforced.
+            
+            - level: 4
+              name: "Measured"
+              description: |
+                Privacy impact assessments, differential privacy, or other protections measured and tested.
+            
+            - level: 5
+              name: "Optimized"
+              description: |
+                Automated enforcement of privacy policies, strong cryptographic protections and auditability.
+        
+        - id: legal_regulatory
+          id_code: "S03.LR04"
+          name: "Legal & Regulatory Readiness"
+          description: |
+            Preparedness to meet evolving laws, reporting obligations, and regulatory expectations 
+            about AI. Includes EU AI Act compliance, GDPR alignment, and proactive regulatory engagement.
+          
+          key_controls:
+            - "Regulatory monitoring and landscape assessment"
+            - "Compliance gap analysis for applicable regulations"
+            - "Legal review processes for AI initiatives"
+            - "Documentation and record-keeping for auditability"
+            - "Serious incident reporting procedures"
+            - "Contractual obligations with suppliers and customers"
+            - "Regulatory change management process"
+            - "Engagement with regulators and industry bodies"
+          
+          mappings:
+            nist_ai_rmf: ["GOVERN 3.1", "GOVERN 3.2"]
+            eu_ai_act: ["Article 16 (Obligations of providers)", "Article 17 (Quality management system)", "Article 62 (Reporting of serious incidents)"]
+            iso_42001: ["Clause 4.2", "Annex A.2.2"]
+            owasp_genai: ["Regulatory Compliance"]
+          
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: |
+                Limited understanding of regulatory landscape for AI. Compliance reactive.
+            
+            - level: 2
+              name: "Repeatable"
+              description: |
+                Tracking key regulations and incorporating into major projects.
+            
+            - level: 3
+              name: "Defined"
+              description: |
+                Legal reviews integrated into AI governance. Evidence and records maintained.
+            
+            - level: 4
+              name: "Measured"
+              description: |
+                Compliance controls measured and regularly audited. Proactive regulatory engagement.
+            
+            - level: 5
+              name: "Optimized"
+              description: |
+                Organization shapes and anticipates regulatory changes. Compliance by design.
+        
+        - id: societal_ethical_impact
+          id_code: "S03.SEI05"
+          name: "Societal & Ethical Impact"
+          description: |
+            Assessment and mitigation of broader societal harms, fairness, bias, and ethical risks 
+            from AI. Includes impact assessments, community engagement, and accountability measures.
+          
+          key_controls:
+            - "Impact assessment processes for high-risk systems"
+            - "Fairness and bias evaluation and mitigation"
+            - "Stakeholder and community engagement"
+            - "Transparent communication about AI use"
+            - "Harm reporting and remediation procedures"
+            - "Accessibility and inclusive design"
+            - "Regular audits for unintended harms"
+            - "Public accountability and transparency reports"
+          
+          mappings:
+            nist_ai_rmf: ["MAP 1.5", "MAP 1.6", "MEASURE 2.11", "MEASURE 2.12"]
+            eu_ai_act: ["Article 7 (General principles)", "Article 27 (Fundamental Rights Impact Assessment)"]
+            iso_42001: ["Annex A.4", "Annex B.4"]
+            owasp_genai: ["Societal & Ethical Impact"]
+          
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: "Limited attention to societal impacts. Considerations are ad-hoc."
+            
+            - level: 2
+              name: "Repeatable"
+              description: |
+                Some processes for fairness and bias checks exist for select initiatives.
+            
+            - level: 3
+              name: "Defined"
+              description: |
+                Standard assessments for fairness, safety and societal impact applied consistently.
+            
+            - level: 4
+              name: "Measured"
+              description: |
+                Metrics and remediation processes for harms are tracked and reported.
+            
+            - level: 5
+              name: "Optimized"
+              description: |
+                Systemic measures to prevent, detect and remediate harms. 
+                Community engagement and accountability.
 
-components:
-  - id: security_for_ai
-    id_code: "S01"
-    title: "Security for AI"
-    description: "Controls, practices and capabilities to secure AI systems and their lifecycle."
-    domains:
-      - id: governance_risk_compliance
-        id_code: "S01.GRC01"
-        name: "Governance, Risk & Compliance"
-        description: "Policies, roles, ownership, risk management and compliance for AI systems."
-        maturity_levels:
-          - level: 1
-            name: "Ad hoc"
-            description: "No consistent governance for AI; responsibilities unclear; limited policy coverage."
-          - level: 2
-            name: "Developing"
-            description: "Initial policies exist; owners identified for selected projects; risk assessments ad-hoc."
-          - level: 3
-            name: "Defined"
-            description: "Organization-wide AI governance, risk frameworks, and policy baselines are defined."
-          - level: 4
-            name: "Managed"
-            description: "Governance enforced; risks are tracked, measured, and reported; compliance processes in place."
-          - level: 5
-            name: "Optimized"
-            description: "Governance integrated with enterprise risk management; continuous improvement and automated policy checks."
+  assessment_questionnaire:
+    questions:
+      # Governance, Risk & Compliance (S01.GRC01)
+      - id: "S01.GRC01.Q1"
+        type: "scoring"
+        title: "Overall AI governance maturity"
+        help_text: "Rate the maturity of AI governance, policy coverage, and accountability across the organization."
+        attachments_allowed: false
+        required: true
+      
+      - id: "S01.GRC01.Q2"
+        type: "multiple_choice"
+        title: "Existence of a formal AI governance framework"
+        help_text: "Select the option that best describes AI governance structure."
+        options:
+          - code: 1
+            label: "No formal governance structure"
+          - code: 2
+            label: "Governance roles assigned for critical projects"
+          - code: 3
+            label: "Formal governance committee established"
+          - code: 4
+            label: "Governance enforced with metrics and reporting"
+          - code: 5
+            label: "AI governance integrated with enterprise risk management"
+        attachments_allowed: false
+        required: true
+      
+      - id: "S01.GRC01.Q3"
+        type: "true_false"
+        title: "Regulatory mapping completed (EU AI Act, ISO 42001, NIST)"
+        help_text: "True if compliance requirements mapped to applicable regulations."
+        attachments_allowed: false
+        required: true
 
-      - id: data_management
-        id_code: "S01.DM02"
-        name: "Data Management & Integrity"
-        description: "Data governance, lineage, quality, labeling and protections used by AI systems."
-        maturity_levels:
-          - level: 1
-            name: "Ad hoc"
-            description: "Data practices inconsistent; limited controls for data used in models."
-          - level: 2
-            name: "Repeatable"
-            description: "Defined datasets for some projects; basic labeling and access controls."
-          - level: 3
-            name: "Defined"
-            description: "Catalogs, lineage and quality checks exist; protected datasets and role-based access enforced."
-          - level: 4
-            name: "Measured"
-            description: "Automated data quality monitoring, provenance and drift detection across environments."
-          - level: 5
-            name: "Adaptive"
-            description: "Data governance is proactive: privacy-preserving techniques, continuous validation, and automated remediation."
-
-      - id: model_development_lifecycle
-        id_code: "S01.MDL03"
-        name: "Model Development & Lifecycle"
-        description: "Secure design, development, testing, validation, deployment, and retirement of models."
-        maturity_levels:
-          - level: 1
-            name: "Ad hoc"
-            description: "Modeling occurs without security requirements or consistent testing."
-          - level: 2
-            name: "Repeatable"
-            description: "Basic secure development practices adopted for select projects with manual reviews."
-          - level: 3
-            name: "Defined"
-            description: "Standardized SDLC for models with testing, versioning, and release gates."
-          - level: 4
-            name: "Measured"
-            description: "Security and performance metrics tracked; model validation and explainability integrated into CI/CD."
-          - level: 5
-            name: "Optimized"
-            description: "End-to-end automated lifecycle with continuous evaluation, rollback, and adaptive retraining controls."
-
-      - id: infrastructure_platform
-        id_code: "S01.INF04"
-        name: "Infrastructure & Platform Security"
-        description: "Secure compute, container, network and cloud platform controls that host AI workloads."
-        maturity_levels:
-          - level: 1
-            name: "Ad hoc"
-            description: "Infrastructure security is inconsistent; AI workloads often run on unstandardized environments."
-          - level: 2
-            name: "Repeatable"
-            description: "Baseline hardening applied for some environments; isolated AI deployments exist."
-          - level: 3
-            name: "Defined"
-            description: "Standardized secure platform templates, configuration management, and secrets handling for AI services."
-          - level: 4
-            name: "Measured"
-            description: "Platform-level monitoring, automated patching and compliance checks for AI infrastructure."
-          - level: 5
-            name: "Adaptive"
-            description: "Resilient, policy-driven platforms with automated threat mitigation and workload-aware protections."
-
-      - id: operations_monitoring
-        id_code: "S01.OPM05"
-        name: "Operations & Monitoring"
-        description: "Runtime monitoring, telemetry, observability, anomaly detection, and model performance monitoring."
-        maturity_levels:
-          - level: 1
-            name: "Ad hoc"
-            description: "Limited or no runtime monitoring of models or AI services."
-          - level: 2
-            name: "Repeatable"
-            description: "Basic logs and alerts exist for critical systems; many gaps remain."
-          - level: 3
-            name: "Defined"
-            description: "Consistent telemetry collection, dashboards and alerting for model health and security events."
-          - level: 4
-            name: "Measured"
-            description: "Automated detection of model drift, performance regressions, and anomalous behavior; SLAs in place."
-          - level: 5
-            name: "Optimized"
-            description: "Predictive monitoring, closed-loop automation for detection and mitigation, and continuous tuning."
-
-      - id: incident_response_resilience
-        id_code: "S01.IRR06"
-        name: "Incident Response & Resilience"
-        description: "Preparedness and capability to detect, respond, recover, and learn from AI-specific security incidents."
-        maturity_levels:
-          - level: 1
-            name: "Ad hoc"
-            description: "No AI-specific incident playbooks; responses are improvised."
-          - level: 2
-            name: "Repeatable"
-            description: "Basic playbooks and contacts exist for selected incidents; exercises rare."
-          - level: 3
-            name: "Defined"
-            description: "AI-focused IR plans, roles, and regular tabletop exercises implemented organization-wide."
-          - level: 4
-            name: "Measured"
-            description: "IR metrics tracked; recovery times and containment capabilities measured and improved."
-          - level: 5
-            name: "Optimized"
-            description: "Automated containment, attack surface reduction, and post-incident learning integrated into lifecycle."
-
-  - id: security_with_ai
-    id_code: "S02"
-    title: "Security with AI"
-    description: "Using AI and ML to enhance security capabilities while maintaining trust and control."
-    domains:
-      - id: use_cases_controls
-        id_code: "S02.UC01"
-        name: "Security Use Cases & Controls"
-        description: "Identification, prioritization, and safe implementation of AI-enabled security use cases."
-        maturity_levels:
-          - level: 1
-            name: "Ad hoc"
-            description: "Sporadic experimentation with AI for security, limited ROI tracking or controls."
-          - level: 2
-            name: "Repeatable"
-            description: "Pilots for high-value use cases with manual oversight."
-          - level: 3
-            name: "Defined"
-            description: "Catalog of validated AI security use cases with standard deployment patterns."
-          - level: 4
-            name: "Measured"
-            description: "Operational AI security systems with measured effectiveness and risk controls."
-          - level: 5
-            name: "Optimized"
-            description: "Adaptive AI security that combines human oversight and automated response with measurable business impact."
-
-      - id: model_assurance_security
-        id_code: "S02.MAS02"
-        name: "Model Assurance for Security"
-        description: "Assurance, validation, explainability and robustness of models used as security controls."
-        maturity_levels:
-          - level: 1
-            name: "Ad hoc"
-            description: "Little to no validation or assurance of security models."
-          - level: 2
-            name: "Repeatable"
-            description: "Basic validation and testing practices for models in isolated projects."
-          - level: 3
-            name: "Defined"
-            description: "Assurance processes standardized: testing, explainability, and bias checks for security models."
-          - level: 4
-            name: "Measured"
-            description: "Operational metrics for false positives/negatives, adversarial testing, and continual validation."
-          - level: 5
-            name: "Optimized"
-            description: "Continuous assurance pipelines with automatic re-training, self-checks and human-in-the-loop verification."
-
-      - id: integration_automation
-        id_code: "S02.IA03"
-        name: "Integration & Automation"
-        description: "Safe integration of AI-driven security into workflows, orchestration and SOAR systems."
-        maturity_levels:
-          - level: 1
-            name: "Ad hoc"
-            description: "Manual handoffs and little automation between AI outputs and security operations."
-          - level: 2
-            name: "Repeatable"
-            description: "Semi-automated workflows with human review for high-risk actions."
-          - level: 3
-            name: "Defined"
-            description: "Standard integration patterns with risk gating and audit trails for automated actions."
-          - level: 4
-            name: "Measured"
-            description: "Automated playbooks with measurable outcomes and rollback capabilities."
-          - level: 5
-            name: "Optimized"
-            description: "Fully orchestrated, proven automation with adaptive policies and continuous improvement."
-
-      - id: ethics_oversight
-        id_code: "S02.ETH04"
-        name: "Ethics & Oversight"
-        description: "Controls to ensure permissible, transparent and ethical use of AI within security operations."
-        maturity_levels:
-          - level: 1
-            name: "Ad hoc"
-            description: "Ethics considerations informal or reactive."
-          - level: 2
-            name: "Repeatable"
-            description: "Ethical guidelines under development for some projects."
-          - level: 3
-            name: "Defined"
-            description: "Clear policies for acceptable AI security use and oversight processes established."
-          - level: 4
-            name: "Measured"
-            description: "Ethics metrics and compliance checks applied to AI security systems."
-          - level: 5
-            name: "Optimized"
-            description: "Governance ensures ethical AI usage is embedded, audited and continuously refined."
-
-  - id: security_from_ai
-    id_code: "S03"
-    title: "Security from AI"
-    description: "Assessing and mitigating risks introduced by AI — intentional misuse, emergent behaviors, and systemic harms."
-    domains:
-      - id: threat_modeling_risk_assessment
-        id_code: "S03.TM01"
-        name: "Threat Modeling & Risk Assessment"
-        description: "Identify and quantify AI-specific threats, misuse cases, and systemic risks."
-        maturity_levels:
-          - level: 1
-            name: "Ad hoc"
-            description: "Limited awareness of AI-specific threats; no systematic threat modeling."
-          - level: 2
-            name: "Repeatable"
-            description: "Threat modeling done for major projects; many gaps in coverage."
-          - level: 3
-            name: "Defined"
-            description: "Consistent threat modeling approach applied across AI initiatives; prioritized risk register."
-          - level: 4
-            name: "Measured"
-            description: "Risks tracked, mitigations measured, and controls tested against adversarial scenarios."
-          - level: 5
-            name: "Optimized"
-            description: "Proactive horizon-scanning, adversarial red-teaming and system-level resilience planning."
-
-      - id: detection_misuse_prevention
-        id_code: "S03.DMP02"
-        name: "Detection & Misuse Prevention"
-        description: "Controls and capabilities to detect misuse of AI systems or malicious use of AI by adversaries."
-        maturity_levels:
-          - level: 1
-            name: "Ad hoc"
-            description: "Few detection controls; misuse often discovered reactively."
-          - level: 2
-            name: "Repeatable"
-            description: "Basic anomaly detection and manual reviews implemented for high-risk models."
-          - level: 3
-            name: "Defined"
-            description: "Automated detection pipelines for suspicious inputs and outputs with response playbooks."
-          - level: 4
-            name: "Measured"
-            description: "High-fidelity detection, telemetry correlation, and measured prevention effectiveness."
-          - level: 5
-            name: "Optimized"
-            description: "Adaptive defenses combining ML-based detection, deception, and active mitigation."
-
-      - id: privacy_data_protection
-        id_code: "S03.PDP03"
-        name: "Privacy & Data Protection"
-        description: "Protecting individual privacy and ensuring lawful data use in AI systems."
-        maturity_levels:
-          - level: 1
-            name: "Ad hoc"
-            description: "Privacy considerations applied sporadically and inconsistently."
-          - level: 2
-            name: "Repeatable"
-            description: "Basic anonymization and access controls used for sensitive datasets."
-          - level: 3
-            name: "Defined"
-            description: "Privacy-by-design processes and data minimization practices enforced."
-          - level: 4
-            name: "Measured"
-            description: "Privacy impact assessments, differential privacy or other protections measured and tested."
-          - level: 5
-            name: "Optimized"
-            description: "Automated enforcement of privacy policies, strong cryptographic protections and auditability."
-
-      - id: legal_regulatory
-        id_code: "S03.LR04"
-        name: "Legal & Regulatory Readiness"
-        description: "Preparedness to meet evolving laws, reporting obligations, and regulatory expectations about AI."
-        maturity_levels:
-          - level: 1
-            name: "Ad hoc"
-            description: "Limited understanding of regulatory landscape for AI; compliance reactive."
-          - level: 2
-            name: "Repeatable"
-            description: "Tracking key regulations and starting to incorporate requirements into major projects."
-          - level: 3
-            name: "Defined"
-            description: "Legal reviews integrated into AI program governance; evidence and records maintained."
-          - level: 4
-            name: "Measured"
-            description: "Compliance controls measured and regularly audited; proactive regulatory engagement."
-          - level: 5
-            name: "Optimized"
-            description: "Organization shapes and anticipates regulatory changes and embeds compliance by design."
-
-      - id: societal_ethical_impact
-        id_code: "S03.SEI05"
-        name: "Societal & Ethical Impact"
-        description: "Assessment and mitigation of broader societal harms, fairness, and ethical risks from AI."
-        maturity_levels:
-          - level: 1
-            name: "Ad hoc"
-            description: "Limited attention to societal impacts; considerations are ad-hoc."
-          - level: 2
-            name: "Repeatable"
-            description: "Some processes for fairness and bias checks exist for select initiatives."
-          - level: 3
-            name: "Defined"
-            description: "Standard assessments for fairness, safety and societal impact applied consistently."
-          - level: 4
-            name: "Measured"
-            description: "Metrics and remediation processes for harms are tracked and reported."
-          - level: 5
-            name: "Optimized"
-            description: "Systemic measures to prevent, detect and remediate harms; community engagement and accountability."
-
-assessment_questionnaire:
-  # For each domain we provide a set of template questions. Each question
-  # uses one of the allowed types: `multiple_choice`, `true_false`,
-  # `scoring` (1-5), `free_text`, `numeric`. Questions may accept
-  # attachments when `attachments_allowed: true`.
-  questions:
-    # Governance, Risk & Compliance (S01.GRC01)
-    - id: "S01.GRC01.Q1"
-      type: "scoring"
-      title: "Overall AI governance maturity"
-      help_text: "Rate the maturity of AI governance, policy coverage, and accountability across the organization."
-      attachments_allowed: false
-      required: true
-    - id: "S01.GRC01.Q2"
-      type: "multiple_choice"
-      title: "Existence of a formal AI policy"
-      help_text: "Select the option that best describes the current status of AI policies in your organization."
-      options:
-        - code: 1
-          label: "No formal AI policy"
-        - code: 2
-          label: "Policy in draft / limited scope"
-        - code: 3
-          label: "Formal policy exists but not enforced"
-        - code: 4
-          label: "Policy enforced with metrics"
-        - code: 5
-          label: "Policy integrated with enterprise risk management"
-      attachments_allowed: false
-      required: true
-    - id: "S01.GRC01.Q3"
-      type: "true_false"
-      title: "Assigned AI ownership and roles"
-      help_text: "True if AI ownership, data stewardship, and risk owners are formally assigned."
-      attachments_allowed: false
-      required: true
-    - id: "S01.GRC01.Q4"
-      type: "free_text"
-      title: "Describe recent governance improvements"
-      help_text: "Provide examples of recent policy, process or organizational changes related to AI governance. Attach supporting documents if needed."
-      attachments_allowed: true
-      required: false
-    - id: "S01.GRC01.Q5"
-      type: "numeric"
-      title: "Number of AI projects with formal risk assessments"
-      help_text: "Enter the integer count of AI/ML projects that have undergone a documented risk assessment in the last 12 months."
-      attachments_allowed: false
-      required: false
-
-    # Data Management & Integrity (S01.DM02)
-    - id: "S01.DM02.Q1"
-      type: "scoring"
-      title: "Data governance maturity for AI datasets"
-      help_text: "Rate dataset cataloging, lineage, quality controls, and protection measures for AI datasets."
-      attachments_allowed: false
-      required: true
-    - id: "S01.DM02.Q2"
-      type: "multiple_choice"
-      title: "Use of data labeling and quality processes"
-      help_text: "Select the option that best reflects how labeling and quality assurance are applied."
-      options:
-        - code: 1
-          label: "No formal labeling process"
-        - code: 2
-          label: "Ad-hoc labeling for some projects"
-        - code: 3
-          label: "Standard labeling pipelines used"
-        - code: 4
-          label: "Automated quality checks in CI"
-        - code: 5
-          label: "End-to-end automated labeling & verification"
-      attachments_allowed: false
-      required: true
-    - id: "S01.DM02.Q3"
-      type: "true_false"
-      title: "Is data lineage recorded for critical datasets?"
-      help_text: "True if lineage (origin, transformations, versions) is tracked for datasets supporting production models."
-      attachments_allowed: false
-      required: true
-    - id: "S01.DM02.Q4"
-      type: "free_text"
-      title: "Describe data protection controls"
-      help_text: "Summarize encryption, access controls, masking, or privacy-preserving techniques used. Attach diagrams or policies if available."
-      attachments_allowed: true
-      required: false
-    - id: "S01.DM02.Q5"
-      type: "numeric"
-      title: "Percent of datasets with automated quality checks"
-      help_text: "Enter a percentage (0-100) representing datasets covered by automated validation pipelines."
-      attachments_allowed: false
-      required: false
-
-    # Model Development & Lifecycle (S01.MDL03)
-    - id: "S01.MDL03.Q1"
-      type: "scoring"
-      title: "Model development security maturity"
-      help_text: "Rate how well security, testing, versioning, and release controls are integrated into your model SDLC."
-      attachments_allowed: false
-      required: true
-    - id: "S01.MDL03.Q2"
-      type: "multiple_choice"
-      title: "Model versioning and provenance"
-      help_text: "Which description best fits your model versioning practices?"
-      options:
-        - code: 1
-          label: "No formal versioning"
-        - code: 2
-          label: "Manual version tags"
-        - code: 3
-          label: "Automated versioning in CI/CD"
-        - code: 4
-          label: "Provenance recorded end-to-end"
-        - code: 5
-          label: "Immutable, auditable model provenance"
-      attachments_allowed: false
-      required: true
-    - id: "S01.MDL03.Q3"
-      type: "true_false"
-      title: "Are adversarial robustness tests performed prior to deployment?"
-      help_text: "True if adversarial or robustness testing is part of the release checklist."
-      attachments_allowed: false
-      required: true
-    - id: "S01.MDL03.Q4"
-      type: "free_text"
-      title: "List critical model release gates"
-      help_text: "Describe the gates (e.g., testing, security review, bias assessment) used before a model is released. Attach evidence if available."
-      attachments_allowed: true
-      required: false
-    - id: "S01.MDL03.Q5"
-      type: "numeric"
-      title: "Average time (days) from model approval to production deployment"
-      help_text: "Provide the average elapsed days between approval and production deployment."
-      attachments_allowed: false
-      required: false
-
-    # Infrastructure & Platform Security (S01.INF04)
-    - id: "S01.INF04.Q1"
-      type: "scoring"
-      title: "Platform hardening and configuration management maturity"
-      help_text: "Rate platform protections (isolation, secrets handling, hardening) for AI workloads."
-      attachments_allowed: false
-      required: true
-    - id: "S01.INF04.Q2"
-      type: "multiple_choice"
-      title: "Deployment environment standardization"
-      help_text: "Which best describes how AI deployments are standardized across environments?"
-      options:
-        - code: 1
-          label: "No standard environments"
-        - code: 2
-          label: "Some standardized templates"
-        - code: 3
-          label: "Standardized IaC templates used"
-        - code: 4
-          label: "Automated secure baseline enforcement"
-        - code: 5
-          label: "Policy-driven, workload-aware platforms"
-      attachments_allowed: false
-      required: true
-    - id: "S01.INF04.Q3"
-      type: "true_false"
-      title: "Are secrets and keys used by models centrally managed?"
-      help_text: "True if secrets are in a vault or managed secret system rather than embedded in code or configs."
-      attachments_allowed: false
-      required: true
-    - id: "S01.INF04.Q4"
-      type: "free_text"
-      title: "Describe platform resilience measures"
-      help_text: "Include redundancy, backup, and disaster recovery approaches for AI workloads. Attach architecture diagrams if available."
-      attachments_allowed: true
-      required: false
-    - id: "S01.INF04.Q5"
-      type: "numeric"
-      title: "Number of environment drift incidents in last 12 months"
-      help_text: "Enter the count of incidents where environment/configuration drift caused model failures or security issues."
-      attachments_allowed: false
-      required: false
-
-    # Operations & Monitoring (S01.OPM05)
-    - id: "S01.OPM05.Q1"
-      type: "scoring"
-      title: "Monitoring and observability maturity for models"
-      help_text: "Rate the coverage and effectiveness of telemetry, drift detection, and alerting for AI systems."
-      attachments_allowed: false
-      required: true
-    - id: "S01.OPM05.Q2"
-      type: "multiple_choice"
-      title: "Telemetry centralization"
-      help_text: "Where is model telemetry stored and analyzed?"
-      options:
-        - code: 1
-          label: "Local logs only"
-        - code: 2
-          label: "Ad-hoc centralization"
-        - code: 3
-          label: "Centralized monitoring platform"
-        - code: 4
-          label: "Centralized + automated analysis"
-        - code: 5
-          label: "Predictive, closed-loop observability"
-      attachments_allowed: false
-      required: true
-    - id: "S01.OPM05.Q3"
-      type: "true_false"
-      title: "Are SLA/ SLOs defined for production models?"
-      help_text: "True if service level or objectives for model availability/performance are defined and monitored."
-      attachments_allowed: false
-      required: true
-    - id: "S01.OPM05.Q4"
-      type: "free_text"
-      title: "Describe your drift detection and remediation workflow"
-      help_text: "Explain how drift is detected, who is notified, and what automated or manual remediation is performed."
-      attachments_allowed: true
-      required: false
-    - id: "S01.OPM05.Q5"
-      type: "numeric"
-      title: "Average time (hours) to detect a model anomaly"
-      help_text: "Provide the average time between anomaly occurrence and detection."
-      attachments_allowed: false
-      required: false
-
-    # Incident Response & Resilience (S01.IRR06)
-    - id: "S01.IRR06.Q1"
-      type: "scoring"
-      title: "Incident response preparedness for AI incidents"
-      help_text: "Rate the maturity of IR playbooks, roles, and exercises specific to AI-related incidents."
-      attachments_allowed: false
-      required: true
-    - id: "S01.IRR06.Q2"
-      type: "multiple_choice"
-      title: "Frequency of AI-specific IR exercises"
-      help_text: "How often are tabletop or live exercises performed for AI incidents?"
-      options:
-        - code: 1
-          label: "Never"
-        - code: 2
-          label: "Rarely (every few years)"
-        - code: 3
-          label: "Annually"
-        - code: 4
-          label: "Quarterly"
-        - code: 5
-          label: "Continuous/Red Teaming"
-      attachments_allowed: false
-      required: true
-    - id: "S01.IRR06.Q3"
-      type: "true_false"
-      title: "Is there a runbook for model compromise scenarios?"
-      help_text: "True if steps to contain, investigate, and recover from model compromise are documented."
-      attachments_allowed: false
-      required: true
-    - id: "S01.IRR06.Q4"
-      type: "free_text"
-      title: "Describe the last AI incident and lessons learned"
-      help_text: "Summarize a recent incident, response actions, and follow-up improvements. Attach incident reports if available."
-      attachments_allowed: true
-      required: false
-    - id: "S01.IRR06.Q5"
-      type: "numeric"
-      title: "Mean time to recovery (hours) for AI incidents"
-      help_text: "Provide average hours required to recover from an AI-related incident."
-      attachments_allowed: false
-      required: false
-
-    # Security with AI: Use Cases & Controls (S02.UC01)
-    - id: "S02.UC01.Q1"
-      type: "scoring"
-      title: "Maturity of AI-enabled security use cases"
-      help_text: "Rate maturity of discovery, prioritization, and operationalization of AI security use cases."
-      attachments_allowed: false
-      required: true
-    - id: "S02.UC01.Q2"
-      type: "multiple_choice"
-      title: "Primary AI security use cases in production"
-      help_text: "Select the top description for production AI security use cases."
-      options:
-        - code: 1
-          label: "None"
-        - code: 2
-          label: "Experimental / POC"
-        - code: 3
-          label: "Limited production"
-        - code: 4
-          label: "Broad production"
-        - code: 5
-          label: "Strategic, cross-functional deployments"
-      attachments_allowed: false
-      required: true
-    - id: "S02.UC01.Q3"
-      type: "true_false"
-      title: "Are AI security outputs reviewed by human analysts?"
-      help_text: "True if humans review or approve high-risk actions suggested by AI systems."
-      attachments_allowed: false
-      required: true
-    - id: "S02.UC01.Q4"
-      type: "free_text"
-      title: "Describe safeguards for false positives/negatives"
-      help_text: "Explain mitigating controls to manage false positives/negatives produced by AI security tools."
-      attachments_allowed: true
-      required: false
-    - id: "S02.UC01.Q5"
-      type: "numeric"
-      title: "Percent reduction in detection time due to AI (estimate)"
-      help_text: "Provide an estimated percentage value representing improvement attributable to AI tools."
-      attachments_allowed: false
-      required: false
-
-    # Security with AI: Model Assurance for Security (S02.MAS02)
-    - id: "S02.MAS02.Q1"
-      type: "scoring"
-      title: "Assurance and validation maturity for security models"
-      help_text: "Rate how consistently models used in security are validated for robustness, bias, and performance."
-      attachments_allowed: false
-      required: true
-    - id: "S02.MAS02.Q2"
-      type: "multiple_choice"
-      title: "Use of adversarial testing for security models"
-      help_text: "Select which best describes adversarial testing coverage."
-      options:
-        - code: 1
-          label: "None"
-        - code: 2
-          label: "Occasional manual tests"
-        - code: 3
-          label: "Regular tests during development"
-        - code: 4
-          label: "Integrated adversarial testing in CI"
-        - code: 5
-          label: "Continuous adversarial validation"
-      attachments_allowed: false
-      required: true
-    - id: "S02.MAS02.Q3"
-      type: "true_false"
-      title: "Are model explainability artifacts maintained for security models?"
-      help_text: "True if explainability outputs and rationale are produced and archived for key models."
-      attachments_allowed: false
-      required: true
-    - id: "S02.MAS02.Q4"
-      type: "free_text"
-      title: "Describe the model assurance pipeline"
-      help_text: "Summarize steps, tools, and ownership for validating security models. Attach pipeline diagrams if available."
-      attachments_allowed: true
-      required: false
-    - id: "S02.MAS02.Q5"
-      type: "numeric"
-      title: "Number of security models with documented test coverage"
-      help_text: "Enter the integer count of security models that have formal test suites and coverage metrics."
-      attachments_allowed: false
-      required: false
-
-    # Security with AI: Integration & Automation (S02.IA03)
-    - id: "S02.IA03.Q1"
-      type: "scoring"
-      title: "Automation maturity for AI-driven security workflows"
-      help_text: "Rate how maturely AI outputs are integrated and automated in security operations with safe guardrails."
-      attachments_allowed: false
-      required: true
-    - id: "S02.IA03.Q2"
-      type: "multiple_choice"
-      title: "Degree of automation for remediation actions"
-      help_text: "Select the option that best reflects automation coverage."
-      options:
-        - code: 1
-          label: "Manual only"
-        - code: 2
-          label: "Semi-automated with human approvals"
-        - code: 3
-          label: "Automated for low-risk actions"
-        - code: 4
-          label: "Broad automated playbooks with rollbacks"
-        - code: 5
-          label: "Fully orchestrated automation with adaptive policies"
-      attachments_allowed: false
-      required: true
-    - id: "S02.IA03.Q3"
-      type: "true_false"
-      title: "Is there an audit trail for automated security actions?"
-      help_text: "True if automated actions are logged with context and can be traced for review."
-      attachments_allowed: false
-      required: true
-    - id: "S02.IA03.Q4"
-      type: "free_text"
-      title: "Describe rollback and safety mechanisms for automation"
-      help_text: "Explain how incorrect automated actions are detected and rolled back. Attach playbooks if available."
-      attachments_allowed: true
-      required: false
-    - id: "S02.IA03.Q5"
-      type: "numeric"
-      title: "Number of automated playbooks in production"
-      help_text: "Enter the count of production SOAR/automation playbooks that are triggered by AI outputs."
-      attachments_allowed: false
-      required: false
-
-    # Security with AI: Ethics & Oversight (S02.ETH04)
-    - id: "S02.ETH04.Q1"
-      type: "scoring"
-      title: "Ethics oversight maturity for AI in security"
-      help_text: "Rate how well ethics, fairness, and transparency considerations are embedded into AI security practices."
-      attachments_allowed: false
-      required: true
-    - id: "S02.ETH04.Q2"
-      type: "multiple_choice"
-      title: "Existence of ethics review processes"
-      help_text: "Which best describes your ethics oversight process for AI security tools?"
-      options:
-        - code: 1
-          label: "None"
-        - code: 2
-          label: "Informal reviews"
-        - code: 3
-          label: "Defined ethics review board"
-        - code: 4
-          label: "Board with formal approval gates"
-        - code: 5
-          label: "Independent audited ethics governance"
-      attachments_allowed: false
-      required: true
-    - id: "S02.ETH04.Q3"
-      type: "true_false"
-      title: "Are fairness and bias checks automated for security models?"
-      help_text: "True if automated bias/fairness tests run as part of model validation."
-      attachments_allowed: false
-      required: true
-    - id: "S02.ETH04.Q4"
-      type: "free_text"
-      title: "Describe oversight responsibilities and escalation paths"
-      help_text: "Explain who owns ethics decisions and how concerns are escalated. Attach charters if available."
-      attachments_allowed: true
-      required: false
-    - id: "S02.ETH04.Q5"
-      type: "numeric"
-      title: "Number of ethics reviews completed in last 12 months"
-      help_text: "Enter the count of formal ethics reviews related to AI security."
-      attachments_allowed: false
-      required: false
-
-    # Security from AI: Threat Modeling & Risk Assessment (S03.TM01)
-    - id: "S03.TM01.Q1"
-      type: "scoring"
-      title: "Threat modeling maturity for AI systems"
-      help_text: "Rate how consistently AI-specific threat modeling and misuse-case analysis are performed."
-      attachments_allowed: false
-      required: true
-    - id: "S03.TM01.Q2"
-      type: "multiple_choice"
-      title: "Coverage of threat modeling across projects"
-      help_text: "Which best describes the proportion of AI projects that undergo threat modeling?"
-      options:
-        - code: 1
-          label: "None"
-        - code: 2
-          label: "Few (pilot projects)"
-        - code: 3
-          label: "Some (critical projects)"
-        - code: 4
-          label: "Most projects"
-        - code: 5
-          label: "All projects / continuous assessment"
-      attachments_allowed: false
-      required: true
-    - id: "S03.TM01.Q3"
-      type: "true_false"
-      title: "Are misuse cases prioritized and tracked?"
-      help_text: "True if misuse cases are cataloged, scored, and included in risk registers."
-      attachments_allowed: false
-      required: true
-    - id: "S03.TM01.Q4"
-      type: "free_text"
-      title: "Describe top AI misuse scenarios you monitor"
-      help_text: "Provide examples and any mitigation strategies. Attach threat models if available."
-      attachments_allowed: true
-      required: false
-    - id: "S03.TM01.Q5"
-      type: "numeric"
-      title: "Number of red-team / adversarial exercises in last 12 months"
-      help_text: "Enter the integer count of exercises performed to test AI systems."
-      attachments_allowed: false
-      required: false
-
-    # Security from AI: Detection & Misuse Prevention (S03.DMP02)
-    - id: "S03.DMP02.Q1"
-      type: "scoring"
-      title: "Maturity of detection & misuse prevention"
-      help_text: "Rate detection, prevention, and response capabilities for malicious use of AI."
-      attachments_allowed: false
-      required: true
-    - id: "S03.DMP02.Q2"
-      type: "multiple_choice"
-      title: "Detection automation level"
-      help_text: "Which best describes your detection automation for suspicious AI inputs/outputs?"
-      options:
-        - code: 1
-          label: "Manual only"
-        - code: 2
-          label: "Semi-automated"
-        - code: 3
-          label: "Automated detection pipelines"
-        - code: 4
-          label: "High-fidelity ML-based detection"
-        - code: 5
-          label: "Adaptive, adversarial-aware defenses"
-      attachments_allowed: false
-      required: true
-    - id: "S03.DMP02.Q3"
-      type: "true_false"
-      title: "Is there a process to report detected misuse to stakeholders or authorities?"
-      help_text: "True if internal/external reporting processes exist for misuse incidents."
-      attachments_allowed: false
-      required: true
-    - id: "S03.DMP02.Q4"
-      type: "free_text"
-      title: "Describe detection signals and telemetry sources"
-      help_text: "List the signals used to detect misuse (e.g., input patterns, anomaly scores). Attach examples if available."
-      attachments_allowed: true
-      required: false
-    - id: "S03.DMP02.Q5"
-      type: "numeric"
-      title: "Average false positive rate for misuse detectors (%)"
-      help_text: "Provide an estimated percentage for false positives observed in production detectors."
-      attachments_allowed: false
-      required: false
-
-    # Security from AI: Privacy & Data Protection (S03.PDP03)
-    - id: "S03.PDP03.Q1"
-      type: "scoring"
-      title: "Privacy and data protection maturity for AI"
-      help_text: "Rate how well privacy risks are managed in AI systems (minimization, anonymization, DPIAs)."
-      attachments_allowed: false
-      required: true
-    - id: "S03.PDP03.Q2"
-      type: "multiple_choice"
-      title: "Use of privacy-enhancing technologies"
-      help_text: "Which best describes the deployment of PETs (e.g., DP, MPC, encryption)?"
-      options:
-        - code: 1
-          label: "None"
-        - code: 2
-          label: "Pilot use"
-        - code: 3
-          label: "Selective production"
-        - code: 4
-          label: "Broad production"
-        - code: 5
-          label: "Comprehensive, automated PETs"
-      attachments_allowed: false
-      required: true
-    - id: "S03.PDP03.Q3"
-      type: "true_false"
-      title: "Are Privacy Impact Assessments (PIAs) performed for AI projects?"
-      help_text: "True if PIAs or DPIAs are required and recorded for AI initiatives."
-      attachments_allowed: false
-      required: true
-    - id: "S03.PDP03.Q4"
-      type: "free_text"
-      title: "Describe consent and data retention policies"
-      help_text: "Explain how consent is handled and data retention requirements are implemented. Attach policy documents if available."
-      attachments_allowed: true
-      required: false
-    - id: "S03.PDP03.Q5"
-      type: "numeric"
-      title: "Number of privacy incidents related to AI in last 24 months"
-      help_text: "Enter the count of incidents involving privacy breaches or regulatory concerns."
-      attachments_allowed: false
-      required: false
-
-    # Security from AI: Legal & Regulatory Readiness (S03.LR04)
-    - id: "S03.LR04.Q1"
-      type: "scoring"
-      title: "Regulatory readiness for AI"
-      help_text: "Rate preparedness to meet current and emerging AI-related legal and regulatory requirements."
-      attachments_allowed: false
-      required: true
-    - id: "S03.LR04.Q2"
-      type: "multiple_choice"
-      title: "Status of legal reviews for AI initiatives"
-      help_text: "Which best describes how legal is engaged on AI projects?"
-      options:
-        - code: 1
-          label: "Not engaged"
-        - code: 2
-          label: "Ad-hoc reviews"
-        - code: 3
-          label: "Routine reviews for critical projects"
-        - code: 4
-          label: "Legal integrated into governance"
-        - code: 5
-          label: "Legal shapes policy and practice"
-      attachments_allowed: false
-      required: true
-    - id: "S03.LR04.Q3"
-      type: "true_false"
-      title: "Are recordkeeping and evidentiary controls in place for AI decisions?"
-      help_text: "True if systems retain sufficient logs/evidence to support audits and regulatory inquiries."
-      attachments_allowed: false
-      required: true
-    - id: "S03.LR04.Q4"
-      type: "free_text"
-      title: "Describe compliance workflows for new AI regulations"
-      help_text: "Explain how regulatory changes are tracked and incorporated. Attach regulatory gap analyses if available."
-      attachments_allowed: true
-      required: false
-    - id: "S03.LR04.Q5"
-      type: "numeric"
-      title: "Number of active regulatory obligations related to AI"
-      help_text: "Enter the count of regulatory obligations your organization currently tracks (e.g., reporting, DPIAs)."
-      attachments_allowed: false
-      required: false
-
-    # Security from AI: Societal & Ethical Impact (S03.SEI05)
-    - id: "S03.SEI05.Q1"
-      type: "scoring"
-      title: "Maturity of societal and ethical risk management"
-      help_text: "Rate how well the organization identifies and mitigates societal harms, bias, and fairness concerns."
-      attachments_allowed: false
-      required: true
-    - id: "S03.SEI05.Q2"
-      type: "multiple_choice"
-      title: "Engagement with external stakeholders/community"
-      help_text: "Which best describes the level of external engagement on AI impacts?"
-      options:
-        - code: 1
-          label: "None"
-        - code: 2
-          label: "Occasional outreach"
-        - code: 3
-          label: "Regular stakeholder consultations"
-        - code: 4
-          label: "Co-design with communities"
-        - code: 5
-          label: "Ongoing accountable partnerships"
-      attachments_allowed: false
-      required: true
-    - id: "S03.SEI05.Q3"
-      type: "true_false"
-      title: "Are impact assessments performed for high-risk systems?"
-      help_text: "True if systematic impact assessments (fairness/safety) are performed and documented."
-      attachments_allowed: false
-      required: true
-    - id: "S03.SEI05.Q4"
-      type: "free_text"
-      title: "Describe mitigation strategies for identified harms"
-      help_text: "Summarize how harms are mitigated and remediated; attach policy or case studies where available."
-      attachments_allowed: true
-      required: false
-    - id: "S03.SEI05.Q5"
-      type: "numeric"
-      title: "Number of community engagement events in last 12 months"
-      help_text: "Enter the integer count of community or stakeholder engagements related to AI impacts."
-      attachments_allowed: false
-      required: false
-
-  # assessment_scoring provides the canonical 1-5 scale and suggested labels
   assessment_scoring:
     scale: "1-5"
     descriptions:
-      1: "Level 1 — Ad hoc: Little or no formalization; reactive"
-      2: "Level 2 — Repeatable / Developing: Some repeatable practices; gaps remain"
-      3: "Level 3 — Defined: Standards and processes in place"
-      4: "Level 4 — Measured / Managed: Metrics and enforcement in place"
-      5: "Level 5 — Optimized / Adaptive: Automated, continuously improving"
+      1: "Level 1 — Ad hoc: Little or no formalization; reactive approach; high risk"
+      2: "Level 2 — Repeatable/Developing: Some repeatable practices; significant gaps remain"
+      3: "Level 3 — Defined: Standards and processes in place; baseline risk mitigation"
+      4: "Level 4 — Measured/Managed: Metrics and enforcement; well-controlled"
+      5: "Level 5 — Optimized/Adaptive: Automated, continuously improving; proactive"
 
-metadata:
-  author: "AISMM Working Group"
-  created: "2025-12-07"
-  license: "proprietary"
+  metadata:
+    version: "2.0"
+    author: "AISMM Working Group"
+    created: "2025-12-08"
+    last_updated: "2025-12-08"
+    revision_notes: |
+      v2.0 enhancements:
+      - Aligned with NIST AI RMF 2.0 and Generative AI Profile (NIST AI 600-1)
+      - EU AI Act compliance mapping with timelines (full applicability: 2 August 2026)
+      - ISO/IEC 42001 requirement alignment
+      - Added prompt injection and jailbreak testing controls
+      - Supply chain security and model poisoning detection controls
+      - Frontier AI and dynamic safety case considerations
+      - Hallucination detection and evaluation metrics
+      - AI transparency, explainability, and interpretability requirements
+      - SOAR integration and agentic AI automation controls
+      - Red-teaming and adversarial testing frameworks
+      - Model provenance and supply chain validation
+      - Privacy-enhancing technologies and differential privacy
+      - Incident reporting and serious incident procedures
+      - Fundamental rights impact assessments
+      - Community engagement and accountability measures
+    
+    key_references:
+      - "NIST AI RMF 2.0 (February 2024) & Generative AI Profile (July 2024)"
+      - "EU AI Act (Regulation EU 2024/1689) - Full applicability: August 2, 2026"
+      - "ISO/IEC 42001:2023 - Information technology — Artificial intelligence — Management system"
+      - "OWASP GenAI Security - LLM Top 10, Red Teaming Initiative"
+      - "SoK: Understanding Vulnerabilities in the LLM Supply Chain (2025)"
+      - "Bridging AI and Software Security: Comparative Vulnerability Assessment of LLM Agent Deployment Paradigms (2025)"
+      - "AI Supply Chain Security and Risk Governance Model for Critical Infrastructure (2025)"
+      - "Prompt Injection Defense Research - Signed-Prompt, PromptShield, GenTel-Safe (2024-2025)"
+      - "Hallucination Detection Metrics and RAG Evaluation (2025)"
+      - "Transparent AI: The Case for Interpretability and Explainability (2025)"
+      - "AI Red Teaming Services and Automated Attack Simulations (2024-2025)"
+      - "Frontier AI Risk Management Framework (2025)"
+      - "Dynamic Safety Case Management System for AI (2024)"
 
-# Notes:
-# - Each domain contains five maturity levels (1..5). These descriptions are
-#   intentionally concise for use in questionnaires and can be expanded into
-#   specific assessment questions or automated policy checks.
-# - Consider adding a JSON Schema and a stable `id` for each maturity-level
-#   criterion if you plan to validate or transform this YAML into UI forms.
+    compliance_note: |
+      This version maps to:
+      - EU AI Act Articles 4-28 (governance, risk management, technical requirements, transparency)
+      - ISO/IEC 42001 Clauses 4-8 (context, leadership, planning, support, operation, performance, improvement)
+      - NIST AI RMF functions: GOVERN, MAP, MEASURE, MANAGE
+      - OWASP GenAI Top 10 and Red Teaming initiatives
+      
+      Organizations using this model for compliance purposes should:
+      1. Conduct gap analysis against specific regulatory requirements
+      2. Implement risk-based prioritization for high-risk AI systems
+      3. Establish legal review and compliance tracking processes
+      4. Maintain detailed documentation for audit readiness
+      5. Engage legal and governance stakeholders in interpretation
+    
+    license: "proprietary"
 
 ...
