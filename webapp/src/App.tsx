@@ -153,49 +153,6 @@ function App() {
         ))}
       </div>
 
-      {/* Scoring Configuration */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div className="p-6 border-b border-gray-100 bg-gray-50">
-          <h3 className="text-xl font-bold text-gray-900">Scoring Configuration</h3>
-          <p className="text-sm text-gray-600 mt-1">Model scoring weights and thresholds</p>
-        </div>
-        <div className="p-6 grid md:grid-cols-3 gap-6">
-          <div>
-            <h4 className="text-sm font-semibold text-gray-700 mb-3">Pillar Weights</h4>
-            <div className="space-y-2">
-              {Object.entries(data.scoring_config.pillar_weights).map(([key, value]) => (
-                <div key={key} className="flex justify-between text-sm">
-                  <span className="text-gray-600">{data.pillars[key]?.name || key}</span>
-                  <span className="font-mono font-medium text-gray-900">{value}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-gray-700 mb-3">Level Scores</h4>
-            <div className="space-y-2">
-              {Object.entries(data.scoring_config.level_scores).map(([key, value]) => (
-                <div key={key} className="flex justify-between text-sm">
-                  <span className="text-gray-600">{key.replace('_', ' ')}</span>
-                  <span className="font-mono font-medium text-gray-900">{value}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-gray-700 mb-3">Maturity Thresholds</h4>
-            <div className="space-y-2">
-              {Object.entries(data.scoring_config.maturity_thresholds).map(([key, value]) => (
-                <div key={key} className="flex justify-between text-sm">
-                  <span className="text-gray-600">{key.replace('_', ' ')}</span>
-                  <span className="font-mono font-medium text-gray-900">{value}%</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Maturity Level Overview Table */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="p-6 border-b border-gray-100 bg-gray-50">
