@@ -247,6 +247,12 @@ function App() {
                     <div className="space-y-2">
                       <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wider">Framework Mappings</h4>
                       <div className="flex flex-wrap gap-2">
+                        {domain.mappings.mitre_atlas && domain.mappings.mitre_atlas.length > 0 && (
+                          <div className="flex items-center gap-1 px-2 py-1 bg-red-50 border border-red-200 rounded text-xs">
+                            <span className="font-medium text-red-900">MITRE ATLAS:</span>
+                            <span className="text-red-700">{domain.mappings.mitre_atlas.join(', ')}</span>
+                          </div>
+                        )}
                         {domain.mappings.nist_ai_rmf && domain.mappings.nist_ai_rmf.length > 0 && (
                           <div className="flex items-center gap-1 px-2 py-1 bg-blue-50 border border-blue-200 rounded text-xs">
                             <span className="font-medium text-blue-900">NIST AI RMF:</span>

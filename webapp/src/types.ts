@@ -12,6 +12,7 @@ export interface Domain {
   description: string;
   key_controls?: string[];
   mappings?: {
+    mitre_atlas?: string[];
     nist_ai_rmf?: string[];
     eu_ai_act?: string[];
     iso_42001?: string[];

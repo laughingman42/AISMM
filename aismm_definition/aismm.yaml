@@ -20,8 +20,7 @@ aismm:
     eu_ai_act: "Regulation (EU) 2024/1689 - AI Act (Entry into Force: 2 August 2024)"
     iso_42001: "ISO/IEC 42001:2023 - Information Technology — AI Management System"
     owasp_genai: "OWASP GenAI Security initiatives and threat taxonomies"
-    research_foundation: "Recent peer-reviewed research on AI security, supply chains, and emergent threats (2024-2025)"
-
+    
   components:
     - id: security_for_ai
       id_code: "S01"
@@ -53,6 +52,7 @@ aismm:
             - "Regulatory monitoring and change management for evolving AI policies"
           
           mappings:
+            mitre_atlas: ["AML.TA0003 (Resource Development)", "AML.M0015 (User Training)", "AML.M0006 (Establish AI Security Policy)"]
             nist_ai_rmf: ["GOVERN 1.1", "GOVERN 1.2", "GOVERN 1.3", "MANAGE 1.1", "MANAGE 1.2"]
             eu_ai_act: ["Article 4 (AI Literacy)", "Article 5 (Prohibited Practices)", "Article 9 (Risk Management System)", "Article 24 (Governance)"]
             iso_42001: ["Clause 4.1", "Clause 5", "Clause 6.1", "Annex A.2", "Annex B.1"]
@@ -135,6 +135,7 @@ aismm:
             - "Data retention and deletion policies compliant with regulations"
           
           mappings:
+            mitre_atlas: ["AML.T0020 (Poison Training Data)", "AML.T0002 (Acquire Public Data)", "AML.T0057 (LLM Data Leakage)", "AML.T0026 (Data from Information Repositories)"]
             nist_ai_rmf: ["MAP 2.1", "MAP 2.2", "MAP 2.3", "MAP 2.4", "MEASURE 2.5", "MANAGE 2.5"]
             eu_ai_act: ["Article 10 (Data and Data Governance)", "Article 27 (Fundamental Rights Impact Assessment)"]
             iso_42001: ["Clause 6.2", "Annex A.5", "Annex B.5"]
@@ -217,6 +218,7 @@ aismm:
             - "Model decommissioning procedures with secure disposal and archival"
           
           mappings:
+            mitre_atlas: ["AML.T0018 (Backdoor ML Model)", "AML.T0010 (ML Supply Chain Compromise)", "AML.T0054 (LLM Jailbreak)", "AML.T0004 (Publish Poisoned Model)"]
             nist_ai_rmf: ["MAP 1.1", "MAP 1.2", "MAP 1.3", "MEASURE 2.2", "MEASURE 2.6", "MANAGE 2.3"]
             eu_ai_act: ["Article 11 (Technical Documentation)", "Article 15 (Accuracy, Robustness and Cybersecurity)", "Article 18 (Transparency)"]
             iso_42001: ["Clause 6.2", "Annex A.6", "Annex B.6"]
@@ -298,6 +300,7 @@ aismm:
             - "Compliance monitoring and configuration drift detection"
           
           mappings:
+            mitre_atlas: ["AML.T0029 (Denial of ML Service)", "AML.T0006 (Exploit Public-Facing Application)", "AML.T0049 (Obfuscated Files or Information)", "AML.TA0005 (ML Model Access)"]
             nist_ai_rmf: ["GOVERN 4.1", "GOVERN 4.2", "MANAGE 2.4", "MANAGE 3.3"]
             eu_ai_act: ["Article 15 (Cybersecurity)", "Article 28 (Quality management system)"]
             iso_42001: ["Clause 6.2", "Annex A.7", "Annex A.9", "Annex B.7"]
@@ -373,6 +376,7 @@ aismm:
             - "Incident detection with automated escalation"
           
           mappings:
+            mitre_atlas: ["AML.T0055 (Insecure Output Handling)", "AML.T0052 (LLM Meta Prompt Extraction)", "AML.T0056 (LLM Plugin Compromise)", "AML.T0024 (Exfiltration via ML Inference API)"]
             nist_ai_rmf: ["MEASURE 1.1", "MEASURE 1.2", "MEASURE 1.3", "MEASURE 2.10", "MANAGE 4.1", "MANAGE 4.2"]
             eu_ai_act: ["Article 12 (Record-keeping)", "Article 26 (Technical Documentation)", "Article 61 (Post-market monitoring)"]
             iso_42001: ["Clause 8", "Annex A.7", "Annex B.7"]
@@ -448,6 +452,7 @@ aismm:
             - "Red-teaming and incident simulation exercises"
           
           mappings:
+            mitre_atlas: ["AML.TA0012 (Impact)", "AML.TA0009 (Defense Evasion)", "AML.TA0002 (Execution)", "AML.M0024 (AI Telemetry Logging)"]
             nist_ai_rmf: ["GOVERN 4.3", "MANAGE 4.3"]
             eu_ai_act: ["Article 62 (Reporting of serious incidents)", "Article 73 (Competence of notified bodies)"]
             iso_42001: ["Clause 8.2", "Annex A.9.3", "Annex B.9"]
@@ -501,6 +506,141 @@ aismm:
                 - "Automated incident detection and containment"
                 - "Continuous red-teaming and simulation"
                 - "Rapid recovery with <1 hour MTTR targets"
+
+        - id: supply_chain_resource_integrity
+          id_code: "S01.SCR07"
+          name: "Supply Chain & Resource Integrity"
+          description: |
+            Security controls for the AI supply chain, focusing on the integrity of third-party
+            models, datasets, libraries, and tools. Addresses risks of poisoned resources,
+            backdoored models, and compromised vendors. Aligns with MITRE ATLAS Resource Development.
+          key_controls:
+            - "Software Bill of Materials (SBOM) for AI (including model weights/data)"
+            - "Model signing and cryptographic verification (e.g., Sigstore)"
+            - "Scan third-party models for malware/pickles (e.g., ModelScan)"
+            - "Vendor risk assessment specific to AI development practices"
+            - "Trusted repositories and artifact registries"
+            - "Continuous monitoring of open-source AI dependencies"
+          mappings:
+            mitre_atlas: ["AML.TA0003 (Resource Development)", "AML.T0010 (ML Supply Chain Compromise)", "AML.T0018 (Backdoor ML Model)"]
+            nist_ai_rmf: ["GOVERN 2.3", "MANAGE 1.3", "MANAGE 2.5"]
+            eu_ai_act: ["Article 28 (Quality management system)", "Article 15 (Cybersecurity)"]
+            iso_42001: ["Annex A.6.2", "Annex B.6"]
+            owasp_genai: ["LLM05:2025 Supply Chain Vulnerabilities"]
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: |
+                Trust in external resources is implicit. Models and data downloaded directly
+                from public hubs (e.g., Hugging Face) without verification.
+              key_indicators:
+                - "Direct downloads from public repositories"
+                - "No verification of model hashes"
+                - "No inventory of external AI assets"
+            - level: 2
+              name: "Repeatable"
+              description: |
+                Basic checks for major third-party models. Manual verification of SHA hashes.
+                List of approved vendors/sources created.
+              key_indicators:
+                - "Approved sources list for models"
+                - "Manual hash verification"
+                - "Basic vendor security questionnaire"
+            - level: 3
+              name: "Defined"
+              description: |
+                Formal AI Supply Chain Risk Management (SCRM) policy. SBOMs required for
+                critical models. Private mirrors for packages and models established.
+              key_indicators:
+                - "Private model registry/mirror used"
+                - "SBOMs generated for deployed systems"
+                - "Automated malware scanning of imported models"
+            - level: 4
+              name: "Measured"
+              description: |
+                Automated enforcement of supply chain policies. Continuous scanning of
+                dependencies for new vulnerabilities. Cryptographic signing of internal models.
+              key_indicators:
+                - "Automated blocking of unapproved models"
+                - "Model signing enforcement"
+                - "Real-time dependency vulnerability alerting"
+            - level: 5
+              name: "Optimized"
+              description: |
+                Zero-trust supply chain. Automated provenance verification from training to
+                deployment. Dynamic vetting of third-party resources using threat intel.
+              key_indicators:
+                - "End-to-end cryptographic provenance (SLSA Level 3+)"
+                - "Automated substitution of vulnerable components"
+                - "Integrated threat intel for vendor risk"
+
+        - id: adversarial_defense_hardening
+          id_code: "S01.ADH08"
+          name: "Adversarial Defense & Hardening"
+          description: |
+            Technical countermeasures to protect AI models against active adversarial attacks,
+            including evasion, extraction, and inversion. Focuses on increasing the cost
+            and difficulty for attackers. Aligns with MITRE ATLAS Model Access and Defense Evasion.
+          key_controls:
+            - "Adversarial training and model hardening"
+            - "Input sanitization and transformation (e.g., squeeze, smoothing)"
+            - "API rate limiting and query analysis (prevention of oracle attacks)"
+            - "Output truncation/noising (defense against extraction)"
+            - "Certified robustness guarantees (where applicable)"
+            - "Gradient masking or obfuscation techniques"
+            - "Honey-tokens or canary inputs in datasets/prompts"
+          mappings:
+            mitre_atlas: ["AML.TA0005 (ML Model Access)", "AML.TA0009 (Defense Evasion)", "AML.TA0014 (Exfiltration)", "AML.T0040 (Model Evasion)"]
+            nist_ai_rmf: ["MEASURE 2.8", "MANAGE 2.4", "MANAGE 4.1"]
+            eu_ai_act: ["Article 15 (Accuracy, Robustness and Cybersecurity)"]
+            iso_42001: ["Annex A.9", "Annex B.9"]
+            owasp_genai: ["LLM02:2025 Insecure Output Handling", "Adversarial Robustness"]
+          maturity_levels:
+            - level: 1
+              name: "Ad hoc"
+              description: |
+                No specific hardening against adversarial attacks. Default model configurations used.
+              key_indicators:
+                - "Models deployed 'as-is'"
+                - "No rate limiting on inference APIs"
+                - "No input sanitization"
+            - level: 2
+              name: "Repeatable"
+              description: |
+                Basic API protections (rate limiting, API keys). Awareness of adversarial
+                risks but limited technical mitigation.
+              key_indicators:
+                - "Standard API gateway security"
+                - "Basic input length/type validation"
+                - "Adversarial examples included in test sets (manual)"
+            - level: 3
+              name: "Defined"
+              description: |
+                Standard hardening guidelines for production models. Input sanitization
+                libraries integrated. Adversarial training used for high-risk models.
+              key_indicators:
+                - "Adversarial training included in pipelines"
+                - "Input sanitization layers defined"
+                - "Defense against common attacks (e.g., prompt injection) standardized"
+            - level: 4
+              name: "Measured"
+              description: |
+                Quantified robustness metrics (e.g., success rate of attacks).
+                Automated defense mechanisms (e.g., dynamic throttling based on query patterns).
+              key_indicators:
+                - "Robustness certification metrics"
+                - "Automated detection of model extraction attempts"
+                - "Dynamic response to evasion attempts"
+            - level: 5
+              name: "Optimized"
+              description: |
+                Adaptive defense systems. Models capable of uncertainty estimation to reject
+                adversarial inputs. Moving target defense strategies.
+              key_indicators:
+                - "Self-adaptive model defenses"
+                - "Moving target defense implementation"
+                - "Real-time adversarial signature generation"
+
     
     - id: security_with_ai
       id_code: "S02"
@@ -528,6 +668,7 @@ aismm:
             - "Vendor evaluation and assessment for AI security tools"
           
           mappings:
+            mitre_atlas: ["AML.M0016 (Security Awareness Training)", "AML.M0006 (Establish AI Security Policy)"]
             nist_ai_rmf: ["GOVERN 1.2", "MAP 1.5"]
             eu_ai_act: ["Article 5 (Prohibited Practices)", "Article 6 (High-risk classification)", "Article 71 (Third-party conformity assessment bodies)"]
             iso_42001: ["Clause 4.1", "Annex A.4", "Annex B.4"]
@@ -577,6 +718,7 @@ aismm:
             - "Test coverage metrics and quality gates"
           
           mappings:
+            mitre_atlas: ["AML.T0040 (Evade ML Model)", "AML.T0043 (Craft Adversarial Data)", "AML.T0042 (Verify Attack)"]
             nist_ai_rmf: ["MEASURE 2.1", "MEASURE 2.2", "MEASURE 2.6", "MANAGE 2.1"]
             eu_ai_act: ["Article 15 (Accuracy, Robustness and Cybersecurity)"]
             iso_42001: ["Annex A.8", "Annex B.8"]
@@ -627,6 +769,7 @@ aismm:
             - "Performance monitoring for automated workflows"
           
           mappings:
+            mitre_atlas: ["AML.T0055 (Insecure Output Handling)", "AML.TA0002 (Execution)", "AML.T0056 (LLM Plugin Compromise)"]
             nist_ai_rmf: ["MANAGE 2.2", "MANAGE 3.2", "MANAGE 4.2"]
             eu_ai_act: ["Article 14 (Human Oversight)"]
             iso_42001: ["Annex A.6.4", "Annex A.7.2"]
@@ -672,6 +815,7 @@ aismm:
             - "Audit procedures for ethical compliance"
           
           mappings:
+            mitre_atlas: ["AML.T0048 (Erosion of Trust)"]
             nist_ai_rmf: ["GOVERN 2.1", "GOVERN 2.2", "MAP 1.3"]
             eu_ai_act: ["Article 14 (Human Oversight)", "Article 27 (Fundamental Rights Impact Assessment)"]
             iso_42001: ["Annex A.3", "Annex B.3"]
@@ -727,6 +871,7 @@ aismm:
             - "Scenario-based risk modeling"
           
           mappings:
+            mitre_atlas: ["AML.TA0001 (Initial Access)", "AML.TA0000 (Reconnaissance)", "AML.TA0008 (Exfiltration)", "AML.T0028 (Discover AI Model Ontology)"]
             nist_ai_rmf: ["MAP 3.1", "MAP 3.2", "MAP 3.3", "MEASURE 1.1"]
             eu_ai_act: ["Article 9 (Risk Management System)", "Article 27 (Fundamental Rights Impact Assessment)"]
             iso_42001: ["Clause 6.1.2", "Annex B.1"]
@@ -796,6 +941,7 @@ aismm:
             - "Incident reporting mechanisms"
           
           mappings:
+            mitre_atlas: ["AML.T0051 (LLM Prompt Injection)", "AML.T0054 (LLM Jailbreak)", "AML.T0005 (External Remote Services)", "AML.T0031 (User Execution)"]
             nist_ai_rmf: ["MANAGE 4.1", "MANAGE 4.2"]
             eu_ai_act: ["Article 15 (Cybersecurity)"]
             iso_42001: ["Annex A.9.2", "Annex B.9"]
@@ -845,6 +991,7 @@ aismm:
             - "Privacy-preserving ML (federated learning, synthetic data)"
           
           mappings:
+            mitre_atlas: ["AML.T0024 (Exfiltration via ML Inference API)", "AML.T0057 (LLM Data Leakage)", "AML.T0044 (LLM Indirect Prompt Injection)"]
             nist_ai_rmf: ["MAP 2.4", "MEASURE 2.7", "MANAGE 2.6"]
             eu_ai_act: ["Article 10 (Data and Data Governance)", "Article 27 (Fundamental Rights Impact Assessment)"]
             iso_42001: ["Clause 6.2", "Annex A.5.3", "Annex B.5"]
@@ -892,6 +1039,7 @@ aismm:
             - "Engagement with regulators and industry bodies"
           
           mappings:
+            mitre_atlas: ["AML.M0013 (Threat Intelligence Program)", "AML.M0006 (Establish AI Security Policy)"]
             nist_ai_rmf: ["GOVERN 3.1", "GOVERN 3.2"]
             eu_ai_act: ["Article 16 (Obligations of providers)", "Article 17 (Quality management system)", "Article 62 (Reporting of serious incidents)"]
             iso_42001: ["Clause 4.2", "Annex A.2.2"]
@@ -941,6 +1089,7 @@ aismm:
             - "Public accountability and transparency reports"
           
           mappings:
+            mitre_atlas: ["AML.TA0012 (Impact)", "AML.T0048 (Erosion of Trust)", "AML.T0047 (ML Intellectual Property Theft)"]
             nist_ai_rmf: ["MAP 1.5", "MAP 1.6", "MEASURE 2.11", "MEASURE 2.12"]
             eu_ai_act: ["Article 7 (General principles)", "Article 27 (Fundamental Rights Impact Assessment)"]
             iso_42001: ["Annex A.4", "Annex B.4"]
