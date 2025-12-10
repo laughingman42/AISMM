@@ -24,6 +24,7 @@ import type { AISMMDataV1 } from '../types';
 import { OrganizationList } from './OrganizationList';
 import { AssessmentForm } from './AssessmentForm';
 import { AssessmentResults } from './AssessmentResults';
+import { OrganizationDashboard } from './OrganizationDashboard';
 
 interface AssessmentHubProps {
   modelData: AISMMDataV1;
@@ -282,6 +283,13 @@ export function AssessmentHub({ modelData }: AssessmentHubProps) {
             </div>
           )}
         </div>
+
+        {/* Maturity Dashboard */}
+        <OrganizationDashboard
+          organizationId={selectedOrg.id}
+          assessments={assessments}
+          modelData={modelData}
+        />
 
         {/* New Assessment Modal */}
         {showNewModal && (

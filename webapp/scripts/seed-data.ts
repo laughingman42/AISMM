@@ -73,8 +73,8 @@ const sampleOrgs = [
   },
 ];
 
-// Generate random response for a question
-function generateResponse(question: Question, domainId: string): {
+// Generate random response for a question with a target maturity level
+function generateResponse(question: Question, domainId: string, targetMaturity: number = 3): {
   domain_id: string;
   question_id: string;
   response_value: string | null;
@@ -91,11 +91,17 @@ function generateResponse(question: Question, domainId: string): {
     score: 0,
   };
 
+  // Add some randomness around the target (±1 level)
+  const variation = (Math.random() - 0.5) * 2; // -1 to +1
+  const effectiveTarget = Math.max(1, Math.min(5, targetMaturity + variation));
+  
   switch (question.question_type) {
     case 'single_choice':
     case 'scale': {
       const options = question.options || [];
-      const index = Math.floor(Math.random() * options.length);
+      // Map target maturity (1-5) to index (0 to options.length-1)
+      const targetIndex = Math.round(((effectiveTarget - 1) / 4) * (options.length - 1));
+      const index = Math.max(0, Math.min(options.length - 1, targetIndex));
       const score = Math.round((index / (options.length - 1)) * 4) + 1;
       return {
         ...baseResponse,
@@ -106,7 +112,9 @@ function generateResponse(question: Question, domainId: string): {
     }
     case 'multiple_choice': {
       const options = question.options || [];
-      const numSelected = Math.floor(Math.random() * options.length) + 1;
+      // Higher maturity = more options selected
+      const targetRatio = (effectiveTarget - 1) / 4;
+      const numSelected = Math.max(1, Math.round(targetRatio * options.length));
       const shuffled = [...options].sort(() => Math.random() - 0.5);
       const selected = shuffled.slice(0, numSelected);
       const score = Math.min(5, Math.ceil((selected.length / options.length) * 5));
@@ -117,7 +125,9 @@ function generateResponse(question: Question, domainId: string): {
       };
     }
     case 'boolean': {
-      const isYes = Math.random() > 0.4; // 60% chance of Yes
+      // Higher maturity = more likely to have "Yes"
+      const yesChance = (effectiveTarget - 1) / 4;
+      const isYes = Math.random() < yesChance;
       return {
         ...baseResponse,
         response_value: isYes ? 'Yes' : 'No',
@@ -126,7 +136,9 @@ function generateResponse(question: Question, domainId: string): {
       };
     }
     case 'numeric': {
-      const value = Math.floor(Math.random() * 50);
+      // Higher maturity = higher numbers (e.g., more reviews conducted)
+      const baseValue = Math.round(effectiveTarget * 8); // 8, 16, 24, 32, 40
+      const value = Math.max(0, baseValue + Math.floor((Math.random() - 0.5) * 10));
       const score = value === 0 ? 1 : value < 5 ? 2 : value < 10 ? 3 : value < 20 ? 4 : 5;
       return {
         ...baseResponse,
@@ -139,11 +151,11 @@ function generateResponse(question: Question, domainId: string): {
       return {
         ...baseResponse,
         response_text: 'Sample response for testing purposes.',
-        score: 3, // Neutral score for text
+        score: Math.round(effectiveTarget), // Use target maturity for text
       };
     }
     default:
-      return { ...baseResponse, score: 3 };
+      return { ...baseResponse, score: Math.round(effectiveTarget) };
   }
 }
 
@@ -192,19 +204,45 @@ function seedDatabase() {
 
   console.log('');
 
-  // Create assessments for each organization
+  // Create assessments for each organization (5-7 assessments spanning 2+ years)
   const assessmentConfigs = [
-    { name: 'Q4 2024 Assessment', monthsAgo: 6, status: 'completed' },
-    { name: 'Q1 2025 Assessment', monthsAgo: 3, status: 'completed' },
-    { name: 'Q2 2025 Assessment', monthsAgo: 0, status: 'in_progress' },
+    { name: 'Q1 2023 Assessment', monthsAgo: 24, status: 'completed' },
+    { name: 'Q3 2023 Assessment', monthsAgo: 18, status: 'completed' },
+    { name: 'Q1 2024 Assessment', monthsAgo: 12, status: 'completed' },
+    { name: 'Q2 2024 Assessment', monthsAgo: 9, status: 'completed' },
+    { name: 'Q3 2024 Assessment', monthsAgo: 6, status: 'completed' },
+    { name: 'Q4 2024 Assessment', monthsAgo: 3, status: 'completed' },
+    { name: 'Q1 2025 Assessment', monthsAgo: 0, status: 'completed' },
   ];
 
   for (const orgId of orgIds) {
     const org = db.prepare('SELECT name FROM organizations WHERE id = ?').get(orgId) as { name: string };
     
-    for (const config of assessmentConfigs) {
-      // Skip some assessments randomly to create variety
-      if (config.status === 'in_progress' && Math.random() > 0.5) continue;
+    // Each org gets 5-7 assessments (random subset)
+    const numAssessments = 5 + Math.floor(Math.random() * 3); // 5, 6, or 7
+    const selectedConfigs = assessmentConfigs.slice(assessmentConfigs.length - numAssessments);
+    
+    // Track maturity progression - start lower and generally improve with occasional dips
+    const baseMaturity = 1.5 + Math.random() * 1.0; // Start between 1.5 and 2.5
+    const improvementRate = 0.25 + Math.random() * 0.25; // 0.25 to 0.5 improvement per assessment (slower)
+    
+    // Track cumulative maturity with occasional dips
+    let cumulativeMaturity = baseMaturity;
+    
+    for (let configIndex = 0; configIndex < selectedConfigs.length; configIndex++) {
+      const config = selectedConfigs[configIndex];
+      
+      // Calculate target maturity with gradual improvement and occasional dips
+      // ~20% chance of a small dip (regression)
+      const hasDip = Math.random() < 0.2 && configIndex > 0;
+      const dipAmount = hasDip ? (0.1 + Math.random() * 0.3) : 0; // 0.1-0.4 point dip
+      
+      // Add improvement (smaller than before for slower growth)
+      const improvement = improvementRate * (0.7 + Math.random() * 0.6); // Some variance in improvement
+      cumulativeMaturity = Math.max(1, Math.min(5, cumulativeMaturity + improvement - dipAmount));
+      
+      // Use cumulative maturity as target
+      const targetMaturity = cumulativeMaturity;
       
       const assessmentId = randomUUID();
       const startedAt = new Date();
@@ -224,7 +262,7 @@ function seedDatabase() {
         startedAt.toISOString()
       );
 
-      console.log(`  📋 Created assessment: ${config.name} for ${org.name}`);
+      console.log(`  📋 Created assessment: ${config.name} for ${org.name} (target maturity: ${targetMaturity.toFixed(1)})`);
 
       // Generate responses for each domain
       let totalScore = 0;
@@ -237,9 +275,13 @@ function seedDatabase() {
         if (config.status === 'in_progress' && Math.random() > 0.6) continue;
 
         const domainResponses: Array<{ score: number }> = [];
+        
+        // Add some domain-specific variation (some domains may be stronger)
+        const domainVariation = (Math.random() - 0.5) * 1.5;
+        const domainTargetMaturity = Math.max(1, Math.min(5, targetMaturity + domainVariation));
 
         for (const question of domain.questions) {
-          const response = generateResponse(question, domain.id);
+          const response = generateResponse(question, domain.id, domainTargetMaturity);
           domainResponses.push({ score: response.score });
 
           db.prepare(`
