@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import yaml from 'js-yaml';
 import type { AISMMData } from './types';
 import { 
@@ -75,6 +75,104 @@ function App() {
                 <p className="text-gray-600 text-sm">{comp.description}</p>
               </button>
             ))}
+          </div>
+
+          {/* Maturity Level Overview Table */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="p-6 border-b border-gray-100 bg-gray-50">
+              <h3 className="text-xl font-bold text-gray-900">Maturity Levels Overview</h3>
+              <p className="text-sm text-gray-600 mt-1">Summary of all domains and their maturity progression</p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gray-50 border-b border-gray-200">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider sticky left-0 bg-gray-50 z-10 min-w-[200px]">Domain</th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider min-w-[180px]">Level 1<br/><span className="font-normal text-gray-500">Ad hoc</span></th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider min-w-[180px]">Level 2<br/><span className="font-normal text-gray-500">Developing</span></th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider min-w-[180px]">Level 3<br/><span className="font-normal text-gray-500">Defined</span></th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider min-w-[180px]">Level 4<br/><span className="font-normal text-gray-500">Managed</span></th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider min-w-[180px]">Level 5<br/><span className="font-normal text-gray-500">Optimized</span></th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {data.components.map((comp, compIdx) => (
+                    <React.Fragment key={comp.id}>
+                      {/* Component divider row */}
+                      <tr className="bg-gradient-to-r from-blue-50 to-indigo-50 border-t-2 border-blue-200">
+                        <td colSpan={6} className="px-4 py-3">
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-mono text-blue-600 bg-blue-100 px-2 py-1 rounded">{comp.id_code}</span>
+                            <span className="text-sm font-bold text-gray-900">{comp.title}</span>
+                          </div>
+                        </td>
+                      </tr>
+                      {/* Domain rows */}
+                      {comp.domains.map((domain) => (
+                        <tr key={domain.id} className="hover:bg-gray-50 transition-colors">
+                          <td className="px-4 py-3 sticky left-0 bg-white hover:bg-gray-50 border-r border-gray-100">
+                            <div className="flex flex-col">
+                              <span className="text-xs font-mono text-gray-400">{domain.id_code}</span>
+                              <button
+                                onClick={() => setActiveSection(comp.id)}
+                                className="text-sm font-medium text-gray-900 hover:text-blue-600 text-left"
+                              >
+                                {domain.name}
+                              </button>
+                            </div>
+                          </td>
+                          {[1, 2, 3, 4, 5].map(level => {
+                            const maturityLevel = domain.maturity_levels.find(ml => ml.level === level);
+                            return (
+                              <td key={level} className="px-3 py-3 align-top">
+                                {maturityLevel && (
+                                  <div className={clsx(
+                                    "text-xs p-2 rounded-lg border",
+                                    level === 1 ? "bg-gray-50 border-gray-200 text-gray-700" :
+                                    level === 2 ? "bg-blue-50 border-blue-200 text-blue-800" :
+                                    level === 3 ? "bg-indigo-50 border-indigo-200 text-indigo-800" :
+                                    level === 4 ? "bg-purple-50 border-purple-200 text-purple-800" :
+                                    "bg-green-50 border-green-200 text-green-800"
+                                  )}>
+                                    <div className="line-clamp-3 leading-tight">
+                                      {maturityLevel.description}
+                                    </div>
+                                  </div>
+                                )}
+                              </td>
+                            );
+                          })}
+                        </tr>
+                      ))}
+                    </React.Fragment>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="p-4 bg-gray-50 border-t border-gray-100">
+              <div className="flex flex-wrap gap-4 text-xs text-gray-600">
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-gray-100 border border-gray-300"></div>
+                  <span>Level 1: Ad hoc / Reactive</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-blue-100 border border-blue-300"></div>
+                  <span>Level 2: Repeatable / Developing</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-indigo-100 border border-indigo-300"></div>
+                  <span>Level 3: Defined / Standard</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-purple-100 border border-purple-300"></div>
+                  <span>Level 4: Measured / Managed</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-green-100 border border-green-300"></div>
+                  <span>Level 5: Optimized / Adaptive</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       );
@@ -320,7 +418,7 @@ function App() {
         </div>
 
         <main className="flex-1 overflow-y-auto p-4 lg:p-8">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             {renderContent()}
           </div>
         </main>
