@@ -699,11 +699,401 @@ domains:
           - "Full real-time monitoring with continuous compliance reporting and alerting"
         help_text: "Evaluate both the real-time nature of monitoring and comprehensiveness of compliance reporting"
 
+  ai_agent_authorization:
+    id: "ai_agent_authorization"
+    name: "AI Agent Authorization & Access Control"
+    description: "Authorization frameworks and access controls for autonomous AI agents and their tool/API usage"
+    pillar: "security_from_ai"
+    weight: 1.2
+
+    key_controls:
+      - "Agent identity and authentication frameworks"
+      - "Authorization policies for agent tool/API access"
+      - "Least privilege enforcement for autonomous agents"
+      - "Dynamic access control based on agent behavior and risk"
+      - "Permission boundaries and sandboxing for agents"
+      - "Cross-system agent activity tracking and correlation"
+      - "Agent session management and lifecycle controls"
+      - "Audit logging for all agent actions and access attempts"
+    
+    framework_alignment:
+      - indicator: "Agent authorization and access control frameworks"
+        frameworks:
+          nist_ai_rmf: ["GOVERN 1.5", "MANAGE 2.2", "MEASURE 2.7"]
+          iso_27001: ["A.9.2.1", "A.9.4.1", "A.9.1.2"]
+          nist_csf: ["PR.AC-4", "PR.AC-6", "PR.PT-3"]
+          owasp_genai: ["LLM06:2025 Excessive Agency", "LLM09:2025 Misinformation"]
+      - indicator: "Least privilege and permission boundaries"
+        frameworks:
+          nist_ai_rmf: ["MANAGE 2.2", "GOVERN 1.5"]
+          iso_27001: ["A.9.2.3", "A.9.4.1"]
+          nist_csf: ["PR.AC-4"]
+          owasp_asvs: ["V4 - Access Control"]
+      - indicator: "Agent activity monitoring and audit logging"
+        frameworks:
+          iso_27001: ["A.12.4.1", "A.12.4.3"]
+          nist_csf: ["DE.CM-1", "DE.CM-6", "PR.PT-1"]
+          soc2_security: ["CC6.1", "CC6.2"]
+          nist_ai_rmf: ["MEASURE 4.2"]
+      - indicator: "Dynamic risk-based access control"
+        frameworks:
+          nist_ai_rmf: ["MANAGE 2.2", "MEASURE 2.7"]
+          nist_csf: ["PR.AC-6", "DE.CM-1"]
+          iso_42001: ["8.6", "9.2"]
+    
+    levels:
+      level_1:
+        level: "level_1"
+        name: "No Agent Controls"
+        description: "No specific authorization or access controls for AI agents; agents operate with unrestricted access"
+        score_value: 1
+      level_2:
+        level: "level_2"
+        name: "Basic Permissions"
+        description: "Basic static permissions and manual access controls for AI agents"
+        score_value: 2
+      level_3:
+        level: "level_3"
+        name: "Policy-Based Control"
+        description: "Policy-based authorization with least privilege and permission boundaries for agents"
+        score_value: 3
+      level_4:
+        level: "level_4"
+        name: "Dynamic Authorization"
+        description: "Dynamic risk-based authorization with behavioral analysis and automated access adjustments"
+        score_value: 4
+      level_5:
+        level: "level_5"
+        name: "Zero-Trust Agents"
+        description: "Zero-trust authorization with continuous verification, context-aware policies, and real-time threat response"
+        score_value: 5
+    
+    questions:
+      - id: "agent_authz_q1"
+        text: "How does your organization control what tools and APIs autonomous AI agents can access?"
+        question_type: "single_choice"
+        weight: 1.0
+        required: true
+        options:
+          - "No specific controls for agent tool/API access"
+          - "Manual approval process for agent capabilities"
+          - "Static permission policies with predefined access levels"
+          - "Dynamic authorization with behavior-based access controls"
+          - "Zero-trust model with continuous verification and context-aware policies"
+        help_text: "Consider tool access governance, API permissions, and capability restrictions for agents"
+      
+      - id: "agent_authz_q2"
+        text: "How does your organization implement least privilege for AI agents?"
+        question_type: "single_choice"
+        weight: 1.0
+        required: true
+        options:
+          - "No least privilege principles applied to agents"
+          - "Ad-hoc access restrictions based on identified risks"
+          - "Documented least privilege policies with manual enforcement"
+          - "Automated least privilege with permission boundaries and sandboxing"
+          - "Continuous least privilege optimization with ML-based access refinement"
+        help_text: "Evaluate permission minimization, necessity-based access, and privilege escalation controls"
+      
+      - id: "agent_authz_q3"
+        text: "How does your organization track and audit AI agent actions across systems?"
+        question_type: "single_choice"
+        weight: 0.9
+        required: true
+        options:
+          - "No tracking or auditing of agent activities"
+          - "Basic logging of agent actions in individual systems"
+          - "Centralized logging with correlation across systems"
+          - "Comprehensive audit trails with behavior analysis and anomaly detection"
+          - "Real-time activity monitoring with automated threat response and forensic capabilities"
+        help_text: "Consider logging, correlation, audit trails, and cross-system activity tracking"
+
+    indicators:
+      indicators:
+        - "Agent authorization frameworks and policies"
+        - "Least privilege enforcement and permission boundaries"
+        - "Dynamic risk-based access control"
+        - "Cross-system activity tracking and correlation"
+        - "Audit logging and forensic capabilities"
+      
+      definitions:
+        level_1: "No specific authorization or access controls for AI agents; agents operate with unrestricted access"
+        level_2: "Basic static permissions and manual access controls for AI agents"
+        level_3: "Policy-based authorization with least privilege and permission boundaries for agents"
+        level_4: "Dynamic risk-based authorization with behavioral analysis and automated access adjustments"
+        level_5: "Zero-trust authorization with continuous verification, context-aware policies, and real-time threat response"
+      
+      success_criteria:
+        - "100% of AI agents subject to least privilege access controls"
+        - "Complete audit trail for all agent actions across systems"
+        - "Zero unauthorized agent access incidents"
+        - "Dynamic authorization policies updated based on agent behavior and risk"
+        - "Mean time to detect unauthorized agent access under 5 minutes"
+
+  malicious_agent_detection:
+    id: "malicious_agent_detection"
+    name: "Malicious Agent Detection"
+    description: "Detection and response capabilities for rogue, compromised, or malicious AI agents"
+    pillar: "security_from_ai"
+    weight: 1.3
+
+    key_controls:
+      - "Agent behavioral analysis and profiling"
+      - "Anomaly detection for agent activities"
+      - "Threat scoring and risk assessment for agents"
+      - "Detection of coordinated multi-agent attacks"
+      - "Agent impersonation and spoofing detection"
+      - "Honeypots and deception techniques for malicious agents"
+      - "Automated agent quarantine and containment"
+      - "Incident response playbooks for malicious agents"
+    
+    framework_alignment:
+      - indicator: "Malicious agent detection capabilities"
+        frameworks:
+          nist_ai_rmf: ["MEASURE 2.7", "MEASURE 4.2", "MANAGE 4.1"]
+          iso_27001: ["A.12.4.1", "A.16.1.2", "A.16.1.4"]
+          nist_csf: ["DE.CM-1", "DE.AE-2", "DE.AE-3"]
+          owasp_genai: ["LLM06:2025 Excessive Agency", "LLM09:2025 Misinformation"]
+      - indicator: "Agent behavioral analysis and threat scoring"
+        frameworks:
+          nist_ai_rmf: ["MEASURE 2.7", "MEASURE 4.2"]
+          nist_csf: ["DE.CM-4", "DE.AE-2"]
+          iso_42001: ["8.6", "9.2"]
+      - indicator: "Coordinated attack detection"
+        frameworks:
+          nist_csf: ["DE.CM-1", "DE.AE-5"]
+          iso_27001: ["A.16.1.2", "A.16.1.4"]
+          mitre_atlas: ["AML.T0036 - Develop Adversarial Tools"]
+      - indicator: "Automated response and containment"
+        frameworks:
+          nist_ai_rmf: ["MANAGE 4.1", "MANAGE 4.2"]
+          nist_csf: ["RS.RP-1", "RS.MI-3"]
+          iso_27001: ["A.16.1.5", "A.17.1.1"]
+    
+    levels:
+      level_1:
+        level: "level_1"
+        name: "No Detection"
+        description: "No capabilities to detect malicious or compromised AI agents"
+        score_value: 1
+      level_2:
+        level: "level_2"
+        name: "Basic Monitoring"
+        description: "Basic logging and manual review of agent activities"
+        score_value: 2
+      level_3:
+        level: "level_3"
+        name: "Automated Detection"
+        description: "Automated anomaly detection with behavioral analysis for agent threats"
+        score_value: 3
+      level_4:
+        level: "level_4"
+        name: "Advanced Threat Detection"
+        description: "Advanced detection with ML-based threat scoring and automated containment"
+        score_value: 4
+      level_5:
+        level: "level_5"
+        name: "Predictive Defense"
+        description: "Predictive threat detection with AI-powered analysis and autonomous response capabilities"
+        score_value: 5
+    
+    questions:
+      - id: "malicious_agent_q1"
+        text: "What capabilities does your organization have to detect rogue or compromised AI agents?"
+        question_type: "single_choice"
+        weight: 1.0
+        required: true
+        options:
+          - "No detection capabilities for malicious agents"
+          - "Manual review of agent logs and activities"
+          - "Automated anomaly detection with rule-based alerts"
+          - "ML-based behavioral analysis with threat scoring"
+          - "Predictive detection with AI-powered analysis and automated response"
+        help_text: "Consider detection methods, behavioral analysis, and threat identification capabilities"
+      
+      - id: "malicious_agent_q2"
+        text: "How does your organization detect coordinated attacks involving multiple AI agents?"
+        question_type: "single_choice"
+        weight: 1.0
+        required: true
+        options:
+          - "No capability to detect multi-agent coordination"
+          - "Manual correlation of agent activities across systems"
+          - "Automated correlation with pattern-based detection"
+          - "Advanced analytics with graph analysis and relationship mapping"
+          - "AI-powered detection with real-time multi-agent threat modeling"
+        help_text: "Evaluate cross-agent correlation, pattern detection, and coordinated attack identification"
+      
+      - id: "malicious_agent_q3"
+        text: "What response capabilities does your organization have for detected malicious agents?"
+        question_type: "single_choice"
+        weight: 0.9
+        required: true
+        options:
+          - "No automated response capabilities"
+          - "Manual investigation and remediation"
+          - "Automated alerting with manual containment"
+          - "Automated containment and quarantine with guided remediation"
+          - "Autonomous response with self-healing and adaptive defenses"
+        help_text: "Consider containment, quarantine, remediation, and incident response procedures"
+
+    indicators:
+      indicators:
+        - "Malicious agent detection accuracy and coverage"
+        - "Behavioral analysis and threat scoring capabilities"
+        - "Coordinated multi-agent attack detection"
+        - "Response time and containment effectiveness"
+        - "False positive rate and operational efficiency"
+      
+      definitions:
+        level_1: "No capabilities to detect malicious or compromised AI agents"
+        level_2: "Basic logging and manual review of agent activities"
+        level_3: "Automated anomaly detection with behavioral analysis for agent threats"
+        level_4: "Advanced detection with ML-based threat scoring and automated containment"
+        level_5: "Predictive threat detection with AI-powered analysis and autonomous response capabilities"
+      
+      success_criteria:
+        - "Malicious agent detection accuracy above 95%"
+        - "Mean time to detect malicious agents under 10 minutes"
+        - "Mean time to contain threats under 5 minutes"
+        - "False positive rate below 5%"
+        - "100% of detected threats automatically contained and investigated"
+
+  agent_to_agent_security:
+    id: "agent_to_agent_security"
+    name: "Agent-to-Agent Security"
+    description: "Security controls for communication, collaboration, and trust between autonomous AI agents"
+    pillar: "security_from_ai"
+    weight: 1.1
+
+    key_controls:
+      - "Secure communication protocols between agents"
+      - "Agent identity verification and authentication"
+      - "Trust establishment and validation frameworks"
+      - "Protection against agent-based social engineering"
+      - "Multi-agent system attack surface management"
+      - "Agent collaboration security policies"
+      - "Third-party agent security vetting and monitoring"
+      - "Agent supply chain security controls"
+    
+    framework_alignment:
+      - indicator: "Secure agent communication protocols"
+        frameworks:
+          nist_ai_rmf: ["GOVERN 1.2", "MANAGE 2.2"]
+          iso_27001: ["A.13.1.1", "A.14.1.2", "A.14.1.3"]
+          nist_csf: ["PR.DS-2", "PR.AC-5"]
+      - indicator: "Agent trust and authentication frameworks"
+        frameworks:
+          nist_ai_rmf: ["GOVERN 1.5", "MAP 3.4"]
+          iso_27001: ["A.9.2.1", "A.9.4.2", "A.15.1.2"]
+          nist_csf: ["PR.AC-1", "PR.AC-7"]
+          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities"]
+      - indicator: "Multi-agent attack surface management"
+        frameworks:
+          nist_ai_rmf: ["MAP 1.3", "MEASURE 2.7"]
+          nist_csf: ["ID.AM-1", "ID.RA-1"]
+          iso_27001: ["A.8.1.1", "A.18.1.3"]
+      - indicator: "Agent supply chain security"
+        frameworks:
+          nist_ai_rmf: ["GOVERN 1.2", "MAP 3.4"]
+          nist_ssdf: ["PO.3.1", "PO.3.2", "PS.1.1"]
+          iso_27001: ["A.15.1.1", "A.15.1.2"]
+          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities"]
+    
+    levels:
+      level_1:
+        level: "level_1"
+        name: "No Agent Security"
+        description: "No security controls for agent-to-agent communication or collaboration"
+        score_value: 1
+      level_2:
+        level: "level_2"
+        name: "Basic Controls"
+        description: "Basic authentication and encryption for agent communications"
+        score_value: 2
+      level_3:
+        level: "level_3"
+        name: "Secure Protocols"
+        description: "Secure communication protocols with trust frameworks and verification"
+        score_value: 3
+      level_4:
+        level: "level_4"
+        name: "Advanced Trust"
+        description: "Advanced trust establishment with behavioral validation and supply chain security"
+        score_value: 4
+      level_5:
+        level: "level_5"
+        name: "Zero-Trust Multi-Agent"
+        description: "Zero-trust architecture with continuous verification and adaptive security for all agent interactions"
+        score_value: 5
+    
+    questions:
+      - id: "agent_to_agent_q1"
+        text: "How does your organization secure communication between autonomous AI agents?"
+        question_type: "single_choice"
+        weight: 1.0
+        required: true
+        options:
+          - "No specific security for agent-to-agent communication"
+          - "Basic encryption for agent communications"
+          - "Secure protocols with authentication and authorization"
+          - "End-to-end encryption with mutual authentication and trust verification"
+          - "Zero-trust communication with continuous verification and adaptive policies"
+        help_text: "Consider encryption, authentication, protocol security, and trust establishment"
+      
+      - id: "agent_to_agent_q2"
+        text: "How does your organization establish trust when agents collaborate or share information?"
+        question_type: "single_choice"
+        weight: 1.0
+        required: true
+        options:
+          - "No trust framework for agent collaboration"
+          - "Manual approval for agent-to-agent interactions"
+          - "Policy-based trust with predefined collaboration rules"
+          - "Dynamic trust scoring based on agent behavior and reputation"
+          - "Continuous trust evaluation with blockchain-based verification and attestation"
+        help_text: "Evaluate trust establishment, validation, reputation systems, and collaboration policies"
+      
+      - id: "agent_to_agent_q3"
+        text: "How does your organization manage security risks from third-party AI agents?"
+        question_type: "single_choice"
+        weight: 0.9
+        required: true
+        options:
+          - "No vetting or controls for third-party agents"
+          - "Basic security questionnaires for third-party agents"
+          - "Security assessment and approval process for external agents"
+          - "Continuous monitoring and risk assessment of third-party agents"
+          - "Comprehensive supply chain security with automated vetting and real-time monitoring"
+        help_text: "Consider vendor assessment, agent vetting, monitoring, and supply chain security"
+
+    indicators:
+      indicators:
+        - "Secure agent communication protocols"
+        - "Trust establishment and verification frameworks"
+        - "Agent identity and authentication strength"
+        - "Third-party agent security vetting"
+        - "Multi-agent attack surface visibility"
+      
+      definitions:
+        level_1: "No security controls for agent-to-agent communication or collaboration"
+        level_2: "Basic authentication and encryption for agent communications"
+        level_3: "Secure communication protocols with trust frameworks and verification"
+        level_4: "Advanced trust establishment with behavioral validation and supply chain security"
+        level_5: "Zero-trust architecture with continuous verification and adaptive security for all agent interactions"
+      
+      success_criteria:
+        - "100% of agent communications encrypted and authenticated"
+        - "Trust verification for all agent-to-agent interactions"
+        - "Security assessment completed for all third-party agents"
+        - "Real-time monitoring of multi-agent collaboration patterns"
+        - "Zero unauthorized agent-to-agent information sharing incidents"
+
   ai_security_tools:
     id: "ai_security_tools"
     name: "AI Security Tools"
     description: "Specialized tooling and capabilities for AI-specific security risks and vulnerabilities"
-    pillar: "security_for_ai"
+    pillar: "ai_for_security"
     weight: 1.0
 
     key_controls:
@@ -1328,6 +1718,539 @@ domains:
         - "Regular training and skill development programs"
         - "Cross-functional collaboration metrics above 90%"
         - "AI security expertise distributed across all relevant teams"
+
+  training_data_privacy:
+    id: "training_data_privacy"
+    name: "Training Data Privacy"
+    description: "Privacy-preserving techniques and controls for AI training data protection"
+    pillar: "security_for_ai"
+    weight: 1.3
+
+    key_controls:
+      - "Privacy impact assessments for training data collection and use"
+      - "Privacy-enhancing technologies (PETs) implementation (differential privacy, federated learning, homomorphic encryption)"
+      - "Data minimization and purpose limitation for training datasets"
+      - "Anonymization and pseudonymization of training data"
+      - "Synthetic data generation for privacy-preserving training"
+      - "Consent management and data subject rights enforcement"
+      - "Privacy-preserving model training techniques"
+      - "Regular privacy audits and compliance validation"
+    
+    framework_alignment:
+      - indicator: "Privacy-enhancing technologies for training data"
+        frameworks:
+          nist_ai_rmf: ["GOVERN 1.4", "MAP 1.6", "MEASURE 2.8"]
+          iso_27001: ["A.18.1.4", "A.8.2.1", "A.8.3.1"]
+          iso_42001: ["6.2.1", "7.3", "8.5"]
+          nist_csf: ["PR.DS-3", "PR.IP-2"]
+      - indicator: "Data minimization and purpose limitation"
+        frameworks:
+          iso_27701: ["6.3.2.2", "6.3.3.2"]
+          iso_42001: ["6.2.1", "7.3"]
+          nist_ai_rmf: ["MAP 1.6", "GOVERN 1.4"]
+      - indicator: "Consent management and data subject rights"
+        frameworks:
+          iso_27701: ["6.4.1", "6.5.1"]
+          iso_27001: ["A.18.1.4"]
+      - indicator: "Privacy-preserving model training"
+        frameworks:
+          nist_ai_rmf: ["MAP 1.6", "MEASURE 2.8"]
+          iso_42001: ["7.3", "8.5"]
+    
+    levels:
+      level_1:
+        level: "level_1"
+        name: "No Privacy Controls"
+        description: "No privacy-specific controls for training data; minimal awareness of privacy risks"
+        score_value: 1
+      level_2:
+        level: "level_2"
+        name: "Basic Anonymization"
+        description: "Basic data anonymization and minimal privacy controls for training datasets"
+        score_value: 2
+      level_3:
+        level: "level_3"
+        name: "Privacy by Design"
+        description: "Privacy-by-design principles with PETs implementation (differential privacy, federated learning)"
+        score_value: 3
+      level_4:
+        level: "level_4"
+        name: "Advanced PETs"
+        description: "Advanced privacy-enhancing technologies with synthetic data and homomorphic encryption"
+        score_value: 4
+      level_5:
+        level: "level_5"
+        name: "Privacy-First AI"
+        description: "Comprehensive privacy-first AI development with zero-knowledge proofs and continuous privacy assurance"
+        score_value: 5
+    
+    questions:
+      - id: "training_data_privacy_q1"
+        text: "What privacy-enhancing technologies does your organization use for training data?"
+        question_type: "single_choice"
+        weight: 1.0
+        required: true
+        options:
+          - "No specific privacy-enhancing technologies implemented"
+          - "Basic anonymization and data masking techniques"
+          - "Differential privacy or federated learning for selected models"
+          - "Multiple PETs including synthetic data generation and secure multi-party computation"
+          - "Comprehensive PETs suite with homomorphic encryption and zero-knowledge proofs"
+        help_text: "Consider differential privacy, federated learning, homomorphic encryption, synthetic data, and secure computation"
+      
+      - id: "training_data_privacy_q2"
+        text: "How does your organization ensure data minimization for AI training?"
+        question_type: "single_choice"
+        weight: 1.0
+        required: true
+        options:
+          - "No data minimization practices for training datasets"
+          - "Ad-hoc data reduction based on storage constraints"
+          - "Documented data minimization policies with manual enforcement"
+          - "Automated data minimization with purpose limitation controls"
+          - "Privacy-by-design with automated minimization and continuous optimization"
+        help_text: "Evaluate collection limitations, purpose specification, and retention controls"
+      
+      - id: "training_data_privacy_q3"
+        text: "How does your organization handle consent and data subject rights for training data?"
+        question_type: "single_choice"
+        weight: 0.9
+        required: true
+        options:
+          - "No consent management or data subject rights processes"
+          - "Basic consent collection with manual tracking"
+          - "Consent management system with data subject request handling"
+          - "Automated consent enforcement with model retraining for data deletion"
+          - "Real-time consent and rights management integrated throughout AI lifecycle"
+        help_text: "Consider consent collection, tracking, withdrawal, right to deletion, and model unlearning"
+
+    indicators:
+      indicators:
+        - "Privacy-enhancing technologies implementation"
+        - "Data minimization and purpose limitation"
+        - "Anonymization and synthetic data usage"
+        - "Consent management and data subject rights"
+        - "Privacy-preserving model training techniques"
+      
+      definitions:
+        level_1: "No privacy-specific controls for training data; minimal awareness of privacy risks"
+        level_2: "Basic data anonymization and minimal privacy controls for training datasets"
+        level_3: "Privacy-by-design principles with PETs implementation (differential privacy, federated learning)"
+        level_4: "Advanced privacy-enhancing technologies with synthetic data and homomorphic encryption"
+        level_5: "Comprehensive privacy-first AI development with zero-knowledge proofs and continuous privacy assurance"
+      
+      success_criteria:
+        - "Privacy-enhancing technologies deployed for 100% of sensitive training data"
+        - "Data minimization enforced with automated purpose limitation controls"
+        - "Consent and data subject rights integrated into model training pipelines"
+        - "Privacy impact assessments completed for all AI systems processing personal data"
+        - "Compliance with GDPR, CCPA, and relevant privacy regulations verified"
+
+  training_data_security:
+    id: "training_data_security"
+    name: "Training Data Security"
+    description: "Security controls and protection mechanisms for AI training data throughout its lifecycle"
+    pillar: "security_for_ai"
+    weight: 1.2
+
+    key_controls:
+      - "Training data classification and labeling"
+      - "Access controls and least privilege for training datasets"
+      - "Encryption at rest and in transit for training data"
+      - "Data lineage and provenance tracking"
+      - "Training data integrity verification and validation"
+      - "Secure data storage and backup procedures"
+      - "Data exfiltration prevention for training datasets"
+      - "Audit logging for training data access and modifications"
+    
+    framework_alignment:
+      - indicator: "Training data classification and access controls"
+        frameworks:
+          nist_ai_rmf: ["GOVERN 1.2", "MAP 5.1"]
+          iso_27001: ["A.8.2.1", "A.9.4.1", "A.9.2.1"]
+          iso_42001: ["7.3", "8.5"]
+          nist_csf: ["PR.DS-5", "PR.AC-4"]
+      - indicator: "Data encryption and secure storage"
+        frameworks:
+          iso_27001: ["A.10.1.1", "A.10.1.2"]
+          nist_csf: ["PR.DS-1", "PR.DS-2"]
+          soc2_security: ["CC6.1", "CC6.7"]
+      - indicator: "Data lineage and provenance tracking"
+        frameworks:
+          nist_ai_rmf: ["MAP 3.4", "MEASURE 3.1"]
+          iso_42001: ["7.3", "8.5"]
+      - indicator: "Training data integrity verification"
+        frameworks:
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 3.1"]
+          iso_27001: ["A.12.2.1", "A.14.1.2"]
+          iso_42001: ["8.5"]
+    
+    levels:
+      level_1:
+        level: "level_1"
+        name: "Minimal Protection"
+        description: "Minimal security controls for training data; no classification or access restrictions"
+        score_value: 1
+      level_2:
+        level: "level_2"
+        name: "Basic Controls"
+        description: "Basic access controls and encryption for training data storage"
+        score_value: 2
+      level_3:
+        level: "level_3"
+        name: "Comprehensive Security"
+        description: "Comprehensive security controls with classification, encryption, and data lineage tracking"
+        score_value: 3
+      level_4:
+        level: "level_4"
+        name: "Advanced Protection"
+        description: "Advanced protection with integrity verification, DLP, and automated security enforcement"
+        score_value: 4
+      level_5:
+        level: "level_5"
+        name: "Zero-Trust Data Security"
+        description: "Zero-trust architecture with continuous verification, automated threat response, and immutable audit trails"
+        score_value: 5
+    
+    questions:
+      - id: "training_data_security_q1"
+        text: "How does your organization classify and protect training data?"
+        question_type: "single_choice"
+        weight: 1.0
+        required: true
+        options:
+          - "No classification or specific protection for training data"
+          - "Basic classification with standard file system permissions"
+          - "Formal classification scheme with role-based access controls"
+          - "Advanced classification with automated access enforcement and encryption"
+          - "Dynamic classification with zero-trust controls and continuous verification"
+        help_text: "Consider data classification, labeling, access controls, and protection mechanisms"
+      
+      - id: "training_data_security_q2"
+        text: "How does your organization track training data lineage and provenance?"
+        question_type: "single_choice"
+        weight: 1.0
+        required: true
+        options:
+          - "No tracking of data sources or lineage for training datasets"
+          - "Manual documentation of primary data sources"
+          - "Automated lineage tracking for data collection and preprocessing"
+          - "Comprehensive provenance tracking throughout the ML pipeline"
+          - "Real-time lineage monitoring with cryptographic verification and blockchain"
+        help_text: "Evaluate tracking of data sources, transformations, versioning, and chain of custody"
+      
+      - id: "training_data_security_q3"
+        text: "What controls does your organization have for training data integrity?"
+        question_type: "single_choice"
+        weight: 0.9
+        required: true
+        options:
+          - "No integrity verification for training datasets"
+          - "Basic checksums or hash verification for stored datasets"
+          - "Automated integrity checks during data ingestion and training"
+          - "Continuous integrity monitoring with tamper detection"
+          - "Cryptographic integrity verification with immutable audit trails"
+        help_text: "Consider data validation, poisoning detection, tamper protection, and integrity assurance"
+
+    indicators:
+      indicators:
+        - "Training data classification and labeling"
+        - "Access controls and encryption"
+        - "Data lineage and provenance tracking"
+        - "Integrity verification and validation"
+        - "Exfiltration prevention and monitoring"
+      
+      definitions:
+        level_1: "Minimal security controls for training data; no classification or access restrictions"
+        level_2: "Basic access controls and encryption for training data storage"
+        level_3: "Comprehensive security controls with classification, encryption, and data lineage tracking"
+        level_4: "Advanced protection with integrity verification, DLP, and automated security enforcement"
+        level_5: "Zero-trust architecture with continuous verification, automated threat response, and immutable audit trails"
+      
+      success_criteria:
+        - "100% of training datasets classified and labeled according to sensitivity"
+        - "Encryption at rest and in transit for all sensitive training data"
+        - "Complete data lineage tracking from source to model deployment"
+        - "Automated integrity verification with 99.9% detection rate for tampering"
+        - "Zero unauthorized access incidents to training data"
+
+  data_poisoning_protection:
+    id: "data_poisoning_protection"
+    name: "Data Poisoning Protection"
+    description: "Detection and prevention of data poisoning attacks against AI training datasets"
+    pillar: "security_for_ai"
+    weight: 1.2
+
+    key_controls:
+      - "Training data validation and sanitization"
+      - "Anomaly detection for poisoned data samples"
+      - "Data source verification and trust scoring"
+      - "Statistical analysis for distribution shifts"
+      - "Poisoning attack simulation and testing"
+      - "Data provenance and chain of custody verification"
+      - "Automated outlier detection and filtering"
+      - "Regular training data audits and reviews"
+    
+    framework_alignment:
+      - indicator: "Data poisoning detection and prevention"
+        frameworks:
+          nist_ai_rmf: ["MAP 3.4", "MEASURE 2.3", "MANAGE 2.3"]
+          iso_42001: ["8.5", "8.7"]
+          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM04:2025 Data and Model Poisoning"]
+          mitre_atlas: ["AML.T0018 - Backdoor ML Model", "AML.T0020 - Poison Training Data"]
+      - indicator: "Data source verification and trust"
+        frameworks:
+          nist_ai_rmf: ["MAP 3.4", "GOVERN 1.2"]
+          iso_27001: ["A.15.1.1", "A.15.1.2"]
+          nist_ssdf: ["PO.3.1", "PO.3.2"]
+      - indicator: "Anomaly and outlier detection"
+        frameworks:
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7"]
+          iso_42001: ["8.5", "8.7"]
+      - indicator: "Poisoning attack testing"
+        frameworks:
+          nist_ai_rmf: ["MEASURE 2.11", "MANAGE 4.1"]
+          mitre_atlas: ["AML.T0018 - Backdoor ML Model", "AML.T0020 - Poison Training Data"]
+    
+    levels:
+      level_1:
+        level: "level_1"
+        name: "No Protection"
+        description: "No awareness or protection against data poisoning attacks"
+        score_value: 1
+      level_2:
+        level: "level_2"
+        name: "Basic Validation"
+        description: "Basic data validation and manual review of training datasets"
+        score_value: 2
+      level_3:
+        level: "level_3"
+        name: "Automated Detection"
+        description: "Automated anomaly detection with statistical analysis for poisoning attempts"
+        score_value: 3
+      level_4:
+        level: "level_4"
+        name: "Advanced Prevention"
+        description: "Advanced prevention with provenance tracking, automated filtering, and attack simulation"
+        score_value: 4
+      level_5:
+        level: "level_5"
+        name: "Adaptive Defense"
+        description: "Adaptive defenses with ML-based detection, continuous monitoring, and self-healing datasets"
+        score_value: 5
+    
+    questions:
+      - id: "data_poisoning_q1"
+        text: "What controls does your organization have to detect data poisoning in training datasets?"
+        question_type: "single_choice"
+        weight: 1.0
+        required: true
+        options:
+          - "No specific data poisoning detection capabilities"
+          - "Manual review and basic statistical analysis of training data"
+          - "Automated anomaly detection with threshold-based alerts"
+          - "Advanced detection with ML-based outlier identification and filtering"
+          - "Adaptive detection with continuous learning and automated remediation"
+        help_text: "Consider validation, anomaly detection, distribution analysis, and automated filtering"
+      
+      - id: "data_poisoning_q2"
+        text: "How does your organization verify the trustworthiness of training data sources?"
+        question_type: "single_choice"
+        weight: 1.0
+        required: true
+        options:
+          - "No verification of data source trustworthiness"
+          - "Manual assessment of primary data sources"
+          - "Documented trusted source list with basic verification"
+          - "Automated source verification with trust scoring and provenance tracking"
+          - "Cryptographic verification with blockchain-based provenance and real-time trust assessment"
+        help_text: "Evaluate source vetting, trust frameworks, provenance tracking, and verification methods"
+      
+      - id: "data_poisoning_q3"
+        text: "Does your organization test AI systems for resilience against data poisoning attacks?"
+        question_type: "single_choice"
+        weight: 0.9
+        required: true
+        options:
+          - "No poisoning attack testing performed"
+          - "Occasional manual testing with known attack patterns"
+          - "Regular testing with simulated poisoning scenarios"
+          - "Comprehensive testing with automated attack simulation and red teaming"
+          - "Continuous adversarial testing with adaptive attack generation"
+        help_text: "Consider poisoning attack simulation, backdoor testing, and adversarial data injection"
+
+    indicators:
+      indicators:
+        - "Data poisoning detection capabilities"
+        - "Data source verification and trust scoring"
+        - "Anomaly and outlier detection"
+        - "Provenance tracking and chain of custody"
+        - "Poisoning attack testing and resilience"
+      
+      definitions:
+        level_1: "No awareness or protection against data poisoning attacks"
+        level_2: "Basic data validation and manual review of training datasets"
+        level_3: "Automated anomaly detection with statistical analysis for poisoning attempts"
+        level_4: "Advanced prevention with provenance tracking, automated filtering, and attack simulation"
+        level_5: "Adaptive defenses with ML-based detection, continuous monitoring, and self-healing datasets"
+      
+      success_criteria:
+        - "Data poisoning detection accuracy above 95% with minimal false positives"
+        - "Complete provenance tracking for 100% of training data sources"
+        - "Automated poisoning attack testing in CI/CD pipeline"
+        - "Zero successful data poisoning attacks in production models"
+        - "Mean time to detect poisoning attempts under 24 hours"
+
+  ai_red_teaming:
+    id: "ai_red_teaming"
+    name: "AI Red Teaming"
+    description: "Adversarial testing and security assessment of AI systems through red team exercises"
+    pillar: "security_for_ai"
+    weight: 1.3
+
+    key_controls:
+      - "AI-specific red team methodology and frameworks"
+      - "Regular adversarial testing of AI models and systems"
+      - "Prompt injection and jailbreak testing"
+      - "Model extraction and inversion attack simulation"
+      - "Adversarial example generation and testing"
+      - "Data poisoning and backdoor attack testing"
+      - "AI system abuse and misuse testing"
+      - "Purple team exercises with defensive teams"
+      - "Red team findings remediation tracking"
+    
+    framework_alignment:
+      - indicator: "AI red team program and methodology"
+        frameworks:
+          nist_ai_rmf: ["MEASURE 2.11", "MANAGE 4.1", "GOVERN 1.5"]
+          iso_42001: ["8.7", "9.2"]
+          nist_csf: ["DE.CM-4", "RS.AN-5"]
+          mitre_atlas: ["AML.T0043 - Craft Adversarial Data", "AML.T0051 - LLM Jailbreak", "AML.T0054 - LLM Prompt Injection"]
+          owasp_genai: ["LLM01:2025 Prompt Injection", "LLM04:2025 Data and Model Poisoning"]
+      - indicator: "Adversarial testing for model robustness"
+        frameworks:
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.11"]
+          iso_42001: ["8.7"]
+          mitre_atlas: ["AML.T0043 - Craft Adversarial Data", "AML.T0015 - Evade ML Model"]
+          owasp_asvs: ["V14 - Configuration"]
+      - indicator: "Prompt injection and jailbreak testing"
+        frameworks:
+          owasp_genai: ["LLM01:2025 Prompt Injection"]
+          nist_ai_rmf: ["MEASURE 2.11", "MANAGE 2.3"]
+          mitre_atlas: ["AML.T0051 - LLM Jailbreak", "AML.T0054 - LLM Prompt Injection"]
+      - indicator: "Model extraction and inversion testing"
+        frameworks:
+          nist_ai_rmf: ["MEASURE 2.11", "MAP 3.4"]
+          iso_42001: ["8.7"]
+          mitre_atlas: ["AML.T0024 - Exfiltration via ML Inference API", "AML.T0044 - Full ML Model Access"]
+          owasp_genai: ["LLM06:2025 Excessive Agency", "LLM08:2025 Vector and Embedding Weaknesses"]
+      - indicator: "Purple team collaboration and remediation"
+        frameworks:
+          nist_ai_rmf: ["MANAGE 4.1", "MANAGE 4.2"]
+          iso_27001: ["A.16.1.4", "A.16.1.5"]
+          nist_csf: ["RS.IM-1", "RS.IM-2"]
+    
+    levels:
+      level_1:
+        level: "level_1"
+        name: "No Red Teaming"
+        description: "No adversarial testing or red team exercises for AI systems"
+        score_value: 1
+      level_2:
+        level: "level_2"
+        name: "Ad-hoc Testing"
+        description: "Occasional manual adversarial testing with basic attack scenarios"
+        score_value: 2
+      level_3:
+        level: "level_3"
+        name: "Regular Red Teaming"
+        description: "Regular red team exercises with documented methodology and comprehensive attack scenarios"
+        score_value: 3
+      level_4:
+        level: "level_4"
+        name: "Automated & Advanced"
+        description: "Automated red teaming with advanced attack techniques and continuous testing"
+        score_value: 4
+      level_5:
+        level: "level_5"
+        name: "Adaptive Red Teaming"
+        description: "AI-powered adaptive red teaming with purple team collaboration and real-time remediation"
+        score_value: 5
+    
+    questions:
+      - id: "ai_red_team_q1"
+        text: "How often does your organization conduct red team exercises specifically for AI systems?"
+        question_type: "single_choice"
+        weight: 1.0
+        required: true
+        options:
+          - "No AI-specific red team exercises conducted"
+          - "Annual or ad-hoc testing when major changes occur"
+          - "Quarterly red team exercises with documented scenarios"
+          - "Monthly or continuous testing with automated tools"
+          - "Continuous adaptive red teaming with real-time feedback and remediation"
+        help_text: "Consider frequency, scope, and integration with development lifecycle"
+      
+      - id: "ai_red_team_q2"
+        text: "What types of adversarial attacks does your AI red team test for?"
+        question_type: "single_choice"
+        weight: 1.0
+        required: true
+        options:
+          - "No adversarial attack testing performed"
+          - "Basic prompt injection and input manipulation testing"
+          - "Comprehensive testing including jailbreaks, data poisoning, and adversarial examples"
+          - "Advanced testing with model extraction, inversion, and membership inference attacks"
+          - "Full spectrum testing with novel attack techniques and automated attack generation"
+        help_text: "Consider prompt injection, jailbreaks, adversarial examples, model extraction, data poisoning, etc."
+      
+      - id: "ai_red_team_q3"
+        text: "How does your organization track and remediate findings from AI red team exercises?"
+        question_type: "single_choice"
+        weight: 0.9
+        required: true
+        options:
+          - "No formal tracking or remediation process"
+          - "Manual documentation with ad-hoc remediation"
+          - "Tracked in issue management system with assigned owners"
+          - "Automated tracking with SLA-based remediation and verification"
+          - "Real-time purple team collaboration with automated remediation and continuous validation"
+        help_text: "Evaluate finding documentation, prioritization, remediation tracking, and verification processes"
+      
+      - id: "ai_red_team_q4"
+        text: "Does your AI red team use automated tools and frameworks?"
+        question_type: "single_choice"
+        weight: 0.8
+        required: true
+        options:
+          - "No automated red teaming tools used"
+          - "Basic open-source tools for adversarial example generation"
+          - "Commercial and open-source frameworks for comprehensive testing"
+          - "Custom automated red teaming platform with CI/CD integration"
+          - "AI-powered adaptive red teaming with self-evolving attack techniques"
+        help_text: "Consider tools for adversarial testing, prompt injection, fuzzing, and attack automation"
+
+    indicators:
+      indicators:
+        - "AI red team program maturity and methodology"
+        - "Frequency and coverage of adversarial testing"
+        - "Attack scenario breadth and sophistication"
+        - "Automated red teaming capabilities"
+        - "Purple team collaboration and remediation effectiveness"
+      
+      definitions:
+        level_1: "No adversarial testing or red team exercises for AI systems"
+        level_2: "Occasional manual adversarial testing with basic attack scenarios"
+        level_3: "Regular red team exercises with documented methodology and comprehensive attack scenarios"
+        level_4: "Automated red teaming with advanced attack techniques and continuous testing"
+        level_5: "AI-powered adaptive red teaming with purple team collaboration and real-time remediation"
+      
+      success_criteria:
+        - "Red team exercises conducted at least quarterly for all critical AI systems"
+        - "Comprehensive coverage of OWASP Top 10 for LLM and MITRE ATLAS attack patterns"
+        - "Mean time to remediate critical findings under 30 days"
+        - "Automated red teaming integrated into CI/CD pipeline"
+        - "100% of critical findings verified and closed before production deployment"
 
   # AI for Security Domains
   threat_detection_analysis:
