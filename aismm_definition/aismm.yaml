@@ -10,13 +10,7 @@ created_at: "2024-01-01T00:00:00Z"
 scoring_config:
   version: "1.0.0"
   max_score: 100
-  passing_threshold: 60.0
-  
-  # Pillar weights (will be normalized)
-  pillar_weights:
-    security_for_ai: 1.2      # Slightly higher weight due to foundational nature
-    ai_for_security: 1.0      # Standard weight
-    security_from_ai: 1.1     # Slightly higher due to emerging threats
+  passing_threshold: 75.0
   
   # Level scoring values
   level_scores:
@@ -493,7 +487,7 @@ domains:
     id: "shadow_ai_management"
     name: "Shadow AI Management"
     description: "Detection, prevention, and governance of unauthorized AI tool usage"
-    pillar: "security_for_ai"
+    pillar: "security_from_ai"
     weight: 1.1
 
     key_controls:

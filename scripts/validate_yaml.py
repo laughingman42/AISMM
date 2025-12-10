@@ -54,7 +54,7 @@ def validate_v1(doc):
     if not isinstance(sc, dict):
         errors.append("'scoring_config' should be a mapping")
     else:
-        for key in ["pillar_weights", "level_scores", "maturity_thresholds"]:
+        for key in ["level_scores", "maturity_thresholds"]:
             if key not in sc:
                 errors.append(f"scoring_config missing '{key}'")
     
@@ -67,7 +67,7 @@ def validate_v1(doc):
             if not isinstance(pdata, dict):
                 errors.append(f"pillars.{pid} should be a mapping")
                 continue
-            for field in ["id", "name", "description"]:
+            for field in ["id", "name", "description", "weight"]:
                 if field not in pdata:
                     errors.append(f"pillars.{pid} missing '{field}'")
     

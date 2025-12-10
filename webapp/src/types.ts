@@ -8,7 +8,6 @@ export interface ScoringConfig {
   version: string;
   max_score: number;
   passing_threshold: number;
-  pillar_weights: Record<string, number>;
   level_scores: Record<string, number>;
   maturity_thresholds: Record<string, number>;
 }
@@ -18,7 +17,7 @@ export interface Pillar {
   id: string;
   name: string;
   description: string;
-  weight?: number;
+  weight: number;
 }
 
 // Framework references in alignment
