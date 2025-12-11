@@ -342,7 +342,25 @@ function App() {
               </div>
 
               {/* Indicators */}
-              {domain.indicators && (
+              {domain.indicators && domain.indicators.indicators && (
+                <div className="p-6 border-b border-gray-100">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Target className="w-4 h-4 text-indigo-600" />
+                    <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wider">Indicators</h4>
+                  </div>
+                  <ul className="grid md:grid-cols-2 gap-2">
+                    {domain.indicators.indicators.map((indicator, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
+                        <span className="text-indigo-500 mt-1">→</span>
+                        <span>{indicator}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Success Criteria */}
+              {domain.indicators && domain.indicators.success_criteria && (
                 <div className="p-6 border-b border-gray-100 bg-amber-50/30">
                   <div className="flex items-center gap-2 mb-3">
                     <Target className="w-4 h-4 text-amber-600" />
