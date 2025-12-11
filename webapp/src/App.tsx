@@ -376,39 +376,6 @@ function App() {
                   </ul>
                 </div>
               )}
-
-              {/* Questions */}
-              {domain.questions && domain.questions.length > 0 && (
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-4">
-                    <FileText className="w-4 h-4 text-gray-600" />
-                    <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wider">Assessment Questions ({domain.questions.length})</h4>
-                  </div>
-                  <div className="space-y-4">
-                    {domain.questions.slice(0, 3).map((q) => (
-                      <div key={q.id} className="p-4 bg-gray-50 rounded-lg border border-gray-100">
-                        <div className="flex items-start gap-3">
-                          <span className="text-xs font-mono text-gray-400 bg-white px-2 py-1 rounded border">{q.id}</span>
-                          <div className="flex-1">
-                            <p className="text-sm font-medium text-gray-900 mb-1">{q.text}</p>
-                            {q.help_text && (
-                              <p className="text-xs text-gray-500 flex items-start gap-1">
-                                <Info className="w-3 h-3 mt-0.5" />
-                                {q.help_text}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                    {domain.questions.length > 3 && (
-                      <p className="text-sm text-gray-500 text-center">
-                        +{domain.questions.length - 3} more questions
-                      </p>
-                    )}
-                  </div>
-                </div>
-              )}
             </div>
           ))}
         </div>
