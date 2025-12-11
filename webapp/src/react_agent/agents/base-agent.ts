@@ -14,11 +14,19 @@ import type { PillarId, PillarReport, DomainAnalysis, PrioritizedRecommendation 
  * Create the Ollama LLM instance
  */
 export function createLLM() {
+  const model = config.ollama.model;
+  
+  // Warn about models with poor tool-calling support
+  if (model.includes('llama3.2') || model.includes('llama2')) {
+    console.warn(`⚠️  Model "${model}" may have poor tool-calling support.`);
+    console.warn(`⚠️  For better results, use: gemma3:27b, llama3.1, or mixtral`);
+  }
+  
   return new ChatOllama({
     baseUrl: config.ollama.baseUrl,
-    model: config.ollama.model,
-    temperature: config.ollama.temperature,
-  });
+    model: model,
+    temperature: config.ollama.temperature,    numCtx: 8192, // Larger context window for complex analysis
+    numPredict: config.ollama.maxTokens,  });
 }
 
 /**
@@ -102,8 +110,10 @@ export async function createPillarAgent(
     .addConditionalEdges('agent', shouldContinue, ['tools', END])
     .addEdge('tools', 'agent');
   
-  // Compile and return
-  return workflow.compile();
+  // Compile with recursion limit
+  return workflow.compile({
+    recursionLimit: config.agent.maxIterations,
+  });
 }
 
 /**

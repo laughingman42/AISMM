@@ -22,10 +22,10 @@ export const config = {
 
   // Agent Configuration
   agent: {
-    // Maximum number of iterations for ReAct loop
-    maxIterations: parseInt(process.env.AGENT_MAX_ITERATIONS || '10', 10),
-    // Verbose logging
-    verbose: process.env.AGENT_VERBOSE === 'true',
+    // Maximum number of iterations for ReAct loop (increased for complex analysis)
+    maxIterations: parseInt(process.env.AGENT_MAX_ITERATIONS || '15', 10),
+    // Verbose logging (enabled by default for debugging)
+    verbose: process.env.AGENT_VERBOSE !== 'false',
   },
 
   // Maturity Level Thresholds (aligned with aismm.yaml)

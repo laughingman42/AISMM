@@ -87,27 +87,34 @@ export async function fetchDomainScores(assessmentId: string): Promise<DomainSco
  * Load the AISMM model definition from YAML
  */
 export async function loadAISMMModel(): Promise<AISMMModel> {
-  // Try multiple paths for the AISMM definition (relative to webapp folder structure)
+  // Get current directory from import.meta.url
+  const currentDir = dirname(fileURLToPath(import.meta.url));
+  
+  // Try multiple paths for the AISMM definition
   const possiblePaths = [
-    join(__dirname, '..', '..', '..', '..', 'public', 'aismm.yaml'),  // webapp/public
-    join(__dirname, '..', '..', '..', '..', '..', 'aismm_definition', 'aismm.yaml'),  // project root
-    join(__dirname, '..', '..', 'public', 'aismm.yaml'),  // fallback
+    join(currentDir, '..', '..', '..', 'public', 'aismm.yaml'),  // From src/react_agent/tools -> public
+    join(currentDir, '..', '..', '..', '..', 'aismm_definition', 'aismm.yaml'),  // Project root
+    '/Users/arjunr/Documents/0-SW Dev/AISMM_V10/webapp/public/aismm.yaml',  // Absolute fallback for dev
   ];
   
   let yamlContent: string | null = null;
+  let successPath: string | null = null;
+  const errors: string[] = [];
   
   for (const yamlPath of possiblePaths) {
     try {
       yamlContent = await readFile(yamlPath, 'utf-8');
+      successPath = yamlPath;
+      console.log(`[AISMM] Loaded model from: ${yamlPath}`);
       break;
-    } catch {
-      // Try next path
+    } catch (err) {
+      errors.push(`${yamlPath}: ${(err as Error).message}`);
       continue;
     }
   }
   
   if (!yamlContent) {
-    throw new Error('Could not find AISMM definition file');
+    throw new Error(`Could not find AISMM definition file. Tried paths:\n${errors.join('\n')}`);
   }
   
   const parsed = parseYaml(yamlContent);

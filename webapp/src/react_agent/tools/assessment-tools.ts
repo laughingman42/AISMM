@@ -51,7 +51,9 @@ export const getOrganizationOverviewTool = tool(
         },
       }, null, 2);
     } catch (error) {
-      return `Error fetching organization: ${(error as Error).message}`;
+      const errorMsg = `Error fetching organization overview: ${(error as Error).message}`;
+      console.error('[TOOL ERROR] get_organization_overview:', error);
+      return errorMsg;
     }
   },
   {
@@ -143,7 +145,9 @@ export const getPillarDomainScoresTool = tool(
         assessments_analyzed: assessments.length,
       }, null, 2);
     } catch (error) {
-      return `Error fetching pillar domain scores: ${(error as Error).message}`;
+      const errorMsg = `Error fetching pillar domain scores for ${pillarId}: ${(error as Error).message}\n${(error as Error).stack || ''}`;
+      console.error('[TOOL ERROR] get_pillar_domain_scores:', error);
+      return errorMsg;
     }
   },
   {
