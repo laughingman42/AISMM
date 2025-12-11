@@ -29,20 +29,22 @@ export function getPillarSystemPrompt(pillarId: PillarId, pillarName: string, pi
 
 Your expertise: ${pillarDescription}
 
-Your role is to analyze organizational assessment data for this pillar and produce comprehensive security evaluation reports. You have access to tools that can fetch organization data, domain scores, detailed responses, maturity trends, and gap analysis.
+CRITICAL INSTRUCTION: You MUST use the available tools to gather data. DO NOT write any analysis without calling tools first.
 
-When analyzing an organization, you should:
-1. First get an overview of the organization and their assessments
-2. Fetch the pillar-specific domain scores to understand maturity across domains
-3. For domains with low scores, get detailed responses to understand specific weaknesses
-4. Analyze trends if multiple assessments are available
-5. Identify gaps and prioritize recommendations
+MANDATORY TOOL SEQUENCE:
+1. FIRST call: get_organization_overview (organizationId)
+2. THEN call: get_pillar_domain_scores (organizationId, pillarId="${pillarId}")
+3. THEN call: identify_gaps (organizationId, pillarId="${pillarId}")
+4. OPTIONAL: get_maturity_trend (organizationId, pillarId="${pillarId}")
+5. OPTIONAL: get_domain_responses (organizationId, domainId) for low-scoring domains
 
-Your output should be a structured analysis including:
-- Executive summary of the pillar's security posture
-- Key milestones and achievements
-- Areas requiring improvement
-- Prioritized recommendations with expected impact and effort estimates
+After collecting ALL tool data, write your structured analysis with:
+- Executive summary (based on domain scores you retrieved)
+- Key milestones and achievements (based on HIGH maturity domains)
+- Areas requiring improvement (based on LOW maturity domains from gap analysis)
+- Prioritized recommendations (critical/high/medium/low priority, with impact and effort)
+
+NEVER say "without domain-specific data" or "data not available" - you have tools to get ALL data. Use them!
 
 Be specific, actionable, and base all conclusions on the actual data you retrieve. If data is missing or insufficient, note this in your analysis.
 
@@ -115,22 +117,14 @@ export async function runPillarAgent(
 ): Promise<string> {
   const agent = await createPillarAgent(pillarId, pillarName, pillarDescription);
   
-  const prompt = `Analyze the security maturity of organization "${organizationId}" for the ${pillarName} pillar.
+  const prompt = `Analyze organization ID: ${organizationId} for the ${pillarName} pillar.
 
-Please:
-1. Get the organization overview first
-2. Fetch the pillar-specific domain scores for "${pillarId}"
-3. Identify gaps and prioritize recommendations for this pillar
-4. Check maturity trends if available
-5. For any domains with maturity level 2 or below, get detailed responses
+STEP 1: Call get_organization_overview with organizationId="${organizationId}"
+STEP 2: Call get_pillar_domain_scores with organizationId="${organizationId}" and pillarId="${pillarId}"  
+STEP 3: Call identify_gaps with organizationId="${organizationId}" and pillarId="${pillarId}"
+STEP 4: (Optional) Call get_maturity_trend for trend analysis
 
-Then provide a comprehensive analysis report including:
-- Executive Summary (2-3 paragraphs)
-- Key Milestones and Achievements (bullet points)
-- Areas for Improvement (with specific domains)
-- Prioritized Recommendations (with priority level, expected impact, and effort estimate)
-
-Format your final report clearly with headers and structured content.`;
+After you have ALL the data from these tool calls, write your comprehensive analysis report.`;
 
   const result = await agent.invoke({
     messages: [new HumanMessage(prompt)],
