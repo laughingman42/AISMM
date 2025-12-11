@@ -132,6 +132,67 @@ class ApiClient {
   async compareAssessments(id1: string, id2: string): Promise<{ assessment1: Assessment; assessment2: Assessment }> {
     return this.fetch<{ assessment1: Assessment; assessment2: Assessment }>(`/compare/${id1}/${id2}`);
   }
+
+  // ============ AI Agent Analysis ============
+
+  async getAgentStatus(): Promise<{
+    status: string;
+    ollama: {
+      status: string;
+      url: string;
+      configuredModel: string;
+      availableModels: string[];
+      modelAvailable: boolean;
+    };
+    agent: {
+      available: boolean;
+      pillars: string[];
+    };
+  }> {
+    return this.fetch('/agent/status');
+  }
+
+  async analyzeOrganization(organizationId: string, options?: { runInParallel?: boolean }): Promise<{
+    report: {
+      organization_id: string;
+      organization_name: string;
+      report_generated_at: string;
+      assessments_analyzed: number;
+      executive_summary: string;
+      overall_maturity_level: number;
+      overall_score: number;
+      pillar_reports: Array<{
+        pillar_id: string;
+        pillar_name: string;
+        executive_summary: string;
+        key_milestones?: string[];
+        achievements?: string[];
+        areas_for_improvement?: string[];
+        prioritized_recommendations?: Array<{
+          priority: string;
+          domain: string;
+          recommendation: string;
+          expected_impact: string;
+          effort_estimate: string;
+        }>;
+      }>;
+      cross_pillar_insights: string[];
+      strategic_recommendations: Array<{
+        priority: string;
+        domain: string;
+        recommendation: string;
+        expected_impact: string;
+        effort_estimate: string;
+      }>;
+      maturity_trend?: string;
+    };
+    markdown: string;
+  }> {
+    return this.fetch(`/organizations/${organizationId}/analyze`, {
+      method: 'POST',
+      body: JSON.stringify(options || {}),
+    });
+  }
 }
 
 export const api = new ApiClient();

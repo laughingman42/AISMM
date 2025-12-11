@@ -1,3 +1,7 @@
 ExternalReferences
 .DS_Store
 *.db
+node_modules
+dist
+.env
+.vscode

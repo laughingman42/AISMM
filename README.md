@@ -7,3 +7,7 @@
     - ISO/IEC 42001 (AI Management Systems)
     - OWASP GenAI Security initiatives
     
+## To run
+
+   Run both the backend and frontend
+   npm run dev:all 

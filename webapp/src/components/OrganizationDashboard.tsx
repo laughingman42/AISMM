@@ -27,12 +27,14 @@ import {
   Minus,
   BarChart3,
   AlertTriangle,
-  CheckCircle
+  CheckCircle,
+  Brain
 } from 'lucide-react';
 import clsx from 'clsx';
 import api from '../api/client';
 import type { Assessment, DomainScore } from '../types/assessment';
 import type { AISMMDataV1 } from '../types';
+import { AIAnalysisReport, AIAnalysisLoading, AIAnalysisError } from './AIAnalysisReport';
 
 interface OrganizationDashboardProps {
   organizationId: string;
@@ -62,10 +64,50 @@ const DOMAIN_COLORS = [
   '#06b6d4', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316',
 ];
 
-export function OrganizationDashboard({ organizationId: _organizationId, assessments, modelData }: OrganizationDashboardProps) {
+export function OrganizationDashboard({ organizationId, assessments, modelData }: OrganizationDashboardProps) {
   const [assessmentsWithScores, setAssessmentsWithScores] = useState<AssessmentWithScores[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'overview' | 'pillars' | 'domains' | 'improvements'>('overview');
+
+  // AI Analysis state
+  const [aiAnalysisState, setAiAnalysisState] = useState<'idle' | 'loading' | 'complete' | 'error'>('idle');
+  const [aiAnalysisReport, setAiAnalysisReport] = useState<{
+    report: NonNullable<Awaited<ReturnType<typeof api.analyzeOrganization>>>['report'] | null;
+    markdown: string;
+  }>({ report: null, markdown: '' });
+  const [aiAnalysisError, setAiAnalysisError] = useState<string>('');
+
+  // Handler for triggering AI analysis
+  const handleRunAIAnalysis = async () => {
+    setAiAnalysisState('loading');
+    setAiAnalysisError('');
+    
+    try {
+      const result = await api.analyzeOrganization(organizationId);
+      
+      if (!result || !result.report) {
+        throw new Error('No analysis report returned');
+      }
+      
+      setAiAnalysisReport({
+        report: result.report,
+        markdown: result.markdown,
+      });
+      setAiAnalysisState('complete');
+    } catch (err) {
+      console.error('AI Analysis failed:', err);
+      setAiAnalysisError(
+        err instanceof Error ? err.message : 'Failed to run AI analysis'
+      );
+      setAiAnalysisState('error');
+    }
+  };
+
+  const handleCloseAIAnalysis = () => {
+    setAiAnalysisState('idle');
+    setAiAnalysisReport({ report: null, markdown: '' });
+    setAiAnalysisError('');
+  };
 
   // Filter to completed assessments only
   const completedAssessments = useMemo(() => 
@@ -317,6 +359,25 @@ export function OrganizationDashboard({ organizationId: _organizationId, assessm
 
   return (
     <div className="space-y-6">
+      {/* AI Analysis Modals */}
+      {aiAnalysisState === 'loading' && (
+        <AIAnalysisLoading onCancel={handleCloseAIAnalysis} />
+      )}
+      {aiAnalysisState === 'complete' && aiAnalysisReport.report && (
+        <AIAnalysisReport
+          report={aiAnalysisReport.report}
+          markdown={aiAnalysisReport.markdown}
+          onClose={handleCloseAIAnalysis}
+        />
+      )}
+      {aiAnalysisState === 'error' && (
+        <AIAnalysisError
+          error={aiAnalysisError}
+          onRetry={handleRunAIAnalysis}
+          onClose={handleCloseAIAnalysis}
+        />
+      )}
+
       {/* Dashboard Header */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
         <div className="flex items-center justify-between mb-4">
@@ -324,8 +385,23 @@ export function OrganizationDashboard({ organizationId: _organizationId, assessm
             <BarChart3 className="w-5 h-5 text-blue-600" />
             Maturity Dashboard
           </h3>
-          <div className="text-sm text-gray-500">
-            Based on {completedAssessments.length} completed assessment{completedAssessments.length !== 1 ? 's' : ''}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={handleRunAIAnalysis}
+              disabled={aiAnalysisState === 'loading'}
+              className={clsx(
+                "flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all",
+                aiAnalysisState === 'loading'
+                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                  : "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 shadow-sm hover:shadow-md"
+              )}
+            >
+              <Brain className="w-4 h-4" />
+              AI Agentic Analysis
+            </button>
+            <div className="text-sm text-gray-500">
+              Based on {completedAssessments.length} completed assessment{completedAssessments.length !== 1 ? 's' : ''}
+            </div>
           </div>
         </div>
 

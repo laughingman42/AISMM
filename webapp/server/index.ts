@@ -475,6 +475,106 @@ app.get('/api/compare/:id1/:id2', (req, res) => {
   }
 });
 
+// ============ AGENT ENDPOINTS ============
+
+// Generate security evaluation report for an organization
+app.post('/api/organizations/:id/analyze', async (req, res) => {
+  try {
+    const orgId = req.params.id;
+    const { runInParallel = false } = req.body;
+    
+    // Check if organization exists
+    const org = db.prepare('SELECT * FROM organizations WHERE id = ?').get(orgId);
+    if (!org) {
+      return res.status(404).json({ error: 'Organization not found' });
+    }
+    
+    // Check if there are completed assessments
+    const completedCount = db.prepare(
+      'SELECT COUNT(*) as count FROM assessments WHERE organization_id = ? AND status = ?'
+    ).get(orgId, 'completed') as { count: number };
+    
+    if (completedCount.count === 0) {
+      return res.status(400).json({ 
+        error: 'No completed assessments found',
+        message: 'At least one completed assessment is required to generate a security evaluation report'
+      });
+    }
+    
+    // Dynamically import the agent orchestrator
+    const { generateOrganizationSecurityReport, formatReportAsMarkdown, formatReportAsJSON } = 
+      await import('../src/react_agent/agents/orchestrator.js');
+    
+    console.log(`Starting agent analysis for organization: ${orgId}`);
+    
+    // Generate the report
+    const report = await generateOrganizationSecurityReport(orgId, {
+      runInParallel,
+      verbose: true,
+    });
+    
+    // Return both formats
+    res.json({
+      report,
+      markdown: formatReportAsMarkdown(report),
+    });
+  } catch (error) {
+    console.error('Agent analysis error:', error);
+    res.status(500).json({ 
+      error: (error as Error).message,
+      details: 'Make sure Ollama is running with the configured model'
+    });
+  }
+});
+
+// Get agent status/health check
+app.get('/api/agent/status', async (req, res) => {
+  try {
+    // Try to import agent module to verify it's available
+    const { createLLM } = await import('../src/react_agent/agents/base-agent.js');
+    
+    // Check Ollama connectivity
+    const ollamaUrl = process.env.OLLAMA_BASE_URL || 'http://localhost:11434';
+    const ollamaModel = process.env.OLLAMA_MODEL || 'llama3.2';
+    
+    let ollamaStatus = 'unknown';
+    let ollamaModels: string[] = [];
+    
+    try {
+      const response = await fetch(`${ollamaUrl}/api/tags`);
+      if (response.ok) {
+        const data = await response.json() as { models?: Array<{ name: string }> };
+        ollamaStatus = 'connected';
+        ollamaModels = data.models?.map((m: { name: string }) => m.name) || [];
+      } else {
+        ollamaStatus = 'error';
+      }
+    } catch {
+      ollamaStatus = 'disconnected';
+    }
+    
+    res.json({
+      status: 'ready',
+      ollama: {
+        status: ollamaStatus,
+        url: ollamaUrl,
+        configuredModel: ollamaModel,
+        availableModels: ollamaModels,
+        modelAvailable: ollamaModels.some(m => m.includes(ollamaModel.split(':')[0])),
+      },
+      agent: {
+        available: true,
+        pillars: ['security_for_ai', 'ai_for_security', 'security_from_ai'],
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      error: (error as Error).message,
+    });
+  }
+});
+
 // Start server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
