@@ -242,12 +242,13 @@ function parseArgs(args: string[]): {
         break;
         
       case '--output':
-      case '-out':
+      case '-out': {
         const format = args[++i];
         if (format === 'json' || format === 'markdown' || format === 'both') {
           outputFormat = format;
         }
         break;
+      }
         
       case '--file':
       case '-f':

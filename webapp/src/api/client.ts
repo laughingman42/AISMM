@@ -13,7 +13,8 @@ import type {
   SaveDomainScoreRequest
 } from '../types/assessment';
 
-const API_BASE = 'http://localhost:3001/api';
+// API base URL - configurable via environment variable
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
 
 class ApiClient {
   private async fetch<T>(url: string, options?: RequestInit): Promise<T> {

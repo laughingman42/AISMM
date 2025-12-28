@@ -16,22 +16,17 @@ This version incorporates guidance from:
 
 ### Prerequisites
 - Node.js 18+ and npm
-- Python 3.8+ (for YAML validation)
 - Ollama (for AI agent analysis) - [Install Ollama](https://ollama.ai)
 
 ### Installation
 
 ```bash
-
 # Install webapp dependencies
 cd webapp
 npm install
 
-# (Optional) Set up Python virtual environment for validation
-cd ..
-python3 -m venv .venv
-source .venv/bin/activate  # On macOS/Linux
-pip install pyyaml
+# Copy environment configuration
+cp .env.example .env
 
 # (Optional) Install and start Ollama for AI agent features
 ollama serve
@@ -108,12 +103,13 @@ The agent generates:
 AISMM_V10/
 ├── aismm_definition/
 │   └── aismm.yaml              # Canonical AISMM model definition
-├── scripts/
-│   ├── validate_yaml.py        # YAML validation script
-│   └── sync_webapp.py          # Sync YAML to webapp
 ├── webapp/
 │   ├── public/
 │   │   └── aismm.yaml          # Synced YAML for webapp
+│   ├── scripts/
+│   │   ├── validate_yaml.ts    # YAML validation script
+│   │   ├── sync-yaml.ts        # Sync YAML to webapp
+│   │   └── seed-data.ts        # Database seeding
 │   ├── server/
 │   │   └── index.ts            # Express API server
 │   ├── src/
@@ -126,7 +122,10 @@ AISMM_V10/
 │   │       └── config/         # Agent configuration
 │   └── data/
 │       └── aismm.db            # SQLite database
-└── ExternalReferences/         # Supporting documentation
+├── ExternalReferences/         # Supporting documentation
+├── LICENSE                     # MIT License
+├── CONTRIBUTING.md             # Contribution guidelines
+└── CHANGELOG.md                # Version history
 ```
 
 ### Syncing YAML Changes
@@ -138,10 +137,10 @@ When you modify the AISMM definition:
 vim aismm_definition/aismm.yaml
 
 # 2. Validate changes
-python3 scripts/validate_yaml.py
-
-# 3. Sync to webapp
 cd webapp
+npm run validate
+
+# 3. Sync to webapp public folder
 npm run sync
 
 # 4. Restart the application for changes to take effect
@@ -150,7 +149,7 @@ npm run dev:all
 
 ### YAML Validation Rules
 
-The `validate_yaml.py` script enforces:
+The `webapp/scripts/validate_yaml.ts` script enforces:
 - **No tabs** - Use spaces for indentation only
 - **Required structure**: `aismm.components` with `pillars`, `domains`, `maturity_levels`
 - **Complete maturity levels**: Each domain must have levels 1-5
@@ -159,19 +158,20 @@ The `validate_yaml.py` script enforces:
 
 ### Available Scripts
 
+All scripts are run from the `webapp/` directory:
+
 ```bash
-# Webapp scripts (run from webapp/ directory)
 npm run dev           # Start Vite dev server
-npm run dev:server    # Start Express API server
+npm run server        # Start Express API server
 npm run dev:all       # Start both frontend and backend
 npm run build         # Build for production
 npm run preview       # Preview production build
-npm run seed          # Seed database with sample data
+npm run validate      # Validate AISMM YAML structure
 npm run sync          # Sync YAML from aismm_definition/
+npm run seed          # Seed database with sample data
 npm run agent         # Run AI agent CLI
-
-# Validation (run from project root)
-python3 scripts/validate_yaml.py
+npm run test          # Run tests with Vitest
+npm run lint          # Run ESLint
 ```
 
 ### Database Management
@@ -241,12 +241,15 @@ npm run build
 
 ## Contributing
 
-1. Validate YAML changes: `python3 scripts/validate_yaml.py`
-2. Sync to webapp: `cd webapp && npm run sync`
-3. Test changes: `npm run dev:all`
-4. Keep commits focused on single components/domains
-5. Follow existing code structure and naming conventions
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed contribution guidelines.
+
+Quick steps:
+1. Validate YAML changes: `cd webapp && npm run validate`
+2. Sync to webapp: `npm run sync`
+3. Run lint: `npm run lint`
+4. Test changes: `npm run dev:all`
+5. Keep commits focused on single components/domains
 
 ## License
 
-[Add your license here] 
+MIT License - see [LICENSE](LICENSE) for details. 

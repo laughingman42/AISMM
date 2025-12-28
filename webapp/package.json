@@ -1,17 +1,37 @@
 {
-  "name": "webapp",
+  "name": "@aismm/webapp",
+  "version": "0.1.0",
+  "description": "AI Security Maturity Model (AISMM) - Assessment web application for evaluating organizational AI security posture",
+  "author": "AISMM Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/AISMM_V10.git"
+  },
+  "keywords": [
+    "ai-security",
+    "security-maturity",
+    "assessment",
+    "cybersecurity",
+    "ai-governance",
+    "risk-assessment"
+  ],
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "dev:all": "concurrently \"npm run dev\" \"npm run server\"",
     "server": "tsx server/index.ts",
     "seed": "tsx scripts/seed-data.ts",
+    "validate": "tsx scripts/validate_yaml.ts",
+    "sync": "tsx scripts/sync-yaml.ts",
     "agent": "tsx src/react_agent/index.ts",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage"
   },
   "dependencies": {
     "@langchain/core": "^0.3.40",
@@ -19,7 +39,6 @@
     "@langchain/ollama": "^0.2.0",
     "better-sqlite3": "^12.5.0",
     "clsx": "^2.1.1",
-    "concurrently": "^9.2.1",
     "cors": "^2.8.5",
     "express": "^5.2.1",
     "js-yaml": "^4.1.1",
@@ -35,6 +54,13 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "concurrently": "^9.2.1",
+    "vitest": "^3.0.0",
+    "@vitest/ui": "^3.0.0",
+    "@vitest/coverage-v8": "^3.0.0",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/jest-dom": "^6.6.0",
+    "jsdom": "^26.0.0",
     "@eslint/js": "^9.39.1",
     "@tailwindcss/vite": "^4.1.17",
     "@types/better-sqlite3": "^7.6.13",

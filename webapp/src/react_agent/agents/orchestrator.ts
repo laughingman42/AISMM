@@ -6,7 +6,7 @@
 import { runSecurityForAIAgent } from './security-for-ai-agent.js';
 import { runAIForSecurityAgent } from './ai-for-security-agent.js';
 import { runSecurityFromAIAgent } from './security-from-ai-agent.js';
-import { fetchOrganization, loadAISMMModel, getOrganizationData } from '../tools/api-client.js';
+import { fetchOrganization, getOrganizationData } from '../tools/api-client.js';
 import { getMaturityLevel, getMaturityLevelName } from '../config/index.js';
 import type { 
   OrganizationSecurityReport, 

@@ -15,8 +15,6 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { parse as parseYaml } from 'yaml';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
 /**
  * Fetch all organizations
  */
@@ -94,17 +92,15 @@ export async function loadAISMMModel(): Promise<AISMMModel> {
   const possiblePaths = [
     join(currentDir, '..', '..', '..', 'public', 'aismm.yaml'),  // From src/react_agent/tools -> public
     join(currentDir, '..', '..', '..', '..', 'aismm_definition', 'aismm.yaml'),  // Project root
-    '/Users/arjunr/Documents/0-SW Dev/AISMM_V10/webapp/public/aismm.yaml',  // Absolute fallback for dev
+    join(currentDir, '..', '..', '..', '..', 'public', 'aismm.yaml'),  // Alternative public path
   ];
   
   let yamlContent: string | null = null;
-  let successPath: string | null = null;
   const errors: string[] = [];
   
   for (const yamlPath of possiblePaths) {
     try {
       yamlContent = await readFile(yamlPath, 'utf-8');
-      successPath = yamlPath;
       console.log(`[AISMM] Loaded model from: ${yamlPath}`);
       break;
     } catch (err) {

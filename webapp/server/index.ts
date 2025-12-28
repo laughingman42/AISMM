@@ -13,6 +13,26 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Type definitions for request bodies
+interface ResponseItem {
+  domain_id: string;
+  question_id: string;
+  response_value?: string;
+  response_index?: number;
+  response_text?: string;
+  score?: number;
+}
+
+interface DomainScoreItem {
+  domain_id: string;
+  pillar_id: string;
+  raw_score?: number;
+  weighted_score?: number;
+  maturity_level?: number;
+  questions_answered?: number;
+  questions_total?: number;
+}
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -193,11 +213,11 @@ app.get('/api/assessments', (req, res) => {
       FROM assessments a
       JOIN organizations o ON a.organization_id = o.id
     `;
-    const params: any[] = [];
+    const params: (string | number)[] = [];
     
     if (organization_id) {
       query += ' WHERE a.organization_id = ?';
-      params.push(organization_id);
+      params.push(organization_id as string);
     }
     query += ' ORDER BY a.started_at DESC';
     
@@ -262,7 +282,7 @@ app.put('/api/assessments/:id', (req, res) => {
   try {
     const { name, description, status, total_score, maturity_level } = req.body;
     const updates: string[] = [];
-    const params: any[] = [];
+    const params: (string | number | null)[] = [];
     
     if (name !== undefined) { updates.push('name = ?'); params.push(name); }
     if (description !== undefined) { updates.push('description = ?'); params.push(description); }
@@ -358,7 +378,7 @@ app.post('/api/assessments/:assessmentId/responses/batch', (req, res) => {
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
     `);
     
-    const transaction = db.transaction((items: any[]) => {
+    const transaction = db.transaction((items: ResponseItem[]) => {
       for (const item of items) {
         // Check for existing
         const existing = db.prepare(
@@ -412,7 +432,7 @@ app.post('/api/assessments/:assessmentId/domain-scores', (req, res) => {
       return res.status(400).json({ error: 'domain_scores must be an array' });
     }
     
-    const transaction = db.transaction((items: any[]) => {
+    const transaction = db.transaction((items: DomainScoreItem[]) => {
       for (const item of items) {
         const existing = db.prepare(
           'SELECT id FROM domain_scores WHERE assessment_id = ? AND domain_id = ?'
@@ -502,7 +522,7 @@ app.post('/api/organizations/:id/analyze', async (req, res) => {
     }
     
     // Dynamically import the agent orchestrator
-    const { generateOrganizationSecurityReport, formatReportAsMarkdown, formatReportAsJSON } = 
+    const { generateOrganizationSecurityReport, formatReportAsMarkdown } = 
       await import('../src/react_agent/agents/orchestrator.js');
     
     console.log(`Starting agent analysis for organization: ${orgId}`);
@@ -530,9 +550,6 @@ app.post('/api/organizations/:id/analyze', async (req, res) => {
 // Get agent status/health check
 app.get('/api/agent/status', async (req, res) => {
   try {
-    // Try to import agent module to verify it's available
-    const { createLLM } = await import('../src/react_agent/agents/base-agent.js');
-    
     // Check Ollama connectivity
     const ollamaUrl = process.env.OLLAMA_BASE_URL || 'http://localhost:11434';
     const ollamaModel = process.env.OLLAMA_MODEL || 'llama3.2';

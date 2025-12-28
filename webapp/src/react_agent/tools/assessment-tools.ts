@@ -76,7 +76,7 @@ export const getPillarDomainScoresTool = tool(
       
       // Filter domains by pillar
       const pillarDomains = Object.entries(model.domains)
-        .filter(([_, domain]) => domain.pillar === pillarId)
+        .filter(([, domain]) => domain.pillar === pillarId)
         .map(([domainId, domain]) => ({ domainId, ...domain }));
       
       const pillarDomainIds = pillarDomains.map(d => d.domainId);

@@ -60,6 +60,7 @@ export function AssessmentForm({ assessment, modelData, onComplete, onBack }: As
         setResponses(responseMap);
       } catch (err) {
         console.error('Failed to load responses:', err);
+        setError('Failed to load existing responses. Please try again.');
       }
     };
     loadResponses();
@@ -75,7 +76,7 @@ export function AssessmentForm({ assessment, modelData, onComplete, onBack }: As
   const handleResponseChange = (question: Question, value: string | number | string[] | boolean, domain: Domain) => {
     const questionId = question.id;
     
-    let response: LocalResponse = {
+    const response: LocalResponse = {
       domain_id: domain.id,
       question_id: questionId,
     };

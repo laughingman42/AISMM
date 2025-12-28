@@ -125,79 +125,69 @@ webapp/
 
 ## License
 
+MIT License - see [LICENSE](../LICENSE) for details.
+
 Part of the AISMM (AI Security Maturity Model) project.
 
----
+## Architecture Overview
 
-## Original Vite Template Info
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     React Frontend                          │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐ │
+│  │ Assessment  │  │Organization │  │    Results &        │ │
+│  │    Form     │  │  Dashboard  │  │    Visualizations   │ │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘ │
+└───────────────────────────┬─────────────────────────────────┘
+                            │ HTTP/REST
+┌───────────────────────────▼─────────────────────────────────┐
+│                   Express API Server                         │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐ │
+│  │Organizations│  │ Assessments │  │   AI Agent API      │ │
+│  │   CRUD      │  │    CRUD     │  │   (Orchestrator)    │ │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘ │
+└───────────────────────────┬─────────────────────────────────┘
+         │                                    │
+         ▼                                    ▼
+┌─────────────────┐              ┌─────────────────────────────┐
+│  SQLite (data/) │              │   LangChain React Agents    │
+│  ┌───────────┐  │              │  ┌─────────────────────┐   │
+│  │   orgs    │  │              │  │  Pillar Agents (3)  │   │
+│  │assessments│  │              │  └─────────────────────┘   │
+│  │ responses │  │              │            │               │
+│  │  scores   │  │              │            ▼               │
+│  └───────────┘  │              │  ┌─────────────────────┐   │
+└─────────────────┘              │  │   Ollama (LLM)      │   │
+                                 │  └─────────────────────┘   │
+                                 └─────────────────────────────┘
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Deployment
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+> **Note**: This application is designed as a **local development/assessment tool** and does not include authentication or authorization. Do not expose it to the public internet without adding proper security measures.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
+### Local Development
+
+```bash
+npm run dev:all
+```
+
+### Production Build
+
+```bash
+npm run build
+npm run preview  # Preview built app
+```
+
+For production deployment, you'll need to:
+1. Configure `VITE_API_BASE_URL` environment variable
+2. Set up a reverse proxy (nginx, etc.)
+3. Add authentication if exposing publicly
+4. Consider using a more robust database for high-volume usage
+
+## Contributing
+
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for contribution guidelines.
     },
   },
 ])

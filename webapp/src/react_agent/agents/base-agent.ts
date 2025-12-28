@@ -8,7 +8,7 @@ import { ToolNode } from '@langchain/langgraph/prebuilt';
 import { StateGraph, MessagesAnnotation, START, END } from '@langchain/langgraph';
 import { config } from '../config/index.js';
 import { assessmentTools } from '../tools/assessment-tools.js';
-import type { PillarId, PillarReport, DomainAnalysis, PrioritizedRecommendation } from '../types/index.js';
+import type { PillarId, PillarReport, PrioritizedRecommendation } from '../types/index.js';
 
 /**
  * Create the Ollama LLM instance

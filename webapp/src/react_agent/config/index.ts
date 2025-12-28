@@ -13,7 +13,7 @@ export const config = {
   ollama: {
     baseUrl: process.env.OLLAMA_BASE_URL || 'http://localhost:11434',
     // Model to use - can be llama2, llama3, mistral, mixtral, etc.
-    model: process.env.OLLAMA_MODEL || 'gpt-oss:latest',
+    model: process.env.OLLAMA_MODEL || 'llama3.2:latest',
     // Temperature for generation (0.0 - 1.0) - Lower for better tool calling
     temperature: parseFloat(process.env.OLLAMA_TEMPERATURE || '0.1'),
     // Max tokens for response

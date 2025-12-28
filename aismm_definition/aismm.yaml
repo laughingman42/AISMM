@@ -4,7 +4,7 @@
 version: "1.0.0"
 name: "AI Security Maturity Model"
 description: "Comprehensive model for assessing organizational AI security maturity across three foundational pillars"
-created_at: "2024-01-01T00:00:00Z"
+created_at: "2025-12-01T00:00:00Z"
 
 # Scoring Configuration
 scoring_config:
@@ -2971,9 +2971,9 @@ domains:
   fraud_detection:
     id: "fraud_detection"
     name: "Fraud Detection"
-    description: "AI-powered fraud detection and prevention systems"
+    description: "AI-powered fraud detection and prevention systems for financial transactions, account security, and payment protection"
     pillar: "ai_for_security"
-    weight: 0.8
+    weight: 1.2
 
     key_controls:
       - "AI-powered fraud detection model security"
@@ -2981,6 +2981,15 @@ domains:
       - "Model retraining procedures when evasion detected"
       - "Human-in-the-loop for high-confidence fraud cases"
       - "Feedback loop for fraud model improvement"
+      - "Real-time transaction monitoring and risk scoring"
+      - "Account takeover detection using behavioral biometrics"
+      - "Payment fraud detection across multiple channels"
+      - "Identity verification and synthetic identity detection"
+      - "Money laundering pattern detection and AML compliance"
+      - "Cross-channel fraud correlation and investigation"
+      - "Merchant fraud and chargeback prevention"
+      - "Model explainability for regulatory compliance"
+      - "Fraud model performance monitoring and drift detection"
     
     framework_alignment:
       - indicator: "AI-powered transaction analysis and anomaly detection"
@@ -3021,34 +3030,48 @@ domains:
           iso_27001: ["A.13.1.1", "A.14.1.3"]
           ffiec_guidance: ["System.Integration", "API.Security"]
           iso_42001: ["8.1", "8.3", "7.1.4"]
-    
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data", "AML.T0031 - Erode ML Model Integrity"]
           owasp_genai: ["LLM01:2025 Prompt Injection - Anti-Fraud", "LLM04:2025 Data and Model Poisoning - Fraud Models"]
+      - indicator: "Account takeover and credential abuse detection"
+        frameworks:
+          nist_csf: ["PR.AC-1", "DE.CM-1"]
+          pci_dss: ["Requirement 8", "Requirement 10"]
+          iso_27001: ["A.9.4.3", "A.12.4.1"]
+          iso_42001: ["8.6", "8.7"]
+          mitre_atlas: ["AML.T0015 - Evade ML Model"]
+          owasp_genai: ["LLM01:2025 Prompt Injection - Anti-Fraud"]
+      - indicator: "Anti-money laundering (AML) and suspicious activity detection"
+        frameworks:
+          ffiec_guidance: ["BSA.AML", "Suspicious.Activity.Reporting"]
+          fatf_recommendations: ["Recommendation 1", "Recommendation 10"]
+          iso_27001: ["A.18.1.5"]
+          iso_42001: ["8.6", "5.2"]
+    
     levels:
       level_1:
         level: "level_1"
         name: "Rule-Based Detection"
-        description: "Rule-based fraud detection systems"
+        description: "Basic rule-based fraud detection with static thresholds and manual review"
         score_value: 1
       level_2:
         level: "level_2"
         name: "AI Pattern Recognition"
-        description: "AI-enhanced fraud pattern recognition"
+        description: "AI-enhanced fraud pattern recognition with supervised learning on known fraud types"
         score_value: 2
       level_3:
         level: "level_3"
         name: "Real-time AI Scoring"
-        description: "Real-time AI fraud scoring and prevention"
+        description: "Real-time AI fraud scoring with dynamic risk assessment and automated actions"
         score_value: 3
       level_4:
         level: "level_4"
         name: "Behavioral Analysis"
-        description: "Advanced AI behavioral analysis for fraud detection"
+        description: "Advanced AI behavioral analysis with unsupervised learning and cross-channel correlation"
         score_value: 4
       level_5:
         level: "level_5"
         name: "Predictive Prevention"
-        description: "Predictive AI fraud prevention with continuous learning"
+        description: "Predictive AI fraud prevention with continuous learning, graph analytics, and proactive risk mitigation"
         score_value: 5
     
     questions:
@@ -3090,6 +3113,61 @@ domains:
           - "Continuous learning with real-time model updates and threat intelligence"
           - "Autonomous adaptation with predictive modeling of emerging fraud trends"
         help_text: "Consider model adaptability, threat intelligence integration, and emerging fraud pattern detection"
+      
+      - id: "fraud_detection_q4"
+        text: "What types of fraud does your AI system detect? (Select all that apply)"
+        question_type: "multiple_choice"
+        weight: 0.9
+        required: true
+        options:
+          - code: "payment_fraud"
+            label: "Payment and transaction fraud"
+          - code: "account_takeover"
+            label: "Account takeover and credential abuse"
+          - code: "identity_theft"
+            label: "Identity theft and synthetic identity fraud"
+          - code: "money_laundering"
+            label: "Money laundering and suspicious activity"
+          - code: "merchant_fraud"
+            label: "Merchant fraud and chargeback abuse"
+          - code: "internal_fraud"
+            label: "Internal fraud and employee misconduct"
+          - code: "application_fraud"
+            label: "Application fraud and loan fraud"
+        help_text: "Select all fraud types that your AI system is designed to detect"
+      
+      - id: "fraud_detection_q5"
+        text: "How does your organization handle false positives in AI fraud detection?"
+        question_type: "single_choice"
+        weight: 0.7
+        required: true
+        options:
+          - "Manual review of all flagged transactions with high customer friction"
+          - "Basic triage with some automated clearance for low-risk false positives"
+          - "Intelligent case routing with explainable AI and streamlined customer experience"
+          - "Advanced false positive reduction with continuous model tuning and feedback loops"
+          - "Near-zero false positives with self-correcting models and frictionless customer experience"
+        help_text: "Evaluate false positive management, customer impact, and operational efficiency"
+      
+      - id: "fraud_detection_q6"
+        text: "What percentage of fraudulent transactions does your AI system successfully prevent?"
+        question_type: "numeric"
+        weight: 1.0
+        required: true
+        help_text: "Enter the percentage (0-100) of fraud attempts that are successfully detected and prevented. Consider both known and novel fraud patterns."
+      
+      - id: "fraud_detection_q7"
+        text: "How does your organization ensure AI fraud models remain explainable and compliant?"
+        question_type: "single_choice"
+        weight: 0.8
+        required: true
+        options:
+          - "Limited or no model explainability; black-box AI systems"
+          - "Basic feature importance and post-hoc explanation capabilities"
+          - "Good model interpretability with audit trails for regulatory compliance"
+          - "Advanced explainable AI with case-level justifications and regulatory reporting"
+          - "Full transparency with interpretable models, automated compliance reporting, and regulatory approval"
+        help_text: "Consider model explainability, audit requirements, and regulatory compliance (e.g., FCRA, ECOA, GDPR)"
 
     indicators:
       indicators:
@@ -3098,19 +3176,25 @@ domains:
         - "Advanced behavioral analysis and anomaly detection"
         - "Predictive fraud prevention and proactive risk mitigation"
         - "Continuous learning and adaptive model improvement"
+        - "Cross-channel fraud correlation and investigation"
+        - "Account takeover and identity fraud detection"
+        - "AML and money laundering pattern detection"
       
       definitions:
-        level_1: "Traditional rule-based fraud detection systems without AI enhancement"
-        level_2: "AI-enhanced pattern recognition to identify known fraud signatures"
-        level_3: "Real-time AI scoring with dynamic risk assessment for transactions"
-        level_4: "Advanced behavioral analysis using AI to detect subtle fraud patterns"
-        level_5: "Predictive AI fraud prevention with continuous learning and adaptation"
+        level_1: "Traditional rule-based fraud detection systems without AI enhancement; high false positives"
+        level_2: "AI-enhanced pattern recognition to identify known fraud signatures; moderate accuracy"
+        level_3: "Real-time AI scoring with dynamic risk assessment for transactions; good accuracy"
+        level_4: "Advanced behavioral analysis using AI to detect subtle fraud patterns; high accuracy"
+        level_5: "Predictive AI fraud prevention with continuous learning and proactive mitigation; exceptional accuracy"
       
       success_criteria:
         - "Fraud detection accuracy above 98% with false positive rate below 2%"
         - "Real-time transaction scoring with sub-second response times"
-        - "Behavioral analysis detects 90% of sophisticated fraud attempts"
+        - "Behavioral analysis detects 95% of account takeover attempts"
         - "Continuous adaptation to new fraud techniques within 24 hours"
+        - "AML detection rate above 90% with automated SAR filing support"
+        - "Customer friction reduced by 60% through intelligent false positive management"
+        - "Model explainability meets regulatory requirements for all markets"
 
   # Security from AI Domains
   ai_content_detection:
