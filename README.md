@@ -12,6 +12,10 @@ This version incorporates guidance from:
 - ISO/IEC 42001 (AI Management Systems)
 - OWASP GenAI Security initiatives
 
+### Authors Note
+Yes, a lot of this code was written by coding assistants. Multiple agents and models were used, primarily relying on Claude 4.5 and GPT5.2 models. As with any public code, apply the concept of "never trust, always verify". 
+Always run your due diligence procedures. Simple things like running 'npm audit', examining the install/run scripts, and even using a code assistant to review the code are highly recommended. 
+
 ## Quick Start
 
 ### Prerequisites
