@@ -283,45 +283,36 @@ domains:
     framework_alignment:
       - indicator: "Frequency and consistency of AI security assessments"
         frameworks:
-          nist_ai_rmf: ["MEASURE 2.1", "MEASURE 2.2"]
-          iso_27001: ["A.14.2.1", "A.14.2.8"]
-          nist_csf: ["DE.CM-1", "DE.CM-7"]
-          iso_42001: ["9.2", "8.6", "8.7"]
-          mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0042 - Verify Attack"]
-          owasp_genai: ["LLM09:2025 Misinformation - Validation", "LLM02:2025 Sensitive Information Disclosure - Testing"]
+          nist_ai_rmf: ["MEASURE 2.1", "MEASURE 2.2", "MEASURE 2.3"]
+          iso_27001: ["A.18.2.1", "A.18.2.2", "A.18.2.3"]
+          nist_csf: ["ID.RA-01", "ID.RA-02", "ID.RA-03"]
+          iso_42001: ["9.2", "9.3", "8.6"]
       - indicator: "Scope and depth of security reviews"
         frameworks:
-          nist_ai_rmf: ["MAP 1.1", "MAP 1.2", "MAP 5.1"]
-          iso_27001: ["A.14.2.2", "A.14.2.3"]
-          owasp_asvs: ["V1.1", "V1.11"]
-          iso_42001: ["8.2.2", "8.6", "8.7"]
-          mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0042 - Verify Attack"]
-          owasp_genai: ["LLM09:2025 Misinformation - Validation", "LLM02:2025 Sensitive Information Disclosure - Testing"]
+          nist_ai_rmf: ["MAP 1.1", "MAP 1.2", "MAP 5.1", "MAP 5.2"]
+          iso_27001: ["A.14.2.1", "A.14.2.8", "A.18.2.1"]
+          iso_42001: ["8.2", "8.6", "8.7"]
+          nist_csf: ["ID.RA-04", "ID.RA-05"]
       - indicator: "Automation level of security testing"
         frameworks:
-          nist_csf: ["PR.IP-1", "DE.CM-4"]
-          iso_27001: ["A.14.2.5", "A.14.2.6"]
-          soc2_security: ["CC6.1", "CC6.6"]
-          iso_42001: ["8.2.2", "8.3"]
-          mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0042 - Verify Attack"]
-          owasp_genai: ["LLM09:2025 Misinformation - Validation", "LLM02:2025 Sensitive Information Disclosure - Testing"]
+          nist_csf: ["DE.CM-01", "DE.CM-04", "DE.CM-09"]
+          iso_27001: ["A.14.2.5", "A.14.2.8"]
+          nist_ssdf: ["PW.7.1", "PW.7.2", "PW.8.1"]
+          iso_42001: ["8.2", "8.3", "8.4"]
+          soc2_security: ["CC6.1", "CC6.6", "CC7.1"]
       - indicator: "Integration with development lifecycle"
         frameworks:
-          nist_csf: ["PR.IP-2", "ID.SC-1"]
-          iso_27001: ["A.14.1.1", "A.14.2.1"]
-          nist_ssdf: ["PO.3.1", "PO.3.2"]
-          iso_42001: ["8.2", "8.3", "8.4"]
-          mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0042 - Verify Attack"]
-          owasp_genai: ["LLM09:2025 Misinformation - Validation", "LLM02:2025 Sensitive Information Disclosure - Testing"]
+          nist_ssdf: ["PO.3.1", "PO.3.2", "PW.1.1", "PW.4.1"]
+          nist_csf: ["PR.DS-07", "PR.DS-08"]
+          iso_27001: ["A.14.1.1", "A.14.2.1", "A.14.2.6"]
+          iso_42001: ["8.2", "8.3", "8.4", "8.5"]
       - indicator: "Policy enforcement mechanisms"
         frameworks:
-          nist_ai_rmf: ["GOVERN 3.1", "GOVERN 3.2"]
-          iso_27001: ["A.13.1.3", "A.18.1.4"]
-          soc2_security: ["CC5.1", "CC5.3"]
-          iso_42001: ["5.2", "8.1", "8.5.2"]
-    
-          mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0042 - Verify Attack"]
-          owasp_genai: ["LLM09:2025 Misinformation - Validation", "LLM02:2025 Sensitive Information Disclosure - Testing"]
+          nist_ai_rmf: ["GOVERN 3.1", "GOVERN 3.2", "MANAGE 2.1"]
+          iso_27001: ["A.5.1.1", "A.18.1.1", "A.18.2.2"]
+          soc2_security: ["CC5.1", "CC5.2", "CC5.3"]
+          iso_42001: ["5.2", "8.1", "9.2"]
+          nist_csf: ["GV.PO-01", "GV.PO-02"]
     levels:
       level_1:
         level: "level_1"
@@ -496,45 +487,36 @@ domains:
     framework_alignment:
       - indicator: "Visibility into unauthorized AI tool usage"
         frameworks:
-          nist_ai_rmf: ["GOVERN 1.4", "MEASURE 1.1"]
-          iso_27001: ["A.12.6.2", "A.16.1.7"]
-          nist_csf: ["ID.AM-1", "ID.AM-3"]
-          iso_42001: ["8.2.1", "9.1", "8.6"]
-          mitre_atlas: ["AML.T0035 - Develop Capabilities", "AML.T0052 - Phishing"]
-          owasp_genai: ["LLM05:2025 Improper Output Handling - Discovery", "LLM10:2025 Unbounded Consumption - Visibility"]
+          nist_ai_rmf: ["GOVERN 1.4", "GOVERN 1.5", "MAP 1.5"]
+          iso_27001: ["A.8.1.1", "A.8.1.2", "A.12.5.1"]
+          nist_csf: ["ID.AM-01", "ID.AM-02", "ID.AM-03"]
+          iso_42001: ["8.2", "9.1", "8.6"]
       - indicator: "Detection capabilities for unapproved AI services"
         frameworks:
-          nist_csf: ["DE.AE-1", "DE.CM-1"]
-          iso_27001: ["A.12.4.1", "A.16.1.2"]
-          soc2_security: ["CC6.1", "CC7.1"]
+          nist_csf: ["DE.AE-02", "DE.AE-03", "DE.CM-01", "DE.CM-07"]
+          iso_27001: ["A.12.4.1", "A.12.4.3"]
+          soc2_security: ["CC6.1", "CC6.8", "CC7.1", "CC7.2"]
           iso_42001: ["8.6", "8.7", "9.1"]
-          mitre_atlas: ["AML.T0035 - Develop Capabilities", "AML.T0052 - Phishing"]
-          owasp_genai: ["LLM05:2025 Improper Output Handling - Discovery", "LLM10:2025 Unbounded Consumption - Visibility"]
       - indicator: "Prevention controls and access restrictions"
         frameworks:
-          iso_27001: ["A.9.1.2", "A.13.1.1"]
-          nist_csf: ["PR.AC-3", "PR.AC-4"]
-          soc2_security: ["CC6.2", "CC6.3"]
-          iso_42001: ["8.5.2", "7.1.4", "8.1"]
-          mitre_atlas: ["AML.T0035 - Develop Capabilities", "AML.T0052 - Phishing"]
-          owasp_genai: ["LLM05:2025 Improper Output Handling - Discovery", "LLM10:2025 Unbounded Consumption - Visibility"]
+          iso_27001: ["A.9.1.2", "A.9.2.3", "A.13.1.1", "A.13.1.3"]
+          nist_csf: ["PR.AC-01", "PR.AC-03", "PR.AC-04", "PR.AC-05"]
+          soc2_security: ["CC6.1", "CC6.2", "CC6.3"]
+          iso_42001: ["8.5", "7.1", "8.1"]
       - indicator: "Governance integration across data and AI domains"
         frameworks:
-          nist_ai_rmf: ["GOVERN 2.1", "GOVERN 6.1"]
-          iso_27001: ["A.5.1.1", "Clause 4.1"]
-          cobit: ["DSS05.01", "DSS05.02"]
-          iso_42001: ["4.1", "5.1", "8.1"]
-          mitre_atlas: ["AML.T0035 - Develop Capabilities", "AML.T0052 - Phishing"]
-          owasp_genai: ["LLM05:2025 Improper Output Handling - Discovery", "LLM10:2025 Unbounded Consumption - Visibility"]
+          nist_ai_rmf: ["GOVERN 2.1", "GOVERN 2.2", "GOVERN 6.1", "GOVERN 6.2"]
+          iso_27001: ["A.5.1.1", "Clause 4.1", "Clause 4.2"]
+          iso_42001: ["4.1", "4.2", "5.1", "8.1"]
+          nist_csf: ["GV.OC-01", "GV.OC-02", "GV.RR-01"]
+          cobit: ["DSS05.01", "DSS05.02", "DSS05.03"]
       - indicator: "Monitoring and compliance reporting"
         frameworks:
-          iso_27001: ["Clause 9.1", "A.18.2.1"]
-          nist_csf: ["DE.CM-7", "RS.CO-2"]
-          soc2_security: ["CC4.1", "CC4.2"]
-          iso_42001: ["9.1", "9.3", "10.2"]
-    
-          mitre_atlas: ["AML.T0035 - Develop Capabilities", "AML.T0052 - Phishing"]
-          owasp_genai: ["LLM05:2025 Improper Output Handling - Discovery", "LLM10:2025 Unbounded Consumption - Visibility"]
+          iso_27001: ["Clause 9.1", "Clause 9.2", "A.18.2.1", "A.18.2.2"]
+          nist_csf: ["DE.CM-07", "RS.CO-02", "RS.CO-03"]
+          soc2_security: ["CC4.1", "CC4.2", "CC7.2"]
+          iso_42001: ["9.1", "9.2", "9.3", "10.2"]
+          nist_ai_rmf: ["MEASURE 1.1", "MEASURE 1.2", "MEASURE 4.1"]
     levels:
       level_1:
         level: "level_1"
@@ -715,27 +697,31 @@ domains:
     framework_alignment:
       - indicator: "Agent authorization and access control frameworks"
         frameworks:
-          nist_ai_rmf: ["GOVERN 1.5", "MANAGE 2.2", "MEASURE 2.7"]
-          iso_27001: ["A.9.2.1", "A.9.4.1", "A.9.1.2"]
-          nist_csf: ["PR.AC-4", "PR.AC-6", "PR.PT-3"]
-          owasp_genai: ["LLM06:2025 Excessive Agency", "LLM09:2025 Misinformation"]
+          nist_ai_rmf: ["GOVERN 1.5", "MANAGE 2.2", "MANAGE 2.3", "MEASURE 2.7"]
+          iso_27001: ["A.9.1.1", "A.9.1.2", "A.9.2.1", "A.9.4.1"]
+          nist_csf: ["PR.AC-01", "PR.AC-04", "PR.AC-05", "PR.AA-01"]
+          iso_42001: ["8.5", "8.6", "7.1"]
+          soc2_security: ["CC6.1", "CC6.2", "CC6.3"]
       - indicator: "Least privilege and permission boundaries"
         frameworks:
-          nist_ai_rmf: ["MANAGE 2.2", "GOVERN 1.5"]
-          iso_27001: ["A.9.2.3", "A.9.4.1"]
-          nist_csf: ["PR.AC-4"]
-          owasp_asvs: ["V4 - Access Control"]
+          nist_ai_rmf: ["MANAGE 2.2", "MANAGE 2.3", "GOVERN 1.5"]
+          iso_27001: ["A.9.2.3", "A.9.4.1", "A.9.4.4", "A.9.4.5"]
+          nist_csf: ["PR.AC-04", "PR.AC-06", "PR.PT-03"]
+          iso_42001: ["8.5", "7.1", "8.1"]
+          nist_sp_800_207: ["Zero Trust Architecture Principles"]
       - indicator: "Agent activity monitoring and audit logging"
         frameworks:
-          iso_27001: ["A.12.4.1", "A.12.4.3"]
-          nist_csf: ["DE.CM-1", "DE.CM-6", "PR.PT-1"]
-          soc2_security: ["CC6.1", "CC6.2"]
-          nist_ai_rmf: ["MEASURE 4.2"]
+          iso_27001: ["A.12.4.1", "A.12.4.2", "A.12.4.3", "A.12.4.4"]
+          nist_csf: ["DE.CM-01", "DE.CM-03", "DE.AE-03", "PR.PT-01"]
+          soc2_security: ["CC6.1", "CC6.2", "CC7.2", "CC7.3"]
+          nist_ai_rmf: ["MEASURE 4.1", "MEASURE 4.2"]
+          iso_42001: ["9.1", "9.2", "8.6"]
       - indicator: "Dynamic risk-based access control"
         frameworks:
-          nist_ai_rmf: ["MANAGE 2.2", "MEASURE 2.7"]
-          nist_csf: ["PR.AC-6", "DE.CM-1"]
-          iso_42001: ["8.6", "9.2"]
+          nist_ai_rmf: ["MANAGE 2.2", "MANAGE 2.3", "MEASURE 2.7", "MEASURE 2.8"]
+          nist_csf: ["PR.AC-04", "DE.CM-01", "DE.AE-02"]
+          iso_42001: ["8.6", "9.1", "9.2"]
+          nist_sp_800_207: ["Continuous Verification", "Context-Aware Policies"]
     
     levels:
       level_1:
@@ -846,25 +832,30 @@ domains:
     framework_alignment:
       - indicator: "Malicious agent detection capabilities"
         frameworks:
-          nist_ai_rmf: ["MEASURE 2.7", "MEASURE 4.2", "MANAGE 4.1"]
-          iso_27001: ["A.12.4.1", "A.16.1.2", "A.16.1.4"]
-          nist_csf: ["DE.CM-1", "DE.AE-2", "DE.AE-3"]
-          owasp_genai: ["LLM06:2025 Excessive Agency", "LLM09:2025 Misinformation"]
+          nist_ai_rmf: ["MEASURE 2.7", "MEASURE 2.8", "MEASURE 4.2", "MANAGE 4.1"]
+          iso_27001: ["A.12.4.1", "A.16.1.2", "A.16.1.4", "A.16.1.7"]
+          nist_csf: ["DE.CM-01", "DE.CM-03", "DE.AE-02", "DE.AE-03", "DE.AE-06"]
+          iso_42001: ["8.6", "8.7", "9.1", "9.2"]
+          soc2_security: ["CC7.1", "CC7.2", "CC7.3"]
       - indicator: "Agent behavioral analysis and threat scoring"
         frameworks:
-          nist_ai_rmf: ["MEASURE 2.7", "MEASURE 4.2"]
-          nist_csf: ["DE.CM-4", "DE.AE-2"]
-          iso_42001: ["8.6", "9.2"]
+          nist_ai_rmf: ["MEASURE 2.7", "MEASURE 2.8", "MEASURE 4.2"]
+          nist_csf: ["DE.CM-01", "DE.CM-03", "DE.AE-02", "DE.AE-04"]
+          iso_42001: ["8.6", "9.1", "9.2"]
+          iso_27001: ["A.12.4.1", "A.12.4.3"]
       - indicator: "Coordinated attack detection"
         frameworks:
-          nist_csf: ["DE.CM-1", "DE.AE-5"]
-          iso_27001: ["A.16.1.2", "A.16.1.4"]
-          mitre_atlas: ["AML.T0036 - Develop Adversarial Tools"]
+          nist_csf: ["DE.CM-01", "DE.AE-02", "DE.AE-04", "DE.AE-06"]
+          iso_27001: ["A.16.1.2", "A.16.1.4", "A.16.1.5"]
+          nist_ai_rmf: ["MEASURE 2.7", "MANAGE 4.1"]
+          soc2_security: ["CC7.2", "CC7.3", "CC7.4"]
       - indicator: "Automated response and containment"
         frameworks:
-          nist_ai_rmf: ["MANAGE 4.1", "MANAGE 4.2"]
-          nist_csf: ["RS.RP-1", "RS.MI-3"]
-          iso_27001: ["A.16.1.5", "A.17.1.1"]
+          nist_ai_rmf: ["MANAGE 4.1", "MANAGE 4.2", "MANAGE 4.3"]
+          nist_csf: ["RS.RP-01", "RS.AN-01", "RS.MI-01", "RS.MI-02"]
+          iso_27001: ["A.16.1.5", "A.16.1.6", "A.16.1.7"]
+          iso_42001: ["8.7", "10.1", "10.2"]
+          soc2_security: ["CC7.3", "CC7.4", "CC7.5"]
     
     levels:
       level_1:
@@ -975,26 +966,34 @@ domains:
     framework_alignment:
       - indicator: "Secure agent communication protocols"
         frameworks:
-          nist_ai_rmf: ["GOVERN 1.2", "MANAGE 2.2"]
-          iso_27001: ["A.13.1.1", "A.14.1.2", "A.14.1.3"]
-          nist_csf: ["PR.DS-2", "PR.AC-5"]
+          nist_ai_rmf: ["GOVERN 1.2", "MANAGE 2.2", "MAP 3.4"]
+          iso_27001: ["A.13.1.1", "A.13.2.1", "A.14.1.2", "A.14.1.3"]
+          nist_csf_2: ["PR.DS-01", "PR.DS-02", "PR.AA-05"]
+          nist_sp_800_207: ["3.1", "3.2", "5.1"]
+          iso_42001: ["6.1.3", "8.4"]
       - indicator: "Agent trust and authentication frameworks"
         frameworks:
-          nist_ai_rmf: ["GOVERN 1.5", "MAP 3.4"]
-          iso_27001: ["A.9.2.1", "A.9.4.2", "A.15.1.2"]
-          nist_csf: ["PR.AC-1", "PR.AC-7"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities"]
+          nist_ai_rmf: ["GOVERN 1.5", "MAP 3.4", "MANAGE 2.3"]
+          iso_27001: ["A.9.2.1", "A.9.4.2", "A.9.4.3", "A.15.1.2"]
+          nist_csf_2: ["PR.AA-01", "PR.AA-03", "PR.AA-05"]
+          nist_sp_800_207: ["3.3", "4.1", "5.2"]
+          iso_42001: ["6.1.2", "8.4"]
+          soc_2: ["CC6.1", "CC6.2", "CC6.3"]
       - indicator: "Multi-agent attack surface management"
         frameworks:
-          nist_ai_rmf: ["MAP 1.3", "MEASURE 2.7"]
-          nist_csf: ["ID.AM-1", "ID.RA-1"]
-          iso_27001: ["A.8.1.1", "A.18.1.3"]
+          nist_ai_rmf: ["MAP 1.3", "MAP 1.5", "MEASURE 2.7"]
+          nist_csf_2: ["ID.AM-01", "ID.AM-02", "ID.RA-01", "ID.RA-02"]
+          iso_27001: ["A.8.1.1", "A.8.1.2", "A.12.6.1", "A.18.1.3"]
+          iso_42001: ["6.1.1", "6.1.2", "8.2"]
+          nist_sp_800_207: ["4.2", "5.3"]
       - indicator: "Agent supply chain security"
         frameworks:
-          nist_ai_rmf: ["GOVERN 1.2", "MAP 3.4"]
-          nist_ssdf: ["PO.3.1", "PO.3.2", "PS.1.1"]
-          iso_27001: ["A.15.1.1", "A.15.1.2"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities"]
+          nist_ai_rmf: ["GOVERN 1.2", "MAP 3.4", "GOVERN 6.1"]
+          nist_ssdf: ["PO.3.1", "PO.3.2", "PS.1.1", "PS.2.1"]
+          iso_27001: ["A.15.1.1", "A.15.1.2", "A.15.2.1", "A.15.2.2"]
+          nist_csf_2: ["ID.SC-01", "ID.SC-02", "ID.SC-04"]
+          iso_42001: ["8.4", "8.5"]
+          soc_2: ["CC9.2"]
     
     levels:
       level_1:
@@ -1102,45 +1101,41 @@ domains:
     framework_alignment:
       - indicator: "Coverage of AI-specific security vulnerabilities"
         frameworks:
-          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.5"]
-          owasp_llm_top10: ["LLM01", "LLM02", "LLM03"]
-          iso_27001: ["A.12.6.1", "A.14.2.1"]
-          iso_42001: ["8.6", "8.7", "8.2.2"]
-          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Detection", "LLM06:2025 Excessive Agency - Monitoring"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.5", "MEASURE 2.7"]
+          iso_27001: ["A.12.6.1", "A.14.2.1", "A.14.2.8"]
+          iso_42001: ["8.2.2", "8.6", "8.7"]
+          nist_csf_2: ["ID.RA-01", "ID.RA-02", "DE.CM-04"]
+          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data", "AML.T0040 - ML Model Inference API Access"]
+          owasp_genai: ["LLM01:2025 Prompt Injection", "LLM02:2025 Sensitive Information Disclosure", "LLM09:2025 Misinformation"]
       - indicator: "Integration with existing security infrastructure"
         frameworks:
-          nist_csf: ["PR.PT-1", "DE.CM-1"]
-          iso_27001: ["A.13.1.1", "A.14.1.3"]
-          soc2_security: ["CC6.1", "CC6.8"]
-          iso_42001: ["8.1", "7.1.4", "8.3"]
-          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Detection", "LLM06:2025 Excessive Agency - Monitoring"]
+          nist_csf_2: ["PR.PT-01", "DE.CM-01", "DE.CM-06"]
+          iso_27001: ["A.12.4.1", "A.13.1.1", "A.14.1.3"]
+          soc2_security: ["CC6.1", "CC6.6", "CC6.8"]
+          iso_42001: ["7.1.4", "8.1", "8.3"]
+          nist_ai_rmf: ["GOVERN 1.4", "MANAGE 2.2"]
       - indicator: "Specialized tooling for AI/ML workloads"
         frameworks:
-          nist_ai_rmf: ["MANAGE 1.1", "MANAGE 1.2"]
-          iso_27001: ["A.14.2.1", "A.14.2.8"]
-          nist_csf: ["PR.IP-1", "DE.CM-4"]
-          iso_42001: ["8.2", "8.3", "7.1.4"]
-          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Detection", "LLM06:2025 Excessive Agency - Monitoring"]
+          nist_ai_rmf: ["MANAGE 1.1", "MANAGE 1.2", "MEASURE 2.7"]
+          iso_27001: ["A.14.2.1", "A.14.2.5", "A.14.2.8"]
+          nist_csf_2: ["PR.DS-01", "PR.DS-02", "DE.CM-04"]
+          iso_42001: ["7.1.4", "8.2", "8.3"]
+          mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0012 - Valid Accounts"]
+          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM05:2025 Improper Output Handling"]
       - indicator: "Enterprise-wide deployment and adoption"
         frameworks:
-          iso_27001: ["A.12.1.2", "A.14.1.1"]
-          nist_csf: ["ID.GV-1", "PR.IP-3"]
-          soc2_security: ["CC1.4", "CC5.1"]
-          iso_42001: ["8.1", "5.1", "7.1"]
-          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Detection", "LLM06:2025 Excessive Agency - Monitoring"]
+          iso_27001: ["A.12.1.2", "A.14.1.1", "A.18.2.2"]
+          nist_csf_2: ["GV.OC-01", "GV.RM-01", "PR.IP-03"]
+          soc2_security: ["CC1.4", "CC5.1", "CC5.2"]
+          iso_42001: ["5.1", "7.1", "8.1"]
+          nist_ai_rmf: ["GOVERN 1.1", "GOVERN 1.4", "GOVERN 4.1"]
       - indicator: "Automation capabilities and threat response"
         frameworks:
-          nist_csf: ["RS.RP-1", "RS.MI-1"]
-          iso_27001: ["A.16.1.5", "A.16.1.6"]
-          soc2_security: ["CC7.2", "CC7.4"]
+          nist_csf_2: ["RS.RP-01", "RS.AN-01", "RS.MI-01", "RS.MI-02"]
+          iso_27001: ["A.16.1.4", "A.16.1.5", "A.16.1.6"]
+          soc2_security: ["CC7.2", "CC7.3", "CC7.4"]
           iso_42001: ["8.5.2", "8.6", "10.2"]
-    
-          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Detection", "LLM06:2025 Excessive Agency - Monitoring"]
+          nist_ai_rmf: ["MANAGE 4.1", "MANAGE 4.2"]
     levels:
       level_1:
         level: "level_1"
@@ -1246,45 +1241,44 @@ domains:
     framework_alignment:
       - indicator: "AI security practices in software development lifecycle"
         frameworks:
-          nist_ssdf: ["PO.1.1", "PO.1.3", "PS.1.1"]
-          iso_27001: ["A.14.1.1", "A.14.2.1"]
-          nist_csf: ["PR.IP-2", "DE.CM-4"]
+          nist_ssdf: ["PO.1.1", "PO.1.2", "PO.1.3", "PS.1.1"]
+          iso_27001: ["A.14.1.1", "A.14.2.1", "A.14.2.5"]
+          nist_csf_2: ["PR.IP-02", "PR.DS-06", "DE.CM-04"]
           iso_42001: ["8.2", "8.3", "8.4"]
-          mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0042 - Verify Attack"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM05:2025 Improper Output Handling"]
+          nist_ai_rmf: ["MAP 1.1", "MAP 1.2", "GOVERN 1.3"]
+          soc2_security: ["CC8.1", "CC7.1"]
       - indicator: "CI/CD pipeline security integration"
         frameworks:
-          nist_ssdf: ["PS.2.1", "PS.3.1", "PW.4.1"]
-          iso_27001: ["A.14.2.2", "A.14.2.6"]
-          owasp_samm: ["ST1.1", "ST2.2"]
+          nist_ssdf: ["PS.2.1", "PS.3.1", "PW.4.1", "PW.4.4"]
+          iso_27001: ["A.14.2.2", "A.14.2.6", "A.14.2.9"]
+          nist_csf_2: ["PR.DS-06", "PR.IP-02", "DE.CM-04"]
           iso_42001: ["8.3", "8.4", "8.6"]
-          mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0042 - Verify Attack"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM05:2025 Improper Output Handling"]
+          owasp_samm: ["ST1.1", "ST2.2", "ST3.1"]
+          soc2_security: ["CC8.1", "CC7.1", "CC7.2"]
       - indicator: "Developer training and awareness programs"
         frameworks:
-          nist_ssdf: ["PO.2.1", "PO.2.2"]
+          nist_ssdf: ["PO.2.1", "PO.2.2", "PO.2.3"]
           iso_27001: ["A.7.2.2", "A.7.2.3"]
-          soc2_security: ["CC1.4", "CC1.5"]
+          soc2_security: ["CC1.4", "CC1.5", "CC2.2"]
           iso_42001: ["7.2", "7.3", "7.4"]
-          mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0042 - Verify Attack"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM05:2025 Improper Output Handling"]
+          nist_ai_rmf: ["GOVERN 4.1", "GOVERN 4.2"]
+          nist_csf_2: ["GV.AT-01", "GV.AT-02"]
       - indicator: "Security testing automation"
         frameworks:
-          nist_ssdf: ["PW.7.1", "PW.7.2"]
-          iso_27001: ["A.14.2.3", "A.14.2.8"]
-          owasp_samm: ["ST2.1", "ST3.2"]
+          nist_ssdf: ["PW.7.1", "PW.7.2", "PW.8.1", "PW.8.2"]
+          iso_27001: ["A.14.2.3", "A.14.2.8", "A.14.2.9"]
+          owasp_samm: ["ST2.1", "ST3.1", "ST3.2"]
           iso_42001: ["8.2.2", "8.6", "8.7"]
-          mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0042 - Verify Attack"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM05:2025 Improper Output Handling"]
+          nist_csf_2: ["DE.CM-04", "DE.CM-09", "PR.DS-06"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.5"]
       - indicator: "Application-level AI security controls"
         frameworks:
-          nist_ai_rmf: ["MANAGE 2.1", "MANAGE 2.2"]
-          owasp_llm_top10: ["LLM04", "LLM10"]
-          iso_27001: ["A.14.1.2", "A.14.1.3"]
+          nist_ai_rmf: ["MANAGE 2.1", "MANAGE 2.2", "MANAGE 2.3"]
+          iso_27001: ["A.14.1.2", "A.14.1.3", "A.14.2.5"]
           iso_42001: ["8.2.2", "8.5.2", "8.6"]
-    
-          mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0042 - Verify Attack"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM05:2025 Improper Output Handling"]
+          nist_csf_2: ["PR.DS-01", "PR.DS-02", "PR.AA-05"]
+          nist_ssdf: ["PW.5.1", "PW.6.1", "PW.6.2"]
+          soc2_security: ["CC6.1", "CC6.6", "CC6.7"]
     levels:
       level_1:
         level: "level_1"
@@ -1444,45 +1438,40 @@ domains:
     framework_alignment:
       - indicator: "Inventory completeness for AI models and training data"
         frameworks:
-          nist_ai_rmf: ["GOVERN 1.4", "MAP 1.3"]
-          iso_27001: ["A.8.1.1", "A.8.1.2"]
-          nist_csf: ["ID.AM-1", "ID.AM-2"]
-          iso_42001: ["8.2.1", "7.5", "8.1"]
-          mitre_atlas: ["AML.T0047 - ML Supply Chain Compromise", "AML.T0035 - Develop Capabilities"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities - Inventory", "LLM10:2025 Unbounded Consumption - Asset Tracking"]
+          nist_ai_rmf: ["GOVERN 1.4", "MAP 1.3", "MAP 1.5"]
+          iso_27001: ["A.8.1.1", "A.8.1.2", "A.8.1.3"]
+          nist_csf_2: ["ID.AM-01", "ID.AM-02", "ID.AM-05"]
+          iso_42001: ["7.5", "8.1", "8.2.1"]
+          soc2_security: ["CC6.1", "CC6.5"]
       - indicator: "Lineage tracking and dependency mapping"
         frameworks:
-          nist_ai_rmf: ["MAP 1.4", "MANAGE 1.3"]
-          iso_27001: ["A.8.2.1", "A.8.2.3"]
-          dmbok: ["DM2.1", "DM11.2"]
-          iso_42001: ["8.2.1", "8.2.2", "7.5"]
-          mitre_atlas: ["AML.T0047 - ML Supply Chain Compromise", "AML.T0035 - Develop Capabilities"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities - Inventory", "LLM10:2025 Unbounded Consumption - Asset Tracking"]
+          nist_ai_rmf: ["MAP 1.4", "MAP 3.4", "MANAGE 1.3"]
+          iso_27001: ["A.8.2.1", "A.8.2.3", "A.15.1.2"]
+          nist_csf_2: ["ID.AM-03", "ID.SC-04", "PR.DS-06"]
+          iso_42001: ["7.5", "8.2.1", "8.2.2"]
+          nist_ssdf: ["PO.1.2", "PS.3.1"]
       - indicator: "Performance monitoring and drift detection"
         frameworks:
-          nist_ai_rmf: ["MEASURE 2.1", "MEASURE 2.2"]
-          iso_27001: ["A.12.1.4", "Clause 9.1"]
-          mlops_principles: ["Monitor.1", "Monitor.2"]
+          nist_ai_rmf: ["MEASURE 2.1", "MEASURE 2.2", "MEASURE 2.6"]
+          iso_27001: ["A.12.1.4", "Clause 9.1", "A.12.4.1"]
+          nist_csf_2: ["DE.CM-01", "DE.CM-03", "DE.AE-03"]
           iso_42001: ["8.6", "9.1", "9.2"]
-          mitre_atlas: ["AML.T0047 - ML Supply Chain Compromise", "AML.T0035 - Develop Capabilities"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities - Inventory", "LLM10:2025 Unbounded Consumption - Asset Tracking"]
+          soc2_security: ["CC7.1", "CC7.2"]
       - indicator: "Version control and change management"
         frameworks:
-          iso_27001: ["A.12.1.2", "A.14.2.2"]
-          nist_ssdf: ["PO.1.2", "PS.3.2"]
+          iso_27001: ["A.12.1.2", "A.14.2.2", "A.14.2.4"]
+          nist_ssdf: ["PO.1.2", "PS.3.1", "PS.3.2"]
+          nist_csf_2: ["PR.IP-03", "PR.DS-06", "ID.AM-02"]
+          iso_42001: ["7.5", "8.4", "8.5.1"]
           cobit: ["BAI06.01", "BAI06.02"]
-          iso_42001: ["8.4", "8.5.1", "7.5"]
-          mitre_atlas: ["AML.T0047 - ML Supply Chain Compromise", "AML.T0035 - Develop Capabilities"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities - Inventory", "LLM10:2025 Unbounded Consumption - Asset Tracking"]
+          soc2_security: ["CC8.1"]
       - indicator: "Continuous monitoring capabilities"
         frameworks:
-          nist_csf: ["DE.CM-1", "DE.CM-7"]
-          iso_27001: ["A.12.4.1", "A.16.1.2"]
-          soc2_security: ["CC7.1", "CC7.2"]
+          nist_csf_2: ["DE.CM-01", "DE.CM-03", "DE.CM-07"]
+          iso_27001: ["A.12.4.1", "A.12.4.3", "A.16.1.2"]
+          soc2_security: ["CC7.1", "CC7.2", "CC7.3"]
           iso_42001: ["8.6", "9.1", "9.3"]
-    
-          mitre_atlas: ["AML.T0047 - ML Supply Chain Compromise", "AML.T0035 - Develop Capabilities"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities - Inventory", "LLM10:2025 Unbounded Consumption - Asset Tracking"]
+          nist_ai_rmf: ["MEASURE 4.1", "MEASURE 4.2", "MANAGE 4.1"]
     levels:
       level_1:
         level: "level_1"
@@ -1588,45 +1577,42 @@ domains:
     framework_alignment:
       - indicator: "Dedicated AI security personnel and expertise"
         frameworks:
-          nist_ai_rmf: ["GOVERN 1.6", "GOVERN 2.2"]
-          iso_27001: ["A.6.1.1", "A.7.1.1"]
-          nist_csf: ["ID.GV-2", "PR.AT-1"]
-          iso_42001: ["5.3", "7.2", "7.3"]
-          mitre_atlas: ["AML.T0052 - Phishing", "AML.T0050 - Command and Scripting Interpreter"]
-          owasp_genai: ["LLM07:2025 System Prompt Leakage - Training", "LLM06:2025 Excessive Agency - Skills"]
+          nist_ai_rmf: ["GOVERN 1.6", "GOVERN 2.2", "GOVERN 4.1"]
+          iso_27001: ["A.6.1.1", "A.7.1.1", "A.7.2.2"]
+          nist_csf_2: ["GV.RR-01", "GV.RR-02", "PR.AT-01"]
+          iso_42001: ["5.3", "7.1", "7.2"]
+          soc2_security: ["CC1.3", "CC1.4"]
       - indicator: "Cross-functional collaboration and integration"
         frameworks:
-          iso_27001: ["A.6.1.2", "A.6.1.3"]
-          nist_csf: ["ID.GV-1", "ID.GV-3"]
-          soc2_security: ["CC1.1", "CC1.2"]
-          iso_42001: ["5.3", "7.4", "8.1"]
-          mitre_atlas: ["AML.T0052 - Phishing", "AML.T0050 - Command and Scripting Interpreter"]
-          owasp_genai: ["LLM07:2025 System Prompt Leakage - Training", "LLM06:2025 Excessive Agency - Skills"]
+          iso_27001: ["A.6.1.2", "A.6.1.3", "A.6.1.5"]
+          nist_csf_2: ["GV.OC-01", "GV.OC-03", "GV.RR-01"]
+          soc2_security: ["CC1.1", "CC1.2", "CC1.3"]
+          iso_42001: ["5.1", "5.3", "7.4"]
+          nist_ai_rmf: ["GOVERN 2.1", "GOVERN 2.2", "GOVERN 3.1"]
+          cobit: ["APO01.01", "APO01.02", "EDM01.01"]
       - indicator: "Clear roles, responsibilities, and deliverables"
         frameworks:
-          iso_27001: ["A.6.1.1", "A.7.1.2"]
-          nist_csf: ["ID.GV-2", "PR.AT-2"]
-          cobit: ["APO01.01", "APO01.02"]
+          iso_27001: ["A.6.1.1", "A.7.1.2", "A.7.2.1"]
+          nist_csf_2: ["GV.RR-01", "GV.RR-02", "GV.RR-03"]
+          cobit: ["APO01.01", "APO01.02", "APO01.03"]
           iso_42001: ["5.3", "7.1", "8.1"]
-          mitre_atlas: ["AML.T0052 - Phishing", "AML.T0050 - Command and Scripting Interpreter"]
-          owasp_genai: ["LLM07:2025 System Prompt Leakage - Training", "LLM06:2025 Excessive Agency - Skills"]
+          nist_ai_rmf: ["GOVERN 1.1", "GOVERN 1.6", "GOVERN 2.2"]
+          soc2_security: ["CC1.1", "CC1.2"]
       - indicator: "Training and skill development programs"
         frameworks:
-          iso_27001: ["A.7.2.1", "A.7.2.2"]
-          nist_csf: ["PR.AT-1", "PR.AT-2"]
-          soc2_security: ["CC1.4", "CC1.5"]
+          iso_27001: ["A.7.2.1", "A.7.2.2", "A.7.2.3"]
+          nist_csf_2: ["PR.AT-01", "PR.AT-02", "GV.AT-01"]
+          soc2_security: ["CC1.4", "CC1.5", "CC2.2"]
           iso_42001: ["7.2", "7.3", "7.4"]
-          mitre_atlas: ["AML.T0052 - Phishing", "AML.T0050 - Command and Scripting Interpreter"]
-          owasp_genai: ["LLM07:2025 System Prompt Leakage - Training", "LLM06:2025 Excessive Agency - Skills"]
+          nist_ai_rmf: ["GOVERN 4.1", "GOVERN 4.2"]
+          nist_ssdf: ["PO.2.1", "PO.2.2"]
       - indicator: "Organizational AI security culture"
         frameworks:
-          nist_ai_rmf: ["GOVERN 6.1", "GOVERN 6.2"]
-          iso_27001: ["A.7.2.1", "Clause 7.2"]
-          nist_csf: ["ID.GV-4", "PR.AT-3"]
+          nist_ai_rmf: ["GOVERN 4.1", "GOVERN 4.2", "GOVERN 6.1"]
+          iso_27001: ["A.7.2.1", "Clause 7.2", "Clause 7.3"]
+          nist_csf_2: ["GV.OC-01", "GV.OC-04", "PR.AT-02"]
           iso_42001: ["5.1", "7.2", "7.4"]
-    
-          mitre_atlas: ["AML.T0052 - Phishing", "AML.T0050 - Command and Scripting Interpreter"]
-          owasp_genai: ["LLM07:2025 System Prompt Leakage - Training", "LLM06:2025 Excessive Agency - Skills"]
+          soc2_security: ["CC1.1", "CC1.4", "CC1.5"]
     levels:
       level_1:
         level: "level_1"
@@ -1735,23 +1721,40 @@ domains:
     framework_alignment:
       - indicator: "Privacy-enhancing technologies for training data"
         frameworks:
-          nist_ai_rmf: ["GOVERN 1.4", "MAP 1.6", "MEASURE 2.8"]
-          iso_27001: ["A.18.1.4", "A.8.2.1", "A.8.3.1"]
+          nist_ai_rmf: ["GOVERN 1.4", "MAP 1.6", "MEASURE 2.8", "MEASURE 2.10"]
+          iso_27001: ["A.18.1.4", "A.8.2.1", "A.8.3.1", "A.10.1.1"]
           iso_42001: ["6.2.1", "7.3", "8.5"]
-          nist_csf: ["PR.DS-3", "PR.IP-2"]
+          nist_csf_2: ["PR.DS-01", "PR.DS-02", "PR.IP-01"]
+          iso_27701: ["6.5.2.1", "6.5.2.4", "7.4.5"]
+          soc2_security: ["C1.1", "C1.2", "P6.1"]
       - indicator: "Data minimization and purpose limitation"
         frameworks:
-          iso_27701: ["6.3.2.2", "6.3.3.2"]
-          iso_42001: ["6.2.1", "7.3"]
-          nist_ai_rmf: ["MAP 1.6", "GOVERN 1.4"]
+          iso_27701: ["6.3.2.1", "6.3.2.2", "6.3.3.2", "7.2.1"]
+          iso_42001: ["6.2.1", "7.3", "8.2.1"]
+          nist_ai_rmf: ["MAP 1.6", "GOVERN 1.4", "GOVERN 1.5"]
+          nist_csf_2: ["GV.RM-01", "ID.AM-05", "PR.DS-10"]
+          soc2_security: ["P3.1", "P3.2", "P4.1"]
+      - indicator: "Anonymization and synthetic data usage"
+        frameworks:
+          nist_ai_rmf: ["MAP 1.6", "MEASURE 2.8", "MANAGE 1.3"]
+          iso_27001: ["A.8.2.3", "A.8.3.1", "A.8.3.2"]
+          iso_27701: ["7.4.2", "7.4.5", "7.4.8"]
+          iso_42001: ["7.3", "8.5", "8.6"]
+          nist_csf_2: ["PR.DS-01", "PR.DS-02"]
       - indicator: "Consent management and data subject rights"
         frameworks:
-          iso_27701: ["6.4.1", "6.5.1"]
-          iso_27001: ["A.18.1.4"]
+          iso_27701: ["6.4.1", "6.5.1", "7.3.1", "7.3.2", "7.3.4"]
+          iso_27001: ["A.18.1.4", "A.18.1.1"]
+          nist_ai_rmf: ["GOVERN 1.4", "GOVERN 6.1", "MAP 1.6"]
+          nist_csf_2: ["GV.PO-01", "GV.OC-02", "ID.AM-05"]
+          soc2_security: ["P1.1", "P2.1", "P5.1", "P5.2"]
       - indicator: "Privacy-preserving model training"
         frameworks:
-          nist_ai_rmf: ["MAP 1.6", "MEASURE 2.8"]
-          iso_42001: ["7.3", "8.5"]
+          nist_ai_rmf: ["MAP 1.6", "MEASURE 2.8", "MEASURE 2.10", "MANAGE 2.2"]
+          iso_42001: ["7.3", "8.5", "8.6"]
+          iso_27701: ["6.5.2.1", "7.4.5"]
+          nist_csf_2: ["PR.DS-01", "PR.DS-02", "PR.IP-01"]
+          soc2_security: ["CC6.1", "CC6.7", "P6.1"]
     
     levels:
       level_1:
@@ -1862,24 +1865,39 @@ domains:
     framework_alignment:
       - indicator: "Training data classification and access controls"
         frameworks:
-          nist_ai_rmf: ["GOVERN 1.2", "MAP 5.1"]
-          iso_27001: ["A.8.2.1", "A.9.4.1", "A.9.2.1"]
-          iso_42001: ["7.3", "8.5"]
-          nist_csf: ["PR.DS-5", "PR.AC-4"]
+          nist_ai_rmf: ["GOVERN 1.2", "GOVERN 1.4", "MAP 5.1"]
+          iso_27001: ["A.8.2.1", "A.8.2.2", "A.9.2.1", "A.9.4.1"]
+          iso_42001: ["7.3", "8.2.1", "8.5"]
+          nist_csf_2: ["PR.AA-01", "PR.AA-05", "PR.DS-01", "ID.AM-01"]
+          soc2_security: ["CC6.1", "CC6.2", "CC6.3"]
       - indicator: "Data encryption and secure storage"
         frameworks:
-          iso_27001: ["A.10.1.1", "A.10.1.2"]
-          nist_csf: ["PR.DS-1", "PR.DS-2"]
-          soc2_security: ["CC6.1", "CC6.7"]
+          iso_27001: ["A.10.1.1", "A.10.1.2", "A.8.3.1"]
+          nist_csf_2: ["PR.DS-01", "PR.DS-02"]
+          soc2_security: ["CC6.1", "CC6.6", "CC6.7"]
+          nist_ai_rmf: ["GOVERN 1.4", "MANAGE 2.2"]
+          iso_42001: ["8.5", "8.6"]
       - indicator: "Data lineage and provenance tracking"
         frameworks:
-          nist_ai_rmf: ["MAP 3.4", "MEASURE 3.1"]
-          iso_42001: ["7.3", "8.5"]
+          nist_ai_rmf: ["MAP 3.4", "MAP 1.5", "MEASURE 3.1"]
+          iso_42001: ["7.3", "8.5", "8.2.1"]
+          nist_ssdf: ["PO.1.2", "PS.3.1"]
+          iso_27001: ["A.8.1.1", "A.8.1.2", "A.12.1.2"]
+          nist_csf_2: ["ID.AM-01", "ID.AM-03", "PR.DS-06"]
       - indicator: "Training data integrity verification"
         frameworks:
-          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 3.1"]
-          iso_27001: ["A.12.2.1", "A.14.1.2"]
-          iso_42001: ["8.5"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 3.1", "MANAGE 2.3"]
+          iso_27001: ["A.12.2.1", "A.14.1.2", "A.14.1.3"]
+          iso_42001: ["8.5", "8.7"]
+          nist_csf_2: ["PR.DS-06", "DE.CM-09"]
+          soc2_security: ["CC7.1", "CC7.2"]
+      - indicator: "Exfiltration prevention and monitoring"
+        frameworks:
+          iso_27001: ["A.12.4.1", "A.12.4.3", "A.13.2.1"]
+          nist_csf_2: ["DE.CM-01", "DE.CM-03", "PR.DS-05"]
+          soc2_security: ["CC6.6", "CC6.7", "CC7.2"]
+          nist_ai_rmf: ["MANAGE 2.2", "MANAGE 4.1"]
+          iso_42001: ["8.6", "9.1"]
     
     levels:
       level_1:
@@ -1990,22 +2008,41 @@ domains:
     framework_alignment:
       - indicator: "Data poisoning detection and prevention"
         frameworks:
-          nist_ai_rmf: ["MAP 3.4", "MEASURE 2.3", "MANAGE 2.3"]
-          iso_42001: ["8.5", "8.7"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM04:2025 Data and Model Poisoning"]
+          nist_ai_rmf: ["MAP 3.4", "MEASURE 2.3", "MEASURE 2.7", "MANAGE 2.3"]
+          iso_42001: ["8.5", "8.7", "9.1"]
+          nist_csf_2: ["DE.CM-01", "DE.CM-03", "DE.AE-02"]
+          iso_27001: ["A.12.2.1", "A.14.1.2", "A.14.1.3"]
+          soc2_security: ["CC7.1", "CC7.2"]
           mitre_atlas: ["AML.T0018 - Backdoor ML Model", "AML.T0020 - Poison Training Data"]
+          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM04:2025 Data and Model Poisoning"]
       - indicator: "Data source verification and trust"
         frameworks:
-          nist_ai_rmf: ["MAP 3.4", "GOVERN 1.2"]
-          iso_27001: ["A.15.1.1", "A.15.1.2"]
-          nist_ssdf: ["PO.3.1", "PO.3.2"]
+          nist_ai_rmf: ["MAP 3.4", "GOVERN 1.2", "GOVERN 1.4"]
+          iso_27001: ["A.15.1.1", "A.15.1.2", "A.15.2.1"]
+          nist_ssdf: ["PO.3.1", "PO.3.2", "PS.3.1"]
+          nist_csf_2: ["ID.SC-01", "ID.SC-02", "ID.SC-04"]
+          iso_42001: ["8.2.1", "8.5"]
+          soc2_security: ["CC9.1", "CC9.2"]
       - indicator: "Anomaly and outlier detection"
         frameworks:
-          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7"]
-          iso_42001: ["8.5", "8.7"]
-      - indicator: "Poisoning attack testing"
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MEASURE 2.11"]
+          iso_42001: ["8.5", "8.7", "9.1"]
+          nist_csf_2: ["DE.AE-02", "DE.AE-03", "DE.CM-01"]
+          iso_27001: ["A.12.4.1", "A.12.6.1"]
+          soc2_security: ["CC7.1", "CC7.2"]
+      - indicator: "Provenance tracking and chain of custody"
         frameworks:
-          nist_ai_rmf: ["MEASURE 2.11", "MANAGE 4.1"]
+          nist_ai_rmf: ["MAP 3.4", "MAP 1.5", "MEASURE 3.1"]
+          iso_42001: ["7.3", "8.5", "8.2.1"]
+          nist_ssdf: ["PO.1.2", "PS.3.1"]
+          nist_csf_2: ["ID.AM-01", "ID.AM-03", "PR.DS-06"]
+          iso_27001: ["A.8.1.1", "A.8.1.2"]
+      - indicator: "Poisoning attack testing and resilience"
+        frameworks:
+          nist_ai_rmf: ["MEASURE 2.11", "MANAGE 4.1", "MANAGE 4.2"]
+          iso_42001: ["8.7", "9.2"]
+          nist_csf_2: ["DE.CM-08", "ID.RA-01", "RS.AN-02"]
+          iso_27001: ["A.14.2.8", "A.18.2.3"]
           mitre_atlas: ["AML.T0018 - Backdoor ML Model", "AML.T0020 - Poison Training Data"]
     
     levels:
@@ -2119,32 +2156,43 @@ domains:
       - indicator: "AI red team program and methodology"
         frameworks:
           nist_ai_rmf: ["MEASURE 2.11", "MANAGE 4.1", "GOVERN 1.5"]
-          iso_42001: ["8.7", "9.2"]
-          nist_csf: ["DE.CM-4", "RS.AN-5"]
+          iso_42001: ["8.7", "9.2", "8.4"]
+          nist_csf_2: ["DE.CM-08", "ID.RA-01", "ID.RA-05"]
+          iso_27001: ["A.14.2.8", "A.18.2.3", "A.12.6.1"]
+          soc2_security: ["CC4.1", "CC4.2"]
           mitre_atlas: ["AML.T0043 - Craft Adversarial Data", "AML.T0051 - LLM Jailbreak", "AML.T0054 - LLM Prompt Injection"]
           owasp_genai: ["LLM01:2025 Prompt Injection", "LLM04:2025 Data and Model Poisoning"]
       - indicator: "Adversarial testing for model robustness"
         frameworks:
-          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.11"]
-          iso_42001: ["8.7"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MEASURE 2.11"]
+          iso_42001: ["8.7", "8.5"]
+          nist_csf_2: ["DE.CM-01", "DE.CM-03", "DE.AE-02"]
+          iso_27001: ["A.14.2.8", "A.12.6.1"]
+          soc2_security: ["CC7.1"]
           mitre_atlas: ["AML.T0043 - Craft Adversarial Data", "AML.T0015 - Evade ML Model"]
           owasp_asvs: ["V14 - Configuration"]
       - indicator: "Prompt injection and jailbreak testing"
         frameworks:
-          owasp_genai: ["LLM01:2025 Prompt Injection"]
-          nist_ai_rmf: ["MEASURE 2.11", "MANAGE 2.3"]
+          nist_ai_rmf: ["MEASURE 2.11", "MANAGE 2.3", "MEASURE 2.7"]
+          iso_42001: ["8.7", "8.6"]
+          nist_csf_2: ["DE.CM-08", "PR.DS-01"]
           mitre_atlas: ["AML.T0051 - LLM Jailbreak", "AML.T0054 - LLM Prompt Injection"]
+          owasp_genai: ["LLM01:2025 Prompt Injection", "LLM07:2025 System Prompt Leakage"]
       - indicator: "Model extraction and inversion testing"
         frameworks:
-          nist_ai_rmf: ["MEASURE 2.11", "MAP 3.4"]
-          iso_42001: ["8.7"]
+          nist_ai_rmf: ["MEASURE 2.11", "MAP 3.4", "MANAGE 2.2"]
+          iso_42001: ["8.7", "8.6"]
+          nist_csf_2: ["DE.CM-01", "PR.DS-01", "PR.DS-02"]
+          iso_27001: ["A.13.2.1", "A.9.4.1"]
           mitre_atlas: ["AML.T0024 - Exfiltration via ML Inference API", "AML.T0044 - Full ML Model Access"]
           owasp_genai: ["LLM06:2025 Excessive Agency", "LLM08:2025 Vector and Embedding Weaknesses"]
       - indicator: "Purple team collaboration and remediation"
         frameworks:
-          nist_ai_rmf: ["MANAGE 4.1", "MANAGE 4.2"]
-          iso_27001: ["A.16.1.4", "A.16.1.5"]
-          nist_csf: ["RS.IM-1", "RS.IM-2"]
+          nist_ai_rmf: ["MANAGE 4.1", "MANAGE 4.2", "GOVERN 6.2"]
+          iso_27001: ["A.16.1.4", "A.16.1.5", "A.16.1.6"]
+          nist_csf_2: ["RS.IM-01", "RS.IM-02", "RS.AN-03"]
+          iso_42001: ["9.2", "10.1", "10.2"]
+          soc2_security: ["CC7.3", "CC7.4", "CC7.5"]
     
     levels:
       level_1:
@@ -2266,45 +2314,44 @@ domains:
     framework_alignment:
       - indicator: "AI-powered log analysis and anomaly detection capabilities"
         frameworks:
-          nist_csf: ["DE.AE-1", "DE.AE-3", "DE.CM-1"]
-          iso_27001: ["A.12.4.1", "A.16.1.2"]
+          nist_csf_2: ["DE.AE-02", "DE.AE-03", "DE.CM-01", "DE.CM-09"]
+          iso_27001: ["A.12.4.1", "A.12.4.3", "A.16.1.2"]
           soc2_security: ["CC7.1", "CC7.2"]
           iso_42001: ["8.6", "8.7", "9.1"]
-          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data", "AML.T0044 - Full ML Model Access"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Detection", "LLM04:2025 Data and Model Poisoning - Analysis"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MANAGE 4.1"]
+          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
+          owasp_genai: ["LLM01:2025 Prompt Injection", "LLM04:2025 Data and Model Poisoning"]
       - indicator: "Threat hunting automation and pattern recognition"
         frameworks:
-          nist_csf: ["DE.DP-4", "DE.DP-5"]
-          mitre_attack: ["TA0007", "TA0008"]
-          iso_27001: ["A.16.1.4", "A.16.1.7"]
+          nist_csf_2: ["DE.AE-06", "DE.AE-07", "DE.CM-01"]
+          iso_27001: ["A.16.1.4", "A.16.1.7", "A.12.4.1"]
           iso_42001: ["8.3", "8.6", "8.7"]
-          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data", "AML.T0044 - Full ML Model Access"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Detection", "LLM04:2025 Data and Model Poisoning - Analysis"]
+          nist_ai_rmf: ["MEASURE 2.7", "MANAGE 4.1", "MANAGE 4.2"]
+          soc2_security: ["CC7.2", "CC7.3"]
+          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
+          mitre_attack: ["TA0007", "TA0008"]
       - indicator: "Predictive threat intelligence and behavioral analysis"
         frameworks:
-          nist_csf: ["DE.AE-2", "DE.CM-8"]
-          iso_27001: ["A.12.2.1", "A.16.1.1"]
-          mitre_attack: ["T1071", "T1078"]
+          nist_csf_2: ["DE.AE-02", "DE.AE-08", "ID.RA-03"]
+          iso_27001: ["A.12.2.1", "A.16.1.1", "A.6.1.4"]
           iso_42001: ["8.2.2", "8.6", "9.1"]
-          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data", "AML.T0044 - Full ML Model Access"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Detection", "LLM04:2025 Data and Model Poisoning - Analysis"]
+          nist_ai_rmf: ["MEASURE 2.6", "MEASURE 2.7", "MANAGE 4.1"]
+          soc2_security: ["CC7.1", "CC7.2"]
+          mitre_attack: ["T1071", "T1078"]
       - indicator: "Real-time adaptive learning and model updating"
         frameworks:
-          nist_csf: ["DE.CM-7", "RS.IM-1"]
-          iso_27001: ["A.12.6.1", "Clause 10.1"]
+          nist_csf_2: ["DE.CM-07", "RS.IM-01", "RS.IM-02"]
+          iso_27001: ["A.12.6.1", "Clause 10.1", "Clause 10.2"]
           soc2_security: ["CC4.1", "CC7.4"]
           iso_42001: ["8.5.1", "9.3", "10.1"]
-          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data", "AML.T0044 - Full ML Model Access"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Detection", "LLM04:2025 Data and Model Poisoning - Analysis"]
+          nist_ai_rmf: ["MEASURE 4.1", "MEASURE 4.2", "MANAGE 4.2"]
       - indicator: "Integration with security infrastructure and workflows"
         frameworks:
-          nist_csf: ["DE.CM-1", "RS.CO-2"]
-          iso_27001: ["A.13.1.1", "A.16.1.5"]
-          soc2_security: ["CC6.1", "CC6.8"]
-          iso_42001: ["8.1", "8.3", "7.1.4"]
-    
-          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data", "AML.T0044 - Full ML Model Access"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Detection", "LLM04:2025 Data and Model Poisoning - Analysis"]
+          nist_csf_2: ["DE.CM-01", "RS.CO-02", "RS.CO-03"]
+          iso_27001: ["A.13.1.1", "A.16.1.5", "A.6.1.3"]
+          soc2_security: ["CC6.1", "CC6.8", "CC7.3"]
+          iso_42001: ["8.1", "8.3", "7.4"]
+          nist_ai_rmf: ["GOVERN 1.4", "MANAGE 2.2", "MANAGE 4.1"]
     levels:
       level_1:
         level: "level_1"
@@ -2410,45 +2457,49 @@ domains:
     framework_alignment:
       - indicator: "AI-assisted incident triage and classification capabilities"
         frameworks:
-          nist_csf: ["RS.AN-1", "RS.AN-2"]
-          iso_27001: ["A.16.1.2", "A.16.1.4"]
-          nist_ir: ["PR.1", "AN.1"]
+          nist_csf_2: ["RS.AN-03", "RS.AN-06", "RS.AN-07"]
+          iso_27001: ["A.16.1.2", "A.16.1.4", "A.16.1.5"]
           iso_42001: ["8.6", "8.7", "10.2"]
+          nist_ai_rmf: ["MANAGE 4.1", "MANAGE 4.2", "GOVERN 6.2"]
+          soc2_security: ["CC7.3", "CC7.4"]
           mitre_atlas: ["AML.T0048 - Exfiltration via ML Inference API", "AML.T0024 - Exfiltration via Cyber Means"]
-          owasp_genai: ["LLM02:2025 Sensitive Information Disclosure - Response", "LLM06:2025 Excessive Agency - Containment"]
+          owasp_genai: ["LLM02:2025 Sensitive Information Disclosure", "LLM06:2025 Excessive Agency"]
       - indicator: "Automated workflow orchestration and response coordination"
         frameworks:
-          nist_csf: ["RS.RP-1", "RS.CO-1"]
-          iso_27001: ["A.16.1.5", "A.16.1.6"]
-          soc2_security: ["CC7.3", "CC7.4"]
+          nist_csf_2: ["RS.RP-01", "RS.CO-02", "RS.CO-03"]
+          iso_27001: ["A.16.1.5", "A.16.1.6", "A.6.1.3"]
+          soc2_security: ["CC7.3", "CC7.4", "CC7.5"]
           iso_42001: ["8.3", "8.5.2", "8.1"]
+          nist_ai_rmf: ["MANAGE 4.1", "MANAGE 4.2", "GOVERN 6.2"]
           mitre_atlas: ["AML.T0048 - Exfiltration via ML Inference API", "AML.T0024 - Exfiltration via Cyber Means"]
-          owasp_genai: ["LLM02:2025 Sensitive Information Disclosure - Response", "LLM06:2025 Excessive Agency - Containment"]
+          owasp_genai: ["LLM02:2025 Sensitive Information Disclosure", "LLM06:2025 Excessive Agency"]
       - indicator: "AI-powered root cause analysis and evidence correlation"
         frameworks:
-          nist_csf: ["RS.AN-3", "RS.AN-4"]
-          iso_27001: ["A.16.1.7", "A.16.1.4"]
-          nist_ir: ["AN.2", "AN.3"]
+          nist_csf_2: ["RS.AN-03", "RS.AN-06", "RS.AN-08"]
+          iso_27001: ["A.16.1.7", "A.16.1.4", "A.12.4.1"]
           iso_42001: ["8.6", "8.7", "9.2"]
+          nist_ai_rmf: ["MANAGE 4.1", "MEASURE 4.1", "MEASURE 4.2"]
+          soc2_security: ["CC7.4", "CC7.5"]
           mitre_atlas: ["AML.T0048 - Exfiltration via ML Inference API", "AML.T0024 - Exfiltration via Cyber Means"]
-          owasp_genai: ["LLM02:2025 Sensitive Information Disclosure - Response", "LLM06:2025 Excessive Agency - Containment"]
+          owasp_genai: ["LLM02:2025 Sensitive Information Disclosure", "LLM06:2025 Excessive Agency"]
       - indicator: "Autonomous decision-making and remediation actions"
         frameworks:
-          nist_csf: ["RS.MI-1", "RS.MI-2"]
-          iso_27001: ["A.16.1.5", "A.12.2.1"]
-          soc2_security: ["CC7.2", "CC7.4"]
+          nist_csf_2: ["RS.MI-01", "RS.MI-02", "RC.RP-01"]
+          iso_27001: ["A.16.1.5", "A.12.2.1", "A.12.6.1"]
+          soc2_security: ["CC7.2", "CC7.4", "CC7.5"]
           iso_42001: ["8.5.2", "8.1", "5.2"]
+          nist_ai_rmf: ["MANAGE 2.2", "MANAGE 4.1", "MANAGE 4.2"]
           mitre_atlas: ["AML.T0048 - Exfiltration via ML Inference API", "AML.T0024 - Exfiltration via Cyber Means"]
-          owasp_genai: ["LLM02:2025 Sensitive Information Disclosure - Response", "LLM06:2025 Excessive Agency - Containment"]
+          owasp_genai: ["LLM02:2025 Sensitive Information Disclosure", "LLM06:2025 Excessive Agency"]
       - indicator: "Continuous learning from incident patterns and outcomes"
         frameworks:
-          nist_csf: ["RS.IM-1", "RS.IM-2"]
-          iso_27001: ["A.16.1.6", "Clause 10.1"]
-          nist_ir: ["IM.1", "IM.2"]
+          nist_csf_2: ["RS.IM-01", "RS.IM-02", "ID.IM-01"]
+          iso_27001: ["A.16.1.6", "Clause 10.1", "Clause 10.2"]
           iso_42001: ["9.3", "10.1", "8.5.1"]
-    
+          nist_ai_rmf: ["MEASURE 4.1", "MEASURE 4.2", "MANAGE 4.2"]
+          soc2_security: ["CC4.1", "CC4.2"]
           mitre_atlas: ["AML.T0048 - Exfiltration via ML Inference API", "AML.T0024 - Exfiltration via Cyber Means"]
-          owasp_genai: ["LLM02:2025 Sensitive Information Disclosure - Response", "LLM06:2025 Excessive Agency - Containment"]
+          owasp_genai: ["LLM02:2025 Sensitive Information Disclosure", "LLM06:2025 Excessive Agency"]
     levels:
       level_1:
         level: "level_1"
@@ -2554,45 +2605,50 @@ domains:
     framework_alignment:
       - indicator: "AI-enhanced vulnerability prioritization and risk scoring"
         frameworks:
-          nist_csf: ["ID.RA-1", "ID.RA-2"]
-          iso_27001: ["A.12.6.1", "A.18.2.2"]
-          cvss: ["Base.Score", "Temporal.Score"]
+          nist_csf_2: ["ID.RA-01", "ID.RA-02", "ID.RA-05"]
+          iso_27001: ["A.12.6.1", "A.18.2.2", "A.18.2.3"]
           iso_42001: ["8.6", "8.7", "6.1"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MANAGE 2.3"]
+          soc2_security: ["CC4.1", "CC4.2", "CC7.1"]
           mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0043 - Craft Adversarial Data"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM04:2025 Data and Model Poisoning - Assessment"]
+          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM04:2025 Data and Model Poisoning"]
       - indicator: "Automated vulnerability assessment and discovery capabilities"
         frameworks:
-          nist_csf: ["DE.CM-4", "ID.AM-4"]
-          iso_27001: ["A.12.6.1", "A.14.2.1"]
-          owasp_asvs: ["V1.14", "V14.1"]
+          nist_csf_2: ["DE.CM-08", "ID.AM-07", "ID.AM-08"]
+          iso_27001: ["A.12.6.1", "A.14.2.1", "A.14.2.8"]
           iso_42001: ["8.2.2", "8.6", "8.3"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.11", "MAP 1.5"]
+          soc2_security: ["CC7.1", "CC4.1"]
+          owasp_asvs: ["V1.14", "V14.1"]
           mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0043 - Craft Adversarial Data"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM04:2025 Data and Model Poisoning - Assessment"]
+          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM04:2025 Data and Model Poisoning"]
       - indicator: "Predictive vulnerability identification and threat modeling"
         frameworks:
-          nist_csf: ["ID.RA-3", "PR.IP-12"]
-          iso_27001: ["A.14.2.1", "A.12.6.1"]
-          stride: ["Spoofing", "Tampering"]
+          nist_csf_2: ["ID.RA-03", "ID.RA-04", "ID.RA-05"]
+          iso_27001: ["A.14.2.1", "A.12.6.1", "A.6.1.4"]
           iso_42001: ["6.1", "8.2.2", "8.6"]
+          nist_ai_rmf: ["MAP 3.4", "MEASURE 2.7", "MEASURE 2.11"]
+          soc2_security: ["CC3.1", "CC3.2"]
           mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0043 - Craft Adversarial Data"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM04:2025 Data and Model Poisoning - Assessment"]
+          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM04:2025 Data and Model Poisoning"]
       - indicator: "Threat intelligence integration and dynamic risk analysis"
         frameworks:
-          nist_csf: ["DE.CM-8", "ID.RA-2"]
-          iso_27001: ["A.12.2.1", "A.16.1.3"]
-          stix_taxii: ["Indicator", "TTP"]
+          nist_csf_2: ["ID.RA-03", "ID.RA-02", "DE.CM-08"]
+          iso_27001: ["A.12.2.1", "A.16.1.3", "A.6.1.4"]
           iso_42001: ["8.6", "8.7", "9.1"]
+          nist_ai_rmf: ["MANAGE 4.1", "MEASURE 2.7", "GOVERN 6.1"]
+          soc2_security: ["CC7.1", "CC7.2"]
           mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0043 - Craft Adversarial Data"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM04:2025 Data and Model Poisoning - Assessment"]
+          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM04:2025 Data and Model Poisoning"]
       - indicator: "Automated patch management and verification processes"
         frameworks:
-          nist_csf: ["PR.IP-12", "DE.CM-4"]
-          iso_27001: ["A.12.6.1", "A.14.2.3"]
+          nist_csf_2: ["PR.PS-01", "PR.PS-02", "DE.CM-08"]
+          iso_27001: ["A.12.6.1", "A.14.2.3", "A.12.1.2"]
           soc2_security: ["CC6.1", "CC8.1"]
           iso_42001: ["8.5.2", "8.6", "9.2"]
-    
+          nist_ai_rmf: ["MANAGE 2.2", "MANAGE 4.1", "GOVERN 1.5"]
           mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0043 - Craft Adversarial Data"]
-          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM04:2025 Data and Model Poisoning - Assessment"]
+          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM04:2025 Data and Model Poisoning"]
     levels:
       level_1:
         level: "level_1"
@@ -2698,45 +2754,54 @@ domains:
     framework_alignment:
       - indicator: "AI-powered user behavior analytics and anomaly detection"
         frameworks:
-          nist_csf: ["DE.AE-2", "DE.CM-1"]
-          iso_27001: ["A.9.2.5", "A.12.4.1"]
-          zero_trust: ["Identity.1", "Identity.3"]
+          nist_csf_2: ["DE.AE-02", "DE.AE-03", "DE.CM-01"]
+          iso_27001: ["A.9.2.5", "A.12.4.1", "A.12.4.3"]
           iso_42001: ["8.6", "8.7", "9.1"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MANAGE 4.1"]
+          soc2_security: ["CC6.1", "CC6.2", "CC7.2"]
+          nist_sp_800_207: ["3.1", "3.2", "4.2"]
           mitre_atlas: ["AML.T0044 - Full ML Model Access", "AML.T0048 - Exfiltration via ML Inference API"]
-          owasp_genai: ["LLM06:2025 Excessive Agency - Access Controls", "LLM02:2025 Sensitive Information Disclosure - IAM"]
+          owasp_genai: ["LLM06:2025 Excessive Agency", "LLM02:2025 Sensitive Information Disclosure"]
       - indicator: "Adaptive authentication with risk-based access decisions"
         frameworks:
-          nist_csf: ["PR.AC-1", "PR.AC-7"]
-          iso_27001: ["A.9.1.2", "A.9.4.2"]
-          nist_800_63: ["AAL2", "AAL3"]
-          iso_42001: ["8.5.2", "8.2.2", "7.1.4"]
+          nist_csf_2: ["PR.AA-01", "PR.AA-03", "PR.AA-05"]
+          iso_27001: ["A.9.1.2", "A.9.4.2", "A.9.4.3"]
+          iso_42001: ["8.5.2", "8.2.2", "8.6"]
+          nist_ai_rmf: ["MANAGE 2.2", "MEASURE 2.7", "GOVERN 1.4"]
+          soc2_security: ["CC6.1", "CC6.2", "CC6.3"]
+          nist_sp_800_207: ["3.1", "4.2", "5.1"]
           mitre_atlas: ["AML.T0044 - Full ML Model Access", "AML.T0048 - Exfiltration via ML Inference API"]
-          owasp_genai: ["LLM06:2025 Excessive Agency - Access Controls", "LLM02:2025 Sensitive Information Disclosure - IAM"]
+          owasp_genai: ["LLM06:2025 Excessive Agency", "LLM02:2025 Sensitive Information Disclosure"]
       - indicator: "Zero-trust architecture with continuous access validation"
         frameworks:
-          zero_trust: ["Identity.2", "Network.1"]
-          nist_csf: ["PR.AC-4", "DE.CM-1"]
-          iso_27001: ["A.9.1.2", "A.13.1.1"]
+          nist_sp_800_207: ["3.1", "3.2", "4.2", "5.1"]
+          nist_csf_2: ["PR.AA-05", "PR.AA-06", "DE.CM-01"]
+          iso_27001: ["A.9.1.2", "A.13.1.1", "A.13.1.3"]
           iso_42001: ["8.1", "8.5.2", "8.6"]
+          nist_ai_rmf: ["GOVERN 1.4", "MANAGE 2.2", "MEASURE 2.7"]
+          soc2_security: ["CC6.1", "CC6.6", "CC6.7"]
           mitre_atlas: ["AML.T0044 - Full ML Model Access", "AML.T0048 - Exfiltration via ML Inference API"]
-          owasp_genai: ["LLM06:2025 Excessive Agency - Access Controls", "LLM02:2025 Sensitive Information Disclosure - IAM"]
+          owasp_genai: ["LLM06:2025 Excessive Agency", "LLM02:2025 Sensitive Information Disclosure"]
       - indicator: "Automated access governance and entitlement management"
         frameworks:
-          iso_27001: ["A.9.2.1", "A.9.2.6"]
-          nist_csf: ["PR.AC-1", "ID.AM-6"]
-          soc2_security: ["CC6.2", "CC6.3"]
-          iso_42001: ["8.1", "8.3", "7.1.4"]
+          iso_27001: ["A.9.2.1", "A.9.2.5", "A.9.2.6"]
+          nist_csf_2: ["PR.AA-01", "PR.AA-02", "ID.AM-06"]
+          soc2_security: ["CC6.2", "CC6.3", "CC6.5"]
+          iso_42001: ["8.1", "8.3", "7.4"]
+          nist_ai_rmf: ["GOVERN 2.1", "GOVERN 2.2", "MANAGE 2.2"]
+          cobit: ["DSS05.04", "DSS05.05"]
           mitre_atlas: ["AML.T0044 - Full ML Model Access", "AML.T0048 - Exfiltration via ML Inference API"]
-          owasp_genai: ["LLM06:2025 Excessive Agency - Access Controls", "LLM02:2025 Sensitive Information Disclosure - IAM"]
+          owasp_genai: ["LLM06:2025 Excessive Agency", "LLM02:2025 Sensitive Information Disclosure"]
       - indicator: "Predictive identity threat prevention and response"
         frameworks:
-          nist_csf: ["DE.AE-1", "RS.AN-1"]
-          iso_27001: ["A.16.1.2", "A.9.2.5"]
-          mitre_attack: ["T1078", "T1534"]
+          nist_csf_2: ["DE.AE-02", "DE.AE-06", "RS.AN-03"]
+          iso_27001: ["A.16.1.2", "A.9.2.5", "A.12.4.1"]
           iso_42001: ["8.6", "8.7", "10.2"]
-    
+          nist_ai_rmf: ["MANAGE 4.1", "MEASURE 2.7", "MEASURE 4.1"]
+          soc2_security: ["CC7.2", "CC7.3"]
+          mitre_attack: ["T1078", "T1534"]
           mitre_atlas: ["AML.T0044 - Full ML Model Access", "AML.T0048 - Exfiltration via ML Inference API"]
-          owasp_genai: ["LLM06:2025 Excessive Agency - Access Controls", "LLM02:2025 Sensitive Information Disclosure - IAM"]
+          owasp_genai: ["LLM06:2025 Excessive Agency", "LLM02:2025 Sensitive Information Disclosure"]
     levels:
       level_1:
         level: "level_1"
@@ -2842,40 +2907,50 @@ domains:
     framework_alignment:
       - indicator: "AI-powered event correlation and alert prioritization"
         frameworks:
-          nist_csf: ["DE.AE-1", "DE.AE-3"]
-          iso_27001: ["A.12.4.1", "A.16.1.2"]
-          soc2_security: ["CC7.1", "CC7.2"]
+          nist_csf_2: ["DE.AE-02", "DE.AE-03", "DE.AE-06"]
+          iso_27001: ["A.12.4.1", "A.16.1.2", "A.16.1.4"]
+          iso_42001: ["8.6", "8.7", "9.1"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MANAGE 4.1"]
+          soc2_security: ["CC7.1", "CC7.2", "CC7.3"]
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0048 - Exfiltration via ML Inference API"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Monitoring", "LLM08:2025 Vector and Embedding Weaknesses - Operations"]
+          owasp_genai: ["LLM01:2025 Prompt Injection", "LLM08:2025 Vector and Embedding Weaknesses"]
       - indicator: "Automated security workflow orchestration and SOAR integration"
         frameworks:
-          nist_csf: ["RS.RP-1", "RS.CO-1"]
-          iso_27001: ["A.16.1.5", "A.13.1.1"]
-          soc2_security: ["CC7.3", "CC7.4"]
+          nist_csf_2: ["RS.RP-01", "RS.CO-02", "RS.CO-03"]
+          iso_27001: ["A.16.1.5", "A.13.1.1", "A.6.1.3"]
+          iso_42001: ["8.3", "8.5.2", "8.1"]
+          nist_ai_rmf: ["MANAGE 4.1", "MANAGE 4.2", "GOVERN 6.2"]
+          soc2_security: ["CC7.3", "CC7.4", "CC7.5"]
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0048 - Exfiltration via ML Inference API"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Monitoring", "LLM08:2025 Vector and Embedding Weaknesses - Operations"]
+          owasp_genai: ["LLM01:2025 Prompt Injection", "LLM08:2025 Vector and Embedding Weaknesses"]
       - indicator: "AI-driven security analytics and threat intelligence integration"
         frameworks:
-          nist_csf: ["DE.CM-8", "DE.DP-4"]
-          iso_27001: ["A.12.2.1", "A.16.1.3"]
+          nist_csf_2: ["DE.CM-08", "ID.RA-03", "ID.RA-02"]
+          iso_27001: ["A.12.2.1", "A.16.1.3", "A.6.1.4"]
+          iso_42001: ["8.6", "8.7", "9.1"]
+          nist_ai_rmf: ["MEASURE 2.6", "MEASURE 2.7", "MANAGE 4.1"]
+          soc2_security: ["CC7.1", "CC7.2"]
           mitre_attack: ["TA0001", "TA0043"]
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0048 - Exfiltration via ML Inference API"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Monitoring", "LLM08:2025 Vector and Embedding Weaknesses - Operations"]
+          owasp_genai: ["LLM01:2025 Prompt Injection", "LLM08:2025 Vector and Embedding Weaknesses"]
       - indicator: "Automated incident classification and response recommendations"
         frameworks:
-          nist_csf: ["RS.AN-1", "RS.MI-1"]
-          iso_27001: ["A.16.1.4", "A.16.1.5"]
-          nist_ir: ["PR.1", "AN.1"]
+          nist_csf_2: ["RS.AN-03", "RS.AN-06", "RS.MI-01"]
+          iso_27001: ["A.16.1.4", "A.16.1.5", "A.16.1.7"]
+          iso_42001: ["8.6", "8.7", "10.2"]
+          nist_ai_rmf: ["MANAGE 4.1", "MANAGE 4.2", "MEASURE 4.1"]
+          soc2_security: ["CC7.3", "CC7.4"]
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0048 - Exfiltration via ML Inference API"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Monitoring", "LLM08:2025 Vector and Embedding Weaknesses - Operations"]
+          owasp_genai: ["LLM01:2025 Prompt Injection", "LLM08:2025 Vector and Embedding Weaknesses"]
       - indicator: "Continuous security monitoring with predictive capabilities"
         frameworks:
-          nist_csf: ["DE.CM-1", "DE.CM-7"]
-          iso_27001: ["A.12.4.1", "Clause 9.1"]
-          soc2_security: ["CC7.1", "CC4.1"]
-    
+          nist_csf_2: ["DE.CM-01", "DE.CM-09", "ID.IM-01"]
+          iso_27001: ["A.12.4.1", "Clause 9.1", "Clause 10.1"]
+          iso_42001: ["9.1", "9.3", "10.1"]
+          nist_ai_rmf: ["MEASURE 4.1", "MEASURE 4.2", "MANAGE 4.2"]
+          soc2_security: ["CC7.1", "CC4.1", "CC4.2"]
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0048 - Exfiltration via ML Inference API"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Monitoring", "LLM08:2025 Vector and Embedding Weaknesses - Operations"]
+          owasp_genai: ["LLM01:2025 Prompt Injection", "LLM08:2025 Vector and Embedding Weaknesses"]
     levels:
       level_1:
         level: "level_1"
@@ -2990,58 +3065,69 @@ domains:
     framework_alignment:
       - indicator: "AI-powered transaction analysis and anomaly detection"
         frameworks:
-          pci_dss: ["Requirement 11", "Requirement 12.10"]
-          iso_27001: ["A.12.4.1", "A.16.1.2"]
-          nist_csf: ["DE.AE-2", "DE.CM-1"]
+          nist_csf_2: ["DE.AE-02", "DE.AE-03", "DE.CM-01"]
+          iso_27001: ["A.12.4.1", "A.16.1.2", "A.16.1.4"]
           iso_42001: ["8.6", "8.7", "9.1"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MANAGE 4.1"]
+          soc2_security: ["CC7.1", "CC7.2", "CC7.3"]
+          pci_dss: ["Requirement 11", "Requirement 12.10"]
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data", "AML.T0031 - Erode ML Model Integrity"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Anti-Fraud", "LLM04:2025 Data and Model Poisoning - Fraud Models"]
+          owasp_genai: ["LLM01:2025 Prompt Injection", "LLM04:2025 Data and Model Poisoning"]
       - indicator: "Real-time fraud scoring and risk assessment"
         frameworks:
-          ffiec_guidance: ["Risk.Assessment", "Real.Time.Monitoring"]
-          iso_27001: ["A.18.2.2", "A.12.1.4"]
-          soc2_security: ["CC7.1", "CC4.1"]
+          nist_csf_2: ["ID.RA-01", "ID.RA-02", "DE.CM-01"]
+          iso_27001: ["A.18.2.2", "A.12.1.4", "A.12.4.1"]
           iso_42001: ["8.2.2", "8.6", "6.1"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MANAGE 2.3"]
+          soc2_security: ["CC7.1", "CC4.1", "CC3.2"]
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data", "AML.T0031 - Erode ML Model Integrity"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Anti-Fraud", "LLM04:2025 Data and Model Poisoning - Fraud Models"]
+          owasp_genai: ["LLM01:2025 Prompt Injection", "LLM04:2025 Data and Model Poisoning"]
       - indicator: "Behavioral pattern analysis and user profiling"
         frameworks:
-          nist_csf: ["DE.AE-2", "ID.AM-6"]
-          gdpr: ["Article 22", "Article 13"]
-          iso_27001: ["A.9.2.5", "A.18.1.4"]
+          nist_csf_2: ["DE.AE-02", "DE.AE-03", "ID.AM-06"]
+          iso_27001: ["A.9.2.5", "A.18.1.4", "A.12.4.1"]
           iso_42001: ["8.6", "8.7", "5.2"]
+          nist_ai_rmf: ["MEASURE 2.7", "MAP 2.3", "GOVERN 1.4"]
+          soc2_security: ["CC6.1", "CC7.2"]
+          iso_27701: ["7.4", "7.5"]
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data", "AML.T0031 - Erode ML Model Integrity"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Anti-Fraud", "LLM04:2025 Data and Model Poisoning - Fraud Models"]
+          owasp_genai: ["LLM01:2025 Prompt Injection", "LLM04:2025 Data and Model Poisoning"]
       - indicator: "Machine learning model performance and accuracy tracking"
         frameworks:
-          model_risk_management: ["MRM.1", "MRM.3"]
-          iso_27001: ["Clause 9.1", "A.12.1.4"]
-          soc2_security: ["CC4.1", "CC4.2"]
+          nist_csf_2: ["ID.IM-01", "ID.IM-02", "PR.PS-01"]
+          iso_27001: ["Clause 9.1", "A.12.1.4", "Clause 10.1"]
           iso_42001: ["8.6", "9.1", "9.2"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 4.1", "MEASURE 4.2"]
+          soc2_security: ["CC4.1", "CC4.2"]
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data", "AML.T0031 - Erode ML Model Integrity"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Anti-Fraud", "LLM04:2025 Data and Model Poisoning - Fraud Models"]
+          owasp_genai: ["LLM01:2025 Prompt Injection", "LLM04:2025 Data and Model Poisoning"]
       - indicator: "Integration with payment processing and financial systems"
         frameworks:
+          nist_csf_2: ["PR.DS-01", "PR.DS-02", "ID.AM-05"]
+          iso_27001: ["A.13.1.1", "A.14.1.3", "A.14.1.2"]
+          iso_42001: ["8.1", "8.3", "7.4"]
+          nist_ai_rmf: ["GOVERN 1.4", "MANAGE 2.2", "MAP 1.5"]
+          soc2_security: ["CC6.1", "CC6.6", "CC6.7"]
           pci_dss: ["Requirement 1", "Requirement 6"]
-          iso_27001: ["A.13.1.1", "A.14.1.3"]
-          ffiec_guidance: ["System.Integration", "API.Security"]
-          iso_42001: ["8.1", "8.3", "7.1.4"]
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data", "AML.T0031 - Erode ML Model Integrity"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Anti-Fraud", "LLM04:2025 Data and Model Poisoning - Fraud Models"]
+          owasp_genai: ["LLM01:2025 Prompt Injection", "LLM04:2025 Data and Model Poisoning"]
       - indicator: "Account takeover and credential abuse detection"
         frameworks:
-          nist_csf: ["PR.AC-1", "DE.CM-1"]
-          pci_dss: ["Requirement 8", "Requirement 10"]
-          iso_27001: ["A.9.4.3", "A.12.4.1"]
+          nist_csf_2: ["PR.AA-01", "PR.AA-05", "DE.CM-01"]
+          iso_27001: ["A.9.4.3", "A.12.4.1", "A.9.2.5"]
           iso_42001: ["8.6", "8.7"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MANAGE 4.1"]
+          soc2_security: ["CC6.1", "CC6.2", "CC7.2"]
+          pci_dss: ["Requirement 8", "Requirement 10"]
           mitre_atlas: ["AML.T0015 - Evade ML Model"]
-          owasp_genai: ["LLM01:2025 Prompt Injection - Anti-Fraud"]
+          owasp_genai: ["LLM01:2025 Prompt Injection"]
       - indicator: "Anti-money laundering (AML) and suspicious activity detection"
         frameworks:
-          ffiec_guidance: ["BSA.AML", "Suspicious.Activity.Reporting"]
-          fatf_recommendations: ["Recommendation 1", "Recommendation 10"]
-          iso_27001: ["A.18.1.5"]
+          nist_csf_2: ["DE.AE-02", "DE.AE-06", "RS.AN-03"]
+          iso_27001: ["A.18.1.5", "A.12.4.1", "A.16.1.2"]
           iso_42001: ["8.6", "5.2"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MANAGE 4.1"]
+          soc2_security: ["CC7.2", "CC7.3"]
     
     levels:
       level_1:
@@ -3210,45 +3296,49 @@ domains:
     framework_alignment:
       - indicator: "Text-based AI content detection and verification capabilities"
         frameworks:
-          c2pa: ["Content.Provenance", "Content.Authenticity"]
-          iso_27001: ["A.13.2.1", "A.16.1.2"]
-          nist_csf: ["DE.AE-2", "PR.DS-6"]
+          nist_csf_2: ["DE.AE-02", "DE.AE-03", "PR.DS-06"]
+          iso_27001: ["A.13.2.1", "A.16.1.2", "A.18.1.4"]
           iso_42001: ["8.6", "8.7", "5.2"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "GOVERN 4.2"]
+          soc2_security: ["CC7.1", "CC7.2"]
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
-          owasp_genai: ["LLM09:2025 Misinformation - Detection", "LLM05:2025 Improper Output Handling - Content Validation"]
+          owasp_genai: ["LLM09:2025 Misinformation", "LLM05:2025 Improper Output Handling"]
       - indicator: "Multi-modal AI content detection (images, video, audio)"
         frameworks:
-          c2pa: ["Image.Authentication", "Video.Authentication"]
-          deepfake_detection: ["Detection.Accuracy", "Multi.Modal"]
-          iso_27001: ["A.13.2.3", "A.14.1.2"]
+          nist_csf_2: ["DE.AE-02", "DE.CM-01", "PR.DS-06"]
+          iso_27001: ["A.13.2.3", "A.14.1.2", "A.16.1.2"]
           iso_42001: ["8.2.2", "8.6", "8.7"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MEASURE 2.11"]
+          soc2_security: ["CC7.1", "CC7.2", "CC7.3"]
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
-          owasp_genai: ["LLM09:2025 Misinformation - Detection", "LLM05:2025 Improper Output Handling - Content Validation"]
+          owasp_genai: ["LLM09:2025 Misinformation", "LLM05:2025 Improper Output Handling"]
       - indicator: "Integration with content management and publishing systems"
         frameworks:
-          iso_27001: ["A.13.1.1", "A.14.1.3"]
-          nist_csf: ["PR.IP-1", "DE.CM-1"]
-          content_authenticity: ["CAI.1", "CAI.2"]
-          iso_42001: ["8.1", "8.3", "7.1.4"]
+          nist_csf_2: ["PR.PS-01", "PR.PS-02", "DE.CM-01"]
+          iso_27001: ["A.13.1.1", "A.14.1.3", "A.8.1.1"]
+          iso_42001: ["8.1", "8.3", "7.4"]
+          nist_ai_rmf: ["GOVERN 1.4", "MANAGE 2.2", "MAP 1.5"]
+          soc2_security: ["CC6.1", "CC8.1"]
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
-          owasp_genai: ["LLM09:2025 Misinformation - Detection", "LLM05:2025 Improper Output Handling - Content Validation"]
+          owasp_genai: ["LLM09:2025 Misinformation", "LLM05:2025 Improper Output Handling"]
       - indicator: "Real-time content verification and authenticity scoring"
         frameworks:
-          c2pa: ["Real.Time.Verification", "Provenance.Chain"]
-          iso_27001: ["A.12.4.1", "A.16.1.2"]
-          nist_csf: ["DE.CM-7", "PR.DS-6"]
+          nist_csf_2: ["DE.CM-07", "DE.CM-09", "PR.DS-06"]
+          iso_27001: ["A.12.4.1", "A.16.1.2", "A.18.2.2"]
           iso_42001: ["8.6", "9.1", "8.2.2"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MANAGE 4.1"]
+          soc2_security: ["CC7.1", "CC4.1"]
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
-          owasp_genai: ["LLM09:2025 Misinformation - Detection", "LLM05:2025 Improper Output Handling - Content Validation"]
+          owasp_genai: ["LLM09:2025 Misinformation", "LLM05:2025 Improper Output Handling"]
       - indicator: "Policy enforcement and automated content flagging"
         frameworks:
-          iso_27001: ["A.13.1.3", "A.18.1.4"]
-          nist_csf: ["PR.AC-4", "RS.MI-1"]
-          content_moderation: ["Policy.Enforcement", "Automated.Flagging"]
+          nist_csf_2: ["PR.AA-05", "RS.MI-01", "DE.AE-06"]
+          iso_27001: ["A.13.1.3", "A.18.1.4", "A.5.1.1"]
           iso_42001: ["8.5.2", "5.2", "8.1"]
-    
+          nist_ai_rmf: ["GOVERN 4.2", "MANAGE 2.2", "MANAGE 4.1"]
+          soc2_security: ["CC6.1", "CC7.3", "CC7.4"]
           mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
-          owasp_genai: ["LLM09:2025 Misinformation - Detection", "LLM05:2025 Improper Output Handling - Content Validation"]
+          owasp_genai: ["LLM09:2025 Misinformation", "LLM05:2025 Improper Output Handling"]
     levels:
       level_1:
         level: "level_1"
@@ -3351,6 +3441,48 @@ domains:
       - "Incident procedures for deepfake attacks"
       - "Collaboration with industry on detection methods"
     
+    framework_alignment:
+      - indicator: "Deepfake and synthetic media detection capabilities"
+        frameworks:
+          nist_csf_2: ["DE.AE-02", "DE.AE-03", "DE.CM-01"]
+          iso_27001: ["A.13.2.1", "A.16.1.2", "A.18.1.4"]
+          iso_42001: ["8.6", "8.7", "9.1"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MEASURE 2.11"]
+          soc2_security: ["CC7.1", "CC7.2"]
+          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
+          owasp_genai: ["LLM09:2025 Misinformation", "LLM05:2025 Improper Output Handling"]
+      - indicator: "Real-time verification in communications and media"
+        frameworks:
+          nist_csf_2: ["DE.CM-01", "DE.CM-07", "DE.CM-09"]
+          iso_27001: ["A.13.1.1", "A.13.2.3", "A.12.4.1"]
+          iso_42001: ["8.6", "8.7", "8.2.2"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MANAGE 4.1"]
+          soc2_security: ["CC7.1", "CC7.2", "CC7.3"]
+          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
+          owasp_genai: ["LLM09:2025 Misinformation", "LLM05:2025 Improper Output Handling"]
+      - indicator: "Advanced authentication and provenance tracking"
+        frameworks:
+          nist_csf_2: ["PR.AA-01", "PR.AA-03", "PR.DS-06"]
+          iso_27001: ["A.9.4.2", "A.9.4.3", "A.18.2.2"]
+          iso_42001: ["8.5.2", "8.6", "9.2"]
+          nist_ai_rmf: ["GOVERN 1.4", "MANAGE 2.2", "MEASURE 2.7"]
+          soc2_security: ["CC6.1", "CC6.2", "CC6.3"]
+          nist_sp_800_207: ["3.1", "4.2"]
+      - indicator: "Incident response and containment procedures"
+        frameworks:
+          nist_csf_2: ["RS.AN-03", "RS.MI-01", "RS.CO-02"]
+          iso_27001: ["A.16.1.4", "A.16.1.5", "A.16.1.7"]
+          iso_42001: ["8.6", "8.7", "10.2"]
+          nist_ai_rmf: ["MANAGE 4.1", "MANAGE 4.2", "GOVERN 6.2"]
+          soc2_security: ["CC7.3", "CC7.4", "CC7.5"]
+      - indicator: "Employee awareness and training programs"
+        frameworks:
+          nist_csf_2: ["PR.AT-01", "PR.AT-02", "GV.AT-01"]
+          iso_27001: ["A.7.2.2", "A.7.2.1", "A.6.1.1"]
+          iso_42001: ["7.2", "7.3", "5.2"]
+          nist_ai_rmf: ["GOVERN 4.1", "GOVERN 4.2", "MAP 1.6"]
+          soc2_security: ["CC1.4", "CC2.2"]
+    
     levels:
       level_1:
         level: "level_1"
@@ -3452,6 +3584,48 @@ domains:
       - "Model hardening and robustness techniques"
       - "Attack simulation and penetration testing"
       - "Defense-in-depth architecture for AI systems"
+    
+    framework_alignment:
+      - indicator: "AI-powered attack detection and pattern recognition"
+        frameworks:
+          nist_csf_2: ["DE.AE-02", "DE.AE-03", "DE.CM-01"]
+          iso_27001: ["A.12.2.1", "A.16.1.2", "A.12.4.1"]
+          iso_42001: ["8.6", "8.7", "9.1"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MANAGE 4.1"]
+          soc2_security: ["CC7.1", "CC7.2", "CC7.3"]
+          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
+          owasp_genai: ["LLM01:2025 Prompt Injection", "LLM04:2025 Data and Model Poisoning"]
+      - indicator: "Proactive defense against AI-generated social engineering"
+        frameworks:
+          nist_csf_2: ["DE.CM-01", "PR.AT-01", "DE.AE-06"]
+          iso_27001: ["A.7.2.2", "A.12.2.1", "A.16.1.1"]
+          iso_42001: ["7.2", "8.6", "8.7"]
+          nist_ai_rmf: ["GOVERN 4.1", "MEASURE 2.7", "MANAGE 4.1"]
+          soc2_security: ["CC1.4", "CC7.2", "CC7.3"]
+          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
+          owasp_genai: ["LLM09:2025 Misinformation", "LLM06:2025 Excessive Agency"]
+      - indicator: "Employee training and awareness programs for AI threats"
+        frameworks:
+          nist_csf_2: ["PR.AT-01", "PR.AT-02", "GV.AT-01"]
+          iso_27001: ["A.7.2.2", "A.7.2.1", "A.6.1.1"]
+          iso_42001: ["7.2", "7.3", "5.2"]
+          nist_ai_rmf: ["GOVERN 4.1", "GOVERN 4.2", "MAP 1.6"]
+          soc2_security: ["CC1.4", "CC2.2"]
+      - indicator: "AI attack simulation and defense testing capabilities"
+        frameworks:
+          nist_csf_2: ["ID.RA-05", "DE.CM-08", "RS.IM-01"]
+          iso_27001: ["A.14.2.8", "A.12.6.1", "A.18.2.3"]
+          iso_42001: ["8.2.2", "9.2", "10.1"]
+          nist_ai_rmf: ["MEASURE 2.11", "MANAGE 4.1", "GOVERN 1.5"]
+          soc2_security: ["CC4.1", "CC4.2", "CC7.1"]
+          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
+      - indicator: "Autonomous defense systems and adaptive countermeasures"
+        frameworks:
+          nist_csf_2: ["DE.AE-06", "RS.MI-01", "ID.IM-01"]
+          iso_27001: ["A.12.2.1", "Clause 10.1", "Clause 10.2"]
+          iso_42001: ["8.5.1", "9.3", "10.1"]
+          nist_ai_rmf: ["MEASURE 4.1", "MEASURE 4.2", "MANAGE 4.2"]
+          soc2_security: ["CC4.1", "CC7.4"]
     
     levels:
       level_1:
@@ -3561,27 +3735,46 @@ domains:
     framework_alignment:
       - indicator: "Direct and indirect prompt injection protection"
         frameworks:
-          nist_ai_rmf: ["MAP 3.4", "MEASURE 2.7", "MANAGE 2.3"]
+          nist_csf_2: ["PR.DS-01", "PR.DS-02", "DE.CM-01"]
           iso_27001: ["A.14.2.1", "A.14.2.5", "A.12.6.1"]
+          iso_42001: ["8.5.2", "8.6", "8.2.2"]
+          nist_ai_rmf: ["MAP 3.4", "MEASURE 2.7", "MANAGE 2.3"]
+          soc2_security: ["CC6.1", "CC7.1", "CC7.2"]
+          mitre_atlas: ["AML.T0051 - LLM Prompt Injection", "AML.T0043 - Craft Adversarial Data"]
           owasp_genai: ["LLM01:2025 Prompt Injection"]
       - indicator: "AI guardrails implementation and enforcement"
         frameworks:
+          nist_csf_2: ["PR.PS-01", "PR.PS-02", "GV.PO-01"]
+          iso_27001: ["A.14.2.1", "A.14.1.1", "A.5.1.1"]
+          iso_42001: ["7.2", "8.2", "5.2"]
           nist_ai_rmf: ["GOVERN 1.5", "MANAGE 2.2", "MEASURE 2.11"]
-          iso_42001: ["7.2", "8.2"]
+          soc2_security: ["CC6.1", "CC8.1"]
           owasp_genai: ["LLM01:2025 Prompt Injection", "LLM02:2025 Sensitive Information Disclosure"]
       - indicator: "Centralized guardrail policy management"
         frameworks:
-          nist_ai_rmf: ["GOVERN 1.3", "GOVERN 2.2"]
-          iso_27001: ["A.5.1.1", "A.18.1.1"]
-          iso_42001: ["5.2", "6.1"]
+          nist_csf_2: ["GV.PO-01", "GV.PO-02", "GV.RM-01"]
+          iso_27001: ["A.5.1.1", "A.18.1.1", "A.6.1.1"]
+          iso_42001: ["5.2", "6.1", "8.1"]
+          nist_ai_rmf: ["GOVERN 1.3", "GOVERN 2.2", "GOVERN 1.4"]
+          soc2_security: ["CC1.1", "CC1.2", "CC5.1"]
+          cobit: ["APO01.03", "APO01.04"]
       - indicator: "Input/output validation and filtering"
         frameworks:
+          nist_csf_2: ["PR.DS-01", "PR.DS-02", "DE.AE-02"]
+          iso_27001: ["A.14.2.5", "A.14.1.2", "A.12.2.1"]
+          iso_42001: ["8.5.2", "8.6", "8.7"]
+          nist_ai_rmf: ["MEASURE 2.7", "MANAGE 2.3", "MEASURE 2.3"]
+          soc2_security: ["CC6.1", "CC7.1"]
           owasp_genai: ["LLM01:2025 Prompt Injection", "LLM02:2025 Sensitive Information Disclosure"]
-          nist_ai_rmf: ["MEASURE 2.7", "MANAGE 2.3"]
+          owasp_asvs: ["V5.1", "V5.2"]
       - indicator: "Monitoring and detection capabilities"
         frameworks:
-          nist_ai_rmf: ["MEASURE 2.1", "MEASURE 4.2"]
-          iso_27001: ["A.12.4.1", "A.16.1.2"]
+          nist_csf_2: ["DE.CM-01", "DE.CM-09", "DE.AE-02"]
+          iso_27001: ["A.12.4.1", "A.16.1.2", "A.16.1.4"]
+          iso_42001: ["8.6", "8.7", "9.1"]
+          nist_ai_rmf: ["MEASURE 2.1", "MEASURE 4.2", "MANAGE 4.1"]
+          soc2_security: ["CC7.1", "CC7.2", "CC7.3"]
+          mitre_atlas: ["AML.T0051 - LLM Prompt Injection"]
     
     levels:
       level_1:
@@ -3712,6 +3905,51 @@ domains:
       - "Third-party model security review requirements"
       - "Supply chain risk monitoring and alerts"
     
+    framework_alignment:
+      - indicator: "AI supply chain component security assessment"
+        frameworks:
+          nist_csf_2: ["ID.SC-01", "ID.SC-02", "ID.SC-04"]
+          iso_27001: ["A.15.1.1", "A.15.1.2", "A.15.2.1"]
+          iso_42001: ["8.3", "8.4", "6.1"]
+          nist_ai_rmf: ["MAP 3.4", "GOVERN 1.2", "GOVERN 1.4"]
+          soc2_security: ["CC9.1", "CC9.2"]
+          mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0018 - Backdoor ML Model"]
+          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities", "LLM04:2025 Data and Model Poisoning"]
+      - indicator: "Model and data provenance tracking and verification"
+        frameworks:
+          nist_csf_2: ["ID.AM-07", "ID.AM-08", "PR.DS-06"]
+          iso_27001: ["A.8.1.1", "A.8.1.2", "A.12.1.2"]
+          iso_42001: ["8.5.2", "8.6", "9.2"]
+          nist_ai_rmf: ["MAP 3.4", "MAP 1.5", "MEASURE 3.1"]
+          soc2_security: ["CC6.1", "CC8.1"]
+          mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0020 - Poison Training Data"]
+          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities"]
+      - indicator: "Third-party AI service risk management"
+        frameworks:
+          nist_csf_2: ["ID.SC-02", "ID.SC-04", "GV.SC-01"]
+          iso_27001: ["A.15.1.1", "A.15.1.3", "A.15.2.2"]
+          iso_42001: ["8.3", "8.4", "7.4"]
+          nist_ai_rmf: ["GOVERN 1.2", "GOVERN 6.1", "MAP 1.5"]
+          soc2_security: ["CC9.1", "CC9.2", "CC3.2"]
+          cobit: ["APO10.03", "APO10.04"]
+      - indicator: "Automated security verification and monitoring"
+        frameworks:
+          nist_csf_2: ["DE.CM-06", "DE.CM-08", "ID.SC-04"]
+          iso_27001: ["A.15.2.1", "A.15.2.2", "A.12.6.1"]
+          iso_42001: ["8.6", "8.7", "9.1"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MANAGE 4.1"]
+          soc2_security: ["CC7.1", "CC4.1"]
+          mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise"]
+      - indicator: "Supply chain threat intelligence and response"
+        frameworks:
+          nist_csf_2: ["ID.RA-02", "ID.RA-03", "RS.AN-03"]
+          iso_27001: ["A.16.1.3", "A.6.1.4", "A.16.1.4"]
+          iso_42001: ["8.6", "8.7", "10.2"]
+          nist_ai_rmf: ["MANAGE 4.1", "MEASURE 2.7", "GOVERN 6.1"]
+          soc2_security: ["CC7.2", "CC7.3"]
+          mitre_atlas: ["AML.T0010 - ML Supply Chain Compromise", "AML.T0018 - Backdoor ML Model"]
+          owasp_genai: ["LLM03:2025 Supply Chain Vulnerabilities"]
+    
     levels:
       level_1:
         level: "level_1"
@@ -3813,6 +4051,49 @@ domains:
       - "Monitoring for adversarial attack patterns"
       - "Model ensemble and diversity strategies"
       - "Regular adversarial red team exercises"
+    
+    framework_alignment:
+      - indicator: "Adversarial robustness testing and validation"
+        frameworks:
+          nist_csf_2: ["ID.RA-05", "DE.CM-08", "PR.DS-01"]
+          iso_27001: ["A.14.2.8", "A.12.6.1", "A.18.2.3"]
+          iso_42001: ["8.2.2", "8.6", "9.2"]
+          nist_ai_rmf: ["MEASURE 2.11", "MEASURE 2.7", "MEASURE 2.3"]
+          soc2_security: ["CC4.1", "CC4.2", "CC7.1"]
+          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
+          owasp_genai: ["LLM04:2025 Data and Model Poisoning"]
+      - indicator: "Advanced defense mechanisms and adversarial training"
+        frameworks:
+          nist_csf_2: ["PR.DS-01", "PR.DS-02", "PR.PS-01"]
+          iso_27001: ["A.14.2.1", "A.14.2.5", "A.12.2.1"]
+          iso_42001: ["8.5.1", "8.5.2", "8.6"]
+          nist_ai_rmf: ["GOVERN 1.5", "MANAGE 2.2", "MEASURE 2.11"]
+          soc2_security: ["CC6.1", "CC8.1"]
+          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
+          owasp_genai: ["LLM04:2025 Data and Model Poisoning"]
+      - indicator: "Real-time detection and monitoring capabilities"
+        frameworks:
+          nist_csf_2: ["DE.CM-01", "DE.CM-09", "DE.AE-02"]
+          iso_27001: ["A.12.4.1", "A.16.1.2", "A.16.1.4"]
+          iso_42001: ["8.6", "8.7", "9.1"]
+          nist_ai_rmf: ["MEASURE 2.3", "MEASURE 2.7", "MANAGE 4.1"]
+          soc2_security: ["CC7.1", "CC7.2", "CC7.3"]
+          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
+      - indicator: "Incident response and model recovery procedures"
+        frameworks:
+          nist_csf_2: ["RS.AN-03", "RS.MI-01", "RC.RP-01"]
+          iso_27001: ["A.16.1.4", "A.16.1.5", "A.16.1.6"]
+          iso_42001: ["8.6", "8.7", "10.2"]
+          nist_ai_rmf: ["MANAGE 4.1", "MANAGE 4.2", "GOVERN 6.2"]
+          soc2_security: ["CC7.3", "CC7.4", "CC7.5"]
+      - indicator: "Adaptive defense systems and continuous evolution"
+        frameworks:
+          nist_csf_2: ["ID.IM-01", "ID.IM-02", "PR.PS-02"]
+          iso_27001: ["Clause 10.1", "Clause 10.2", "A.12.1.2"]
+          iso_42001: ["9.3", "10.1", "10.2"]
+          nist_ai_rmf: ["MEASURE 4.1", "MEASURE 4.2", "GOVERN 1.5"]
+          soc2_security: ["CC4.1", "CC4.2"]
+          mitre_atlas: ["AML.T0015 - Evade ML Model", "AML.T0043 - Craft Adversarial Data"]
     
     levels:
       level_1:
