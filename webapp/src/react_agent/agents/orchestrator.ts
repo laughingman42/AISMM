@@ -24,7 +24,7 @@ export async function generateOrganizationSecurityReport(
     verbose?: boolean;
   } = {}
 ): Promise<OrganizationSecurityReport> {
-  const { runInParallel = false, verbose = true } = options;
+  const { runInParallel = true, verbose = true } = options;
   
   if (verbose) {
     console.log('═══════════════════════════════════════════════════════════════');

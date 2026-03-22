@@ -3,7 +3,7 @@
  * Shows assessment history and maturity trends over time
  */
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import {
   LineChart,
   Line,
@@ -77,18 +77,18 @@ export function OrganizationDashboard({ organizationId, assessments, modelData }
   }>({ report: null, markdown: '' });
   const [aiAnalysisError, setAiAnalysisError] = useState<string>('');
 
-  // Handler for triggering AI analysis
-  const handleRunAIAnalysis = async () => {
+  // Handler for triggering AI analysis - memoized to prevent recreating on every render
+  const handleRunAIAnalysis = useCallback(async () => {
     setAiAnalysisState('loading');
     setAiAnalysisError('');
-    
+
     try {
       const result = await api.analyzeOrganization(organizationId);
-      
+
       if (!result || !result.report) {
         throw new Error('No analysis report returned');
       }
-      
+
       setAiAnalysisReport({
         report: result.report,
         markdown: result.markdown,
@@ -101,7 +101,7 @@ export function OrganizationDashboard({ organizationId, assessments, modelData }
       );
       setAiAnalysisState('error');
     }
-  };
+  }, [organizationId]);
 
   const handleCloseAIAnalysis = () => {
     setAiAnalysisState('idle');
