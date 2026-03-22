@@ -101,10 +101,14 @@ db.exec(`
     UNIQUE(assessment_id, domain_id)
   );
 
-  -- Create indexes
+  -- Create indexes for better query performance
   CREATE INDEX IF NOT EXISTS idx_assessments_org ON assessments(organization_id);
   CREATE INDEX IF NOT EXISTS idx_responses_assessment ON responses(assessment_id);
+  CREATE INDEX IF NOT EXISTS idx_responses_question ON responses(question_id);
   CREATE INDEX IF NOT EXISTS idx_domain_scores_assessment ON domain_scores(assessment_id);
+  CREATE INDEX IF NOT EXISTS idx_domain_scores_domain ON domain_scores(domain_id);
+  CREATE INDEX IF NOT EXISTS idx_domain_scores_created ON domain_scores(created_at);
+  CREATE INDEX IF NOT EXISTS idx_assessments_status ON assessments(status);
 `);
 
 console.log('Database initialized at:', dbPath);
